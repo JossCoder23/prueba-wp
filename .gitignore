@@ -1,0 +1,29 @@
+# WordPress core files (handled by Docker image)
+wp-admin/
+wp-includes/
+
+# Configuration files (handled by environment variables)
+wp-config.php
+
+# Uploads directory (handled by persistent volume)
+wp-content/uploads/
+
+# Cache directories
+wp-content/cache/
+wp-content/blogs.dir/ # Multisite
+wp-content/upgrade/
+
+# LocalWP specific files (DO NOT push to GitHub)
+.lando/
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.sql
+.env # If you use a .env file locally
+
+# Composer (if used)
+vendor/
+
+# Node modules (if used for theme/plugin development)
+node_modules/
