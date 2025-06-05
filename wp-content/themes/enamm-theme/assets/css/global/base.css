@@ -1,0 +1,22 @@
+:root {
+  --font-heading: 'Montserrat', sans-serif; /* Para títulos y elementos destacados */
+  --font-body: 'Poppins', sans-serif;       /* Para el texto principal y cuerpo */
+  --font-fallback: sans-serif;              /* Siempre un fallback genérico */
+  --primary: #1F58DB;
+  --secondary: #2D2D2D;
+  --third: #6C6C6C;
+  --fourth: #DBDBDB;
+  --fifth: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), var(--font-fallback);
+  font-weight: 700; /* Asume que encolaste el peso 700 de Montserrat */
+  color: #222;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+a {
+  font-family: var(--font-body), var(--font-fallback);
+}
