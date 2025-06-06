@@ -13,8 +13,8 @@
         <div class="header-container">
             <div class="site-branding">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-logo">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="Logo de tu sitio">
-                    </a>
+                    <img src="" alt="">
+                </a>
             </div>
             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
                 <span class="screen-reader-text">Abrir menú</span>
@@ -28,14 +28,6 @@
 
             <nav id="site-navigation" class="main-navigation">
                 <h3>hola</h3>
-                <?php
-                wp_nav_menu( array(
-                    'theme_location' => 'primary', // Registra esta ubicación en functions.php
-                    'menu_id'        => 'primary-menu',
-                    'menu_class'     => 'main-menu',
-                    'depth'          => 3, // Puedes ajustar la profundidad de los submenús
-                ) );
-                ?>
             </nav>
         </div>
     </header>
