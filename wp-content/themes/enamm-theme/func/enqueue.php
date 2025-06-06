@@ -31,8 +31,16 @@ function tu_tema_enqueue_frontend_assets() {
         filemtime( get_template_directory() . '/assets/css/footer/footer.css' ) // Versión para cache-busting
     );
 
+    wp_enqueue_style(
+        'enamm-header-styles', // Un handle único para tus estilos del footer
+        get_template_directory_uri() . '/assets/css/header/header.css', // Ruta al archivo header.css
+        array('enamm-base'), // Asegura que se cargue después de tus estilos base
+        filemtime( get_template_directory() . '/assets/css/header/header.css' ) // Versión para cache-busting
+    );
+
     // 4. Encolar tu style.css principal (si lo usas para estilos generales del tema)
-    wp_enqueue_style( 'tu-tema-style', get_stylesheet_uri(), array('enamm-footer-styles'), filemtime( get_stylesheet_directory() . '/style.css' ) );
+    wp_enqueue_style( 'tu-tema-style', get_stylesheet_uri(), array('enamm-footer-styles', 'enamm-header-styles'), filemtime( get_stylesheet_directory() . '/style.css' ) );
+    // wp_enqueue_style( 'tu-tema-style', get_stylesheet_uri(), array('enamm-header-styles'), filemtime( get_stylesheet_directory() . '/style.css' ) );
 
     // 5. Encolar tu archivo CSS adicional en assets/css/main.css (si aplica)
     wp_enqueue_style( 'tu-tema-main', get_template_directory_uri() . '/assets/css/main.css', array('tu-tema-style'), filemtime( get_template_directory() . '/assets/css/main.css' ) );
@@ -52,5 +60,12 @@ function tu_tema_enqueue_frontend_assets() {
 
     // 7. Encolar tu archivo JS en assets/js/script.js
     wp_enqueue_script( 'tu-tema-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '1.0.0', true );
+    wp_enqueue_script(
+        'enamm-header-script',
+        get_template_directory_uri() . '/assets/js/admin/header-admin.js',
+        array(), // ¡Aquí ya no hay dependencia de jQuery!
+        filemtime( get_template_directory() . '/assets/js/admin/header-admin.js' ),
+        true
+    );
 }
 add_action( 'wp_enqueue_scripts', 'tu_tema_enqueue_frontend_assets' ); // Usamos un nombre más descriptivo

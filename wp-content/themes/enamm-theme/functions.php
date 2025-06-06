@@ -9,6 +9,7 @@
 require_once get_template_directory() . '/func/setup.php';
 require_once get_template_directory() . '/func/enqueue.php';
 require_once get_template_directory() . '/func/admin/footer-options.php';
+require_once get_template_directory() . '/func/admin/header-options.php';
 require_once get_template_directory() . '/func/cleanup.php';
 // require_once get_template_directory() . '/inc/custom-functions.php'; // Si añades otras funciones
 

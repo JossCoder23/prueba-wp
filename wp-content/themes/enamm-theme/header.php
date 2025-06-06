@@ -6,29 +6,40 @@
     <?php wp_head(); // Esencial: Carga estilos, scripts, metadatos. ?>
 </head>
 <body <?php body_class(); ?>>
+    
     <?php wp_body_open(); // Hook para WordPress 5.2+ ?>
 
-    <header style="background-color:red">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Mi Sitio Web</a>
-        <nav>
-            <ul>
-                <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Inicio</a></li>
-                <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Página de Ejemplo</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-branding">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-logo">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="Logo de tu sitio">
+                    </a>
+            </div>
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                <span class="screen-reader-text">Abrir menú</span>
+                <div class="hamburger">
+                    <span>Hola</span>
+                    <span>Hola</span>
+                    <span>Hola</span>
+                    <span>Hola</span>
+                </div>
+            </button>
+
+            <nav id="site-navigation" class="main-navigation">
+                <h3>hola</h3>
+                <?php
+                wp_nav_menu( array(
+                    'theme_location' => 'primary', // Registra esta ubicación en functions.php
+                    'menu_id'        => 'primary-menu',
+                    'menu_class'     => 'main-menu',
+                    'depth'          => 3, // Puedes ajustar la profundidad de los submenús
+                ) );
+                ?>
+            </nav>
+        </div>
     </header>
 
-    ```
-
----
-
-## Contenido de `footer.php` (Mínimo PHP)
-
-Copia este código en tu archivo `wp-content/themes/tu-tema-personalizado/footer.php`:
-
-```php
-    
-
-<?php wp_footer(); // Esencial: Carga scripts JavaScript al final. ?>
+    <?php wp_footer(); // Esencial: Carga scripts JavaScript al final. ?>
 </body>
 </html>
