@@ -1,215 +1,318 @@
-/* --- Estilos Generales del Header --- */
-.site-header {
-    background-color: red !important; /* Color de fondo del encabezado */
-    padding: 10px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.header-container {
-    max-width: 1200px; /* Ancho máximo del contenido del header */
-    margin: 0 auto;
-    padding: 0 20px; /* Espaciado lateral */
+header {
+    background-color: var(--secondary);
     display: flex;
-    justify-content: space-between; /* Logo a la izquierda, menú/hamburguesa a la derecha */
-    align-items: center; /* Centrar verticalmente */
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    position: relative; /* Asegura que el z-index funcione correctamente si hay otros elementos */
+    z-index: 999; /* Un z-index alto para que el header esté por encima del contenido normal */
 }
 
-/* --- Estilos del Logo --- */
-.site-branding .site-logo {
-    display: block; /* Asegura que el enlace se comporte como un bloque */
+.header__container {
+    display: flex;
+    width: 280px; /* Esto es un ancho fijo, considera usar porcentajes o max-width para responsividad */
+    height: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    width: 140px;
+    height: auto; /* Asegura que la altura se ajuste automáticamente */
+    display: block; /* Elimina espacio extra debajo de la imagen si el logo es un img */
+}
+
+.header__logo img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Estilos del Menú Móvil (header__menu) --- */
+.header__menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo semi-transparente oscuro */
+    z-index: 1000; /* Debe estar debajo del botón pero encima del resto del contenido */
+    display: flex; /* Para organizar menu__left y menu__right */
+    visibility: hidden; /* Oculto por defecto */
+    opacity: 0; /* Opacidad para la animación */
+    transform: translateX(100%); /* Sale de la derecha */
+    transition: visibility 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+    /* overflow: hidden;  Para permitir scroll si el contenido es muy largo */
+}
+
+/* Estado "abierto" del menú */
+.header__menu.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0); /* Se desliza a la vista */
+}
+
+.menu__left {
+    flex: 0 0 12%; /* Ocupa el 30% del ancho, ajusta según necesites */
+    background-color: var(--primary); /* Ejemplo de color, ajusta a tus variables */
+    /* Otros estilos para la sección izquierda, si quieres un logo o algo aquí */
+    display: block;
+    height: 100%;
+}
+
+.menu__right {
+    flex: 1; /* Ocupa el espacio restante */
+    background-color: var(--fifth); /* Ejemplo de color, ajusta a tus variables */
+    padding: 40px 20px; /* Padding interno */
+    /* overflow-y: auto;  ¡Solo esta sección tendrá scroll en móvil! */
+    height: 100%; /* Ocupa todo el alto disponible */
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuRight__container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los ítems principales del menú */
+    overflow-y: visible;
+    height: auto;
+}
+
+.menuRight__item {
+    /* Estilos para los ítems principales si los necesitas */
+}
+
+.menuRight__item a {
     text-decoration: none;
-    color: #fff; /* Color del texto del logo si es texto */
-    font-size: 24px;
+    color: var(--text-color-dark); /* Color de texto oscuro */
+    font-size: 1.2em;
     font-weight: bold;
+    display: block; /* Asegura que el link ocupe todo el ancho */
+    padding: 10px 0;
 }
 
-.site-branding .site-logo img {
-    max-height: 50px; /* Altura máxima para tu imagen de logo */
-    width: auto;
-    display: block; /* Elimina espacio extra debajo de la imagen */
+.menuRight__item h3 {
+    color: var(--text-color-medium); /* Color de texto para títulos de submenú */
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    cursor: pointer; /* Indica que es clicable */
+    position: relative; /* Para el posible indicador de submenú */
+    padding: 5px 0;
 }
 
-/* --- Estilos del Botón de Hamburguesa (Móvil) --- */
-.menu-toggle {
-    display: none; /* Ocultar por defecto en escritorio */
+/* Opcional: Indicador de submenú (flecha) */
+.menuRight__item h3::after {
+    content: '▼'; /* Flecha hacia abajo */
+    font-size: 0.7em;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+/* Rotar flecha cuando el submenú está abierto */
+.menuRight__item.is-open h3::after {
+    transform: translateY(-50%) rotate(180deg); /* Flecha hacia arriba */
+}
+
+/* Estilos de los submenús */
+.subitem, .subitem2 {
+    display: none; /* Oculto por defecto */
+    flex-direction: column; /* Organiza los links en columna */
+    padding-left: 20px; /* Indentación para submenús */
+    border-left: 2px solid var(--border-color); /* Línea visual para submenú, ajusta la variable */
+    max-height: 0; /* Para animación de deslizamiento */
+    overflow: hidden; /* Oculta contenido desbordante */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.subitem.is-open, .subitem2.is-open {
+    display: flex; /* Mostrar cuando está abierto */
+    max-height: 550px; /* Suficientemente grande para contener todos los ítems */
+    opacity: 1;
+}
+
+.subitem a, .subitem2 a {
+    font-size: 1em;
+    padding: 8px 0;
+    color: var(--text-color-light); /* Color de texto más claro para subítems */
+    font-weight: normal;
+}
+
+.subitem h3, .subitem2 h3 {
+    font-size: 1em;
+    color: var(--text-color-medium);
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* --- Estilos base del botón de hamburguesa (de tu código) --- */
+.header__buttonMobile {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    position: relative; /* Para posicionar el ícono */
-    z-index: 100; /* Asegura que esté por encima del menú desplegado */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    /* ¡CLAVE PARA FIJAR EL BOTÓN AL VIEWPORT EN MÓVIL! */
+    /* Por defecto, está en su posición normal dentro del flujo del header */
+    position: relative; /* O 'static', dependiendo de su contenedor principal en el header */
+    z-index: auto; /* O un z-index bajo si hay otros elementos en el header */
 }
 
+/* Contenedor de las líneas de la hamburguesa */
 .hamburger {
-    width: 30px;
-    height: 20px;
+    width: 40px;
+    height: 30px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    position: relative;
+    transition: transform 0.3s ease;
 }
 
+/* Estilos de las líneas individuales (span) */
 .hamburger span {
     display: block;
     width: 100%;
-    height: 3px;
-    background-color: #fff; /* Color de las líneas de la hamburguesa */
-    transition: all 0.3s ease;
-    border-radius: 2px;
-}
-
-/* Animación del icono de hamburguesa a cruz */
-.menu-toggle.active .hamburger span:nth-child(1) {
-    transform: translateY(8.5px) rotate(45deg);
-}
-.menu-toggle.active .hamburger span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.active .hamburger span:nth-child(3) {
-    transform: translateY(-8.5px) rotate(-45deg);
-}
-
-/* --- Estilos del Menú de Navegación --- */
-.main-navigation ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex; /* Para que los ítems estén en línea en escritorio */
-    flex-wrap: wrap; /* Permite que los ítems se envuelvan si no hay espacio */
-}
-
-.main-navigation ul li {
-    position: relative; /* Para los submenús */
-}
-
-.main-navigation ul li a {
-    display: block;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: #fff;
-    white-space: nowrap; /* Evita que el texto se rompa */
-    transition: background-color 0.3s ease;
-}
-
-.main-navigation ul li a:hover,
-.main-navigation ul li.current-menu-item > a,
-.main-navigation ul li.current_page_item > a {
-    background-color: #555; /* Color de fondo al pasar el ratón o para el ítem activo */
-}
-
-/* --- Estilos de Submenús (Escritorio) --- */
-.main-navigation ul ul {
-    display: none; /* Ocultar submenús por defecto */
+    height: 4px;
+    background-color: var(--fifth); /* Color de las líneas */
+    border-radius: 3px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     position: absolute;
-    background-color: #444; /* Fondo del submenú */
-    min-width: 200px;
-    z-index: 99;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    top: 100%; /* Posiciona el submenú debajo del padre */
     left: 0;
 }
 
-.main-navigation ul ul li {
-    width: 100%; /* Cada ítem del submenú ocupa el ancho completo */
+/* Posicionamiento de cada línea */
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
+
+/* --- Estilos del Botón cuando el Menú está ABIERTO ('.is-active') --- */
+.header__buttonMobile.is-active {
+    position: fixed; /* Ahora se fija al viewport */
+    top: 20px; /* Distancia desde arriba del viewport. ¡AJUSTA ESTE VALOR! */
+    right: 20px; /* Distancia desde la derecha del viewport. ¡AJUSTA ESTE VALOR! */
+    z-index: 1002; /* Asegura que esté por encima del menú (z-index: 1000) */
+    /* Añade una transición para que el cambio de posición sea suave */
+    transition: top 0.4s ease, right 0.4s ease, transform 0.4s ease;
 }
 
-.main-navigation ul ul li a {
-    padding: 10px 20px;
-    font-size: 14px;
+/* Estado "abierto" del menú (cuando la clase 'is-active' se añade al botón) */
+.header__buttonMobile.is-active .hamburger span:nth-child(1) {
+    transform: translateY(13.5px) rotate(50deg);
+    background-color: var(--primary); /* Color de la X cuando el menú está abierto, ajusta según tu background-color del menú */
+    /* position: fixed; */
 }
 
-.main-navigation ul li:hover > ul {
-    display: block; /* Mostrar submenú al pasar el ratón sobre el padre */
+.header__buttonMobile.is-active .hamburger span:nth-child(2) {
+    opacity: 0;
 }
 
-/* Sub-submenús (para niveles más profundos) */
-.main-navigation ul ul ul {
-    left: 100%;
-    top: 0;
+.header__buttonMobile.is-active .hamburger span:nth-child(3) {
+    transform: translateY(-13.5px) rotate(-50deg);
+    background-color: var(--primary); /* Color de la X cuando el menú está abierto */
+    /* position: fixed; */
+    /* top: 5px;  */
 }
 
-.main-navigation ul ul li:hover > ul {
-    display: block;
+/* Opcional: Rotar todo el contenedor de la hamburguesa para una X más centrada */
+.header__buttonMobile.is-active .hamburger {
+    transform: rotate(180deg);
 }
 
-/* --- Media Queries para Responsividad (Mobile vs. Desktop) --- */
-
-/* Estilos para Pantallas Pequeñas (Móvil) */
-@media screen and (max-width: 768px) {
-    .header-container {
-        flex-wrap: wrap; /* Permite que los elementos se envuelvan */
-        justify-content: space-between; /* Asegura que logo y hamburguesa estén separados */
+/* --- Media Query: Ocultar menú móvil en pantallas grandes --- */
+@media (min-width: 769px) { /* Ajusta este breakpoint según tu diseño de escritorio */
+    .header__buttonMobile {
+        display: none; /* Ocultar el botón de hamburguesa en desktop */
     }
 
-    .site-branding {
-        flex-grow: 1; /* Permite que el logo ocupe el espacio necesario */
+    .header__menu {
+        position: static; /* Quitar fixed en desktop */
+        visibility: visible; /* Siempre visible en desktop */
+        opacity: 1;
+        transform: translateX(0);
+        background-color: transparent; /* Fondo transparente */
+        z-index: auto;
+        overflow-y: visible;
+        height: auto; /* Altura automática en desktop */
+        width: auto; /* Ancho automático en desktop */
+        display: block; /* O flex si lo prefieres para tu diseño de desktop */
+        height: 100vh;
+        /* overflow: hidden; */
     }
 
-    .menu-toggle {
-        display: block; /* Mostrar botón de hamburguesa en móviles */
+    .menu__left {
+        display: none; /* Ocultar la parte izquierda si solo es para móvil */
     }
 
-    .main-navigation {
-        /* Ocultar el menú por defecto en móvil */
-        display: none;
-        width: 100%; /* Ocupa todo el ancho disponible */
-        background-color: #222; /* Fondo del menú desplegado */
-        position: absolute; /* Para que se despliegue por debajo del header */
-        top: 70px; /* Ajusta según la altura de tu header */
+    .menu__right {
+        background-color: transparent;
+        padding: 0;
+        flex: none; /* Desactivar flex para que no ocupe todo el espacio */
+        overflow-y: scroll;
+    }
+
+    .menuRight__container {
+        flex-direction: row; /* Ítems principales en fila */
+        justify-content: flex-end; /* O alinear como prefieras en desktop */
+        gap: 0; /* Eliminar el gap si los márgenes se controlan con margen-right */
+        height: auto; /* Asegúrate de que el contenedor no tenga una altura fija si los ítems van en línea */
+    }
+
+    .menuRight__item {
+        margin-left: 20px; /* Espacio entre ítems principales en desktop */
+        position: relative; /* Necesario para submenús desplegables */
+    }
+
+    .menuRight__item a, .menuRight__item h3 {
+        padding: 0; /* Ajusta el padding para desktop */
+        color: var(--text-color-desktop-menu); /* Color específico para menú de escritorio */
+        font-size: 1em; /* Ajusta tamaño de fuente */
+    }
+
+    .menuRight__item h3::after {
+        display: none; /* Ocultar la flecha en desktop si usas hover para submenús */
+    }
+
+    /* Estilos de los submenús en desktop (desplegables al pasar el ratón) */
+    .subitem, .subitem2 {
+        display: none; /* Ocultar submenús por defecto en desktop */
+        position: absolute;
+        top: 100%; /* Posicionamiento debajo del ítem padre */
         left: 0;
-        z-index: 90;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        background-color: var(--background-submenu-desktop); /* Fondo del submenú */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        min-width: 220px; /* Ancho mínimo para submenú */
+        padding: 10px 0;
+        border-left: none; /* Eliminar borde izquierdo */
+        max-height: none; /* Sin animación de max-height en desktop */
+        opacity: 1; /* Siempre visible al activar hover/focus */
+        z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+        flex-direction: column; /* Volver a columna para submenús */
     }
 
-    .main-navigation.toggled-on {
-        display: block; /* Mostrar el menú cuando se activa */
+    /* Mostrar submenús al hacer hover sobre el ítem principal */
+    .menuRight__item:hover > .subitem {
+        display: flex; /* Mostrar el primer nivel de submenú */
     }
 
-    .main-navigation ul {
-        flex-direction: column; /* Apilar ítems verticalmente */
+    /* Para el segundo nivel de submenú (subitem2) que aparece al hacer hover sobre el h3 del subitem */
+    .subitem > .menuRight__item:hover > .subitem2, /* Si tu HTML permite anidar items */
+    .subitem h3:hover + .subitem2 { /* Si el h3 es hermano del subitem2 */
+        display: flex;
     }
 
-    .main-navigation ul li {
-        width: 100%; /* Cada ítem ocupa todo el ancho */
-        border-bottom: 1px solid rgba(255,255,255,0.1); /* Separador entre ítems */
+    .subitem a, .subitem2 a {
+        padding: 8px 15px; /* Padding dentro de los ítems del submenú */
+        white-space: nowrap; /* Evita que los ítems de submenú se rompan */
+        color: var(--text-color-desktop-submenu); /* Color de texto para submenús de escritorio */
     }
-
-    .main-navigation ul li:last-child {
-        border-bottom: none;
-    }
-
-    .main-navigation ul li a {
-        padding: 15px 25px;
-    }
-
-    /* Estilos de Submenús (Móvil) */
-    .main-navigation ul ul {
-        position: static; /* Quita el posicionamiento absoluto para que se expandan "dentro" */
-        background-color: rgba(0,0,0,0.1); /* Fondo más claro para submenús */
-        padding-left: 20px; /* Indentación para submenús */
-        box-shadow: none; /* No sombras para submenús en móvil */
-        display: none; /* Ocultar por defecto */
-        width: 100%; /* Asegura que ocupen el ancho completo */
-    }
-
-    .main-navigation ul ul li a {
-        padding: 10px 25px; /* Ajusta el padding */
-        font-size: 15px;
-    }
-
-    /* Clase para mostrar submenú en móvil */
-    .main-navigation ul li.menu-item-has-children.active > ul {
-        display: block;
-    }
-}
-
-/* Ocultar texto para lectores de pantalla */
-.screen-reader-text {
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    overflow: hidden;
-    position: absolute !important;
-    width: 1px;
-    word-wrap: normal !important;
 }

@@ -1,94 +1,41 @@
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {
+     const mobileButton = document.querySelector('.header__buttonMobile');
+    const headerMenu = document.querySelector('.header__menu');
+    const menuItemsWithSubmenus = document.querySelectorAll('.menuRight__item h3'); // Selecciona los títulos de los ítems con submenú
 
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mainNavigation = document.getElementById('site-navigation');
+    // --- Lógica para el botón de hamburguesa y el menú principal ---
+    if (mobileButton && headerMenu) {
+        mobileButton.addEventListener('click', function() {
+            // Alternar la clase 'is-active' en el botón (hamburguesa <-> X)
+            this.classList.toggle('is-active');
 
-  menuToggle.addEventListener('click', function() {
-      // Toggle de la clase para mostrar/ocultar el menú principal
-      mainNavigation.classList.toggle('toggled-on');
-      // Toggle de la clase para animar la hamburguesa y para accesibilidad
-      this.classList.toggle('active');
+            // Alternar la clase 'is-open' en el contenedor del menú para mostrarlo/ocultarlo
+            headerMenu.classList.toggle('is-open');
 
-      // Actualizar el atributo aria-expanded para accesibilidad
-      const isExpanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !isExpanded);
-  });
+            // Actualizar atributo aria-expanded para accesibilidad
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
 
-  // Manejar los submenús en móviles (solo si tienen hijos)
-  const menuItemsWithChildren = document.querySelectorAll('.main-navigation li.menu-item-has-children > a');
+            // Controlar el scroll del cuerpo para que no se mueva cuando el menú esté abierto
+            if (headerMenu.classList.contains('is-open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = ''; // Restablecer
+            }
+        });
+    }
 
-  menuItemsWithChildren.forEach(function(item) {
-      item.addEventListener('click', function(event) {
-          // Solo prevenir el comportamiento por defecto si estamos en móvil
-          // (cuando el menú está desplegado por el toggle)
-          if (window.innerWidth <= 768) { // Ajusta el breakpoint si es diferente a tu CSS
-              event.preventDefault(); // Previene la navegación inmediata
-
-              const parentLi = this.parentNode;
-              // Si el submenú ya está abierto, lo cerramos
-              if (parentLi.classList.contains('active')) {
-                  parentLi.classList.remove('active');
-              } else {
-                  // Cierra cualquier otro submenú abierto en el mismo nivel
-                  const openSubmenus = parentLi.parentNode.querySelectorAll('.menu-item-has-children.active');
-                  openSubmenus.forEach(function(openItem) {
-                      if (openItem !== parentLi) { // No cerrar el que acabamos de hacer clic
-                          openItem.classList.remove('active');
-                      }
-                  });
-                  // Abre el submenú actual
-                  parentLi.classList.add('active');
-              }
-          }
-          // Si el submenú no tiene hijos, o si estamos en escritorio, el enlace funcionará normalmente.
-      });
-  });
-
-  // Cerrar el menú si se hace clic fuera de él en móvil
-  document.addEventListener('click', function(event) {
-      if (window.innerWidth <= 768 && mainNavigation.classList.contains('toggled-on')) {
-          const isClickInsideMenu = mainNavigation.contains(event.target) || menuToggle.contains(event.target);
-          if (!isClickInsideMenu) {
-              mainNavigation.classList.remove('toggled-on');
-              menuToggle.classList.remove('active');
-              menuToggle.setAttribute('aria-expanded', false);
-
-              // Opcional: Cerrar todos los submenús activos al cerrar el menú principal
-              document.querySelectorAll('.main-navigation li.menu-item-has-children.active').forEach(function(item) {
-                  item.classList.remove('active');
-              });
-          }
-      }
-  });
-
-  // Asegurarse de que el menú se resetee si se cambia el tamaño de la ventana
-  // de móvil a escritorio y viceversa
-  let resizeTimer;
-  window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() {
-          if (window.innerWidth > 768) {
-              // Si estamos en escritorio, asegúrate de que el menú esté visible
-              mainNavigation.style.display = ''; // Elimina el 'display: none' o 'block' inline
-              mainNavigation.classList.remove('toggled-on');
-              menuToggle.classList.remove('active');
-              menuToggle.setAttribute('aria-expanded', false);
-              // Asegúrate de que todos los submenús estén ocultos por defecto en escritorio
-              document.querySelectorAll('.main-navigation ul ul').forEach(function(submenu) {
-                  submenu.style.display = '';
-              });
-          } else {
-              // Si volvemos a móvil, oculta el menú si no está toggled-on
-              if (!mainNavigation.classList.contains('toggled-on')) {
-                  mainNavigation.style.display = 'none';
-              }
-          }
-          // Cerrar todos los submenús desplegados en móvil al redimensionar
-          document.querySelectorAll('.main-navigation li.menu-item-has-children.active').forEach(function(item) {
-              item.classList.remove('active');
-          });
-
-      }, 250); // Pequeño retraso para evitar ejecuciones excesivas
-  });
-
-})
+    // --- Lógica para los submenús (en móvil) ---
+    menuItemsWithSubmenus.forEach(function(h3) {
+        h3.addEventListener('click', function() {
+            const parentItem = this.closest('.menuRight__item'); // El div.menuRight__item padre
+            const submenu = this.nextElementSibling; // El div.subitem o div.subitem2
+            
+            if (parentItem && submenu) {
+                // Alternar la clase 'is-open' en el item padre para el CSS (flecha y submenú)
+                parentItem.classList.toggle('is-open');
+                submenu.classList.toggle('is-open');
+            }
+        });
+    });
+});
