@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     menuItemsWithSubmenus.forEach(function(h3) {
         h3.addEventListener('click', function() {
             // Verifica si la pantalla es menor o igual a 769px
-            if (window.matchMedia('(max-width: 769px)').matches) {
+            if (window.matchMedia('(max-width: 1020px)').matches) {
                 const parentItem = this.closest('.menuRight__item'); // El div.menuRight__item padre
                 const submenu = this.nextElementSibling; // El div.subitem o div.subitem2
 

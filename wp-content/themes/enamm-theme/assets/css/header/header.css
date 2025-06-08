@@ -250,7 +250,7 @@ header {
 }
 
 /* --- Media Query: Ocultar menú móvil en pantallas grandes --- */
-@media (min-width: 769px) { /* Ajusta este breakpoint según tu diseño de escritorio */
+@media (min-width: 1020px) { /* Ajusta este breakpoint según tu diseño de escritorio */
     
     header {
         padding: 15px 0;
