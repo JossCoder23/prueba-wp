@@ -85,13 +85,13 @@
                                 <a href="#">Certificados por recoger</a>
                             </div>
                         </div>
-                        <!-- <div class="menuRight__item menuRight__item--enabled">
+                        <div class="menuRight__item menuRight__item--enabled">
                             <h3>Grados y Títulos</h3>
                             <div class="subitem">
                                 <a href="#">Seguimiento al egresado</a>
                                 <a href="#">Requisitos Académicos</a>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="menuRight__item menuRight__item--disabled">
                             <a href="">Experiencia ENAMM</a>
                         </div>
