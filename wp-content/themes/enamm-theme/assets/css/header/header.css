@@ -101,6 +101,7 @@ header {
     cursor: pointer; /* Indica que es clicable */
     position: relative; /* Para el posible indicador de submenú */
     padding: 5px 0;
+    width: auto;
 }
 
 /* Opcional: Indicador de submenú (flecha) */
