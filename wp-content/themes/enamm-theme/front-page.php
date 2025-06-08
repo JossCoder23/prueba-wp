@@ -8,9 +8,9 @@
 get_header(); // Incluye el contenido de header.php
 ?>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main" style="background-color: brown;">
 
-    <h1>front-page</h1>
+    <h1 style="margin:0">front-page</h1>
 
 </main>
 
