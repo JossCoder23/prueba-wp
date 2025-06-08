@@ -26,7 +26,7 @@
                         <div class="menuRight__item">
                            <a href="">Home</a>
                         </div>
-                        <div class="menuRight__item">
+                        <div class="menuRight__item menuRight__item--disabled">
                             <h3>Nosotros</h3>
                             <div class="subitem">
                                 <a href="#">Quiénes somos</a>
@@ -35,7 +35,7 @@
                                 <a href="#">Anticorrupción</a>
                             </div>
                         </div>
-                        <div class="menuRight__item">
+                        <div class="menuRight__item menuRight__item--disabled">
                             <a href="">Convenios</a>
                         </div>
                         <div class="menuRight__item">
@@ -48,24 +48,30 @@
                         <div class="menuRight__item">
                             <h3>Programas Académicos</h3>
                             <div class="subitem">
-                                <h3>Centro Pre ENAMM</h3>
-                                <div class="subitem2">
-                                    <a href="">Pre Marina Mercante</a>
-                                    <a href="">Pre AMP</a>
+                                <div class="subitem__wrapper"> 
+                                    <h3>Centro Pre ENAMM</h3>
+                                    <div class="subitem2">
+                                        <a href="">Pre Marina Mercante</a>
+                                        <a href="">Pre AMP</a>
+                                    </div>
                                 </div>
-                                <h3>Carreras Pregrado</h3>
-                                <div class="subitem2">
-                                    <a href="">Administración Marítima Portuaria</a>
-                                    <a href="">Marina Mercante</a>
+                                <div class="subitem__wrapper"> 
+                                    <h3>Carreras Pregrado</h3>
+                                    <div class="subitem2">
+                                        <a href="">Administración Marítima Portuaria</a>
+                                        <a href="">Marina Mercante</a>
+                                    </div>
                                 </div>
-                                <h3>Carreras Posgrado</h3>
-                                <div class="subitem2">
-                                    <a href="">Diplomado en Comercio y Finanzas Marítima Portuaria</a>
-                                    <a href="">Diplomado en Gestión Marítima, Portuaria y Pesquera</a>
-                                    <a href="">Diplomado en medio ambiente y derecho marítimo</a>
-                                    <a href="">Doctorado en ciencias marítimas</a>
-                                    <a href="">Maestría en Administración Marítima, Portuaria y Pesquera</a>
-                                    <a href="">Maestría en Gestión Naviera</a>
+                                <div class="subitem__wrapper"> 
+                                    <h3>Carreras Posgrado</h3>
+                                    <div class="subitem2">
+                                        <a href="">Diplomado en Comercio y Finanzas Marítima Portuaria</a>
+                                        <a href="">Diplomado en Gestión Marítima, Portuaria y Pesquera</a>
+                                        <a href="">Diplomado en medio ambiente y derecho marítimo</a>
+                                        <a href="">Doctorado en ciencias marítimas</a>
+                                        <a href="">Maestría en Administración Marítima, Portuaria y Pesquera</a>
+                                        <a href="">Maestría en Gestión Naviera</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -79,16 +85,16 @@
                                 <a href="#">Certificados por recoger</a>
                             </div>
                         </div>
-                        <div class="menuRight__item">
+                        <div class="menuRight__item menuRight__item--disabled">
                             <a href="">Experiencia ENAMM</a>
                         </div>
-                        <div class="menuRight__item">
+                        <div class="menuRight__item menuRight__item--disabled">
                             <a href="">Noticias</a>
                         </div>
                         <div class="menuRight__item">
                             <a href="">Contáctanos</a>
                         </div>
-                        <div class="menuRight__item">
+                        <div class="menuRight__item menuRight__item--disabled">
                             <h3>Enlaces de interés</h3>
                             <div class="subitem">
                                 <a href="#">Aula Virtual</a>
@@ -107,7 +113,7 @@
                             </div>
                         </div>
                         <div class="menuRight__item">
-                            <h3>Investigaciones</h3>
+                            <h3>Investigación</h3>
                             <div class="subitem">
                                 <a href="#">Artículos</a>
                             </div>

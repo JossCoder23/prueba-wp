@@ -114,14 +114,28 @@ header {
     transition: transform 0.3s ease;
 }
 
+.menuRight__item .subitem h3::after {
+    right: 0px !important;
+}
+
+.menuRight__item.is-open h3::after,
+.subitem__wrapper.is-open h3::after {
+      transform: translateY(-50%) rotate(180deg);
+}
+
 /* Rotar flecha cuando el submenú está abierto */
 .menuRight__item.is-open h3::after {
     transform: translateY(-50%) rotate(180deg); /* Flecha hacia arriba */
 }
 
+.menuRight__item:not(:has(.subitem)) > h3::after,
+.subitem__wrapper:not(:has(.subitem2)) > h3::after {
+    content: none;
+}
+
 /* Estilos de los submenús */
 .subitem, .subitem2 {
-    display: none; /* Oculto por defecto */
+    display: flex; /* Oculto por defecto */
     flex-direction: column; /* Organiza los links en columna */
     padding-left: 20px; /* Indentación para submenús */
     border-left: 2px solid var(--border-color); /* Línea visual para submenú, ajusta la variable */
@@ -135,6 +149,7 @@ header {
     display: flex; /* Mostrar cuando está abierto */
     max-height: 550px; /* Suficientemente grande para contener todos los ítems */
     opacity: 1;
+    visibility: visible;
 }
 
 .subitem a, .subitem2 a {
@@ -231,6 +246,26 @@ header {
 
 /* --- Media Query: Ocultar menú móvil en pantallas grandes --- */
 @media (min-width: 769px) { /* Ajusta este breakpoint según tu diseño de escritorio */
+    
+    header {
+        padding: 15px 0;
+        background-color: var(--fifth);
+    }
+
+    .header__logo {
+        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(7475%) hue-rotate(125deg) brightness(101%) contrast(106%);
+        width: 90px;
+    }
+
+    .header__container {
+        /* overflow: hidden; */
+        width: 680px;
+        border: 2px solid green;
+        flex-direction: row;
+        column-gap: 1.5rem;
+    }
+
+
     .header__buttonMobile {
         display: none; /* Ocultar el botón de hamburguesa en desktop */
     }
@@ -240,14 +275,16 @@ header {
         visibility: visible; /* Siempre visible en desktop */
         opacity: 1;
         transform: translateX(0);
-        background-color: transparent; /* Fondo transparente */
+        background-color: var(--secondary); /* Fondo transparente */
         z-index: auto;
-        overflow-y: visible;
+        /* overflow-y: visible; */
         height: auto; /* Altura automática en desktop */
         width: auto; /* Ancho automático en desktop */
         display: block; /* O flex si lo prefieres para tu diseño de desktop */
-        height: 100vh;
         /* overflow: hidden; */
+        /* border: 1px solid red; */
+        padding: .5rem;
+        border-radius: 5px;
     }
 
     .menu__left {
@@ -258,62 +295,261 @@ header {
         background-color: transparent;
         padding: 0;
         flex: none; /* Desactivar flex para que no ocupe todo el espacio */
-        overflow-y: scroll;
+        overflow: visible;
+        /* border: 2px solid purple; */
+        /* transform: none; */
+        height: auto;
     }
 
+   
     .menuRight__container {
         flex-direction: row; /* Ítems principales en fila */
         justify-content: flex-end; /* O alinear como prefieras en desktop */
         gap: 0; /* Eliminar el gap si los márgenes se controlan con margen-right */
         height: auto; /* Asegúrate de que el contenedor no tenga una altura fija si los ítems van en línea */
+        /* border: 1px solid blue; */
+        column-gap: .3rem;
+        display: flex;
+        align-items: center;
     }
 
     .menuRight__item {
-        margin-left: 20px; /* Espacio entre ítems principales en desktop */
+        /* margin-left: 20px;  Espacio entre ítems principales en desktop */
         position: relative; /* Necesario para submenús desplegables */
+        /* border: 2px solid brown; */
+        padding: 0 5px; /* Ajusta el padding para los ítems principales */
+        transition: background-color 0.3s ease; /* Transición para el hover */
+        border-radius: 5px; /* Añade un poco de borde para el hover */
+    }
+
+    /* ESTILO HOVER PARA ÍTEMS PRINCIPALES */
+    .menuRight__item:hover {
+        background-color: var(--primary); /* Color de fondo al hacer hover */
+    }
+
+    /* CAMBIO DE COLOR DEL TEXTO AL HOVER */
+    .menuRight__item:hover > a,
+    .menuRight__item:hover > h3 {
+        color: var(--fifth); /* Color del texto al hacer hover */
+    }
+
+    .menuRight__item--disabled {
+        display: none;
     }
 
     .menuRight__item a, .menuRight__item h3 {
-        padding: 0; /* Ajusta el padding para desktop */
-        color: var(--text-color-desktop-menu); /* Color específico para menú de escritorio */
-        font-size: 1em; /* Ajusta tamaño de fuente */
+        padding: 5px 4px;
+        /*padding: 8px 10px;  Ajusta el padding para desktop */
+        color: var(--fifth); /* Color específico para menú de escritorio */
+        font-size: var(--text-title-menu-desktop);
+        margin: 0;
+        font-weight: 500;
+        /* padding: 0 5px; */
+        text-align: center;
+        /* margin-right: 5px; */
+        /* display: block; */
     }
+/*
+    .menuRight__item h3::after {
+        display: none; /* Ocultar la flecha en desktop si usas hover para submenús 
+    }*/
 
     .menuRight__item h3::after {
-        display: none; /* Ocultar la flecha en desktop si usas hover para submenús */
+          content: '▼';
+        font-size: 0.7em;
+        display: inline-block;
+        margin-left: 8px;
+        vertical-align: middle;
+        color: var(--fifth);
+        top: 35%;
+        right: -5px;
+        /* CLAVE: Asegúrate de que el punto de rotación sea el centro del elemento.
+           Por defecto, es "center center", pero es bueno ser explícito.
+           También, aplicamos la rotación inicial aquí.
+        */
+        transform: rotate(0deg); /* Asegura que empieza sin rotación */
+        transform-origin: center center; /* Rota desde su propio centro */
+        transition: transform 0.3s ease; /* Para una rotación suave */
     }
+
+     .menuRight__item:hover > h3::after {
+        transform: rotate(180deg); /* Triángulo hacia arriba al desplegarse */
+        color: var(--fifth); /* Mantener el color o cambiarlo al del hover */
+    }
+
+    /* Ocultar el ícono si el ítem principal no tiene un submenú (opcional, pero buena práctica) */
+    .menuRight__item:not(:has(.subitem)) > h3::after {
+        content: none; /* Oculta el triángulo si no hay un subitem */
+        margin-left: 0;
+    }
+
+    .subitem {
+        width: 100%;
+        display: none; /* Por defecto oculto */
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none; /* Inactivo para el ratón cuando está oculto */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Para una animación suave */
+        /* Asegura que no haya un max-height que lo limite si el contenido es largo */
+        max-height: none; 
+    }
+
+    /* Mostrar el primer nivel de submenú al hacer HOVER sobre el ítem principal */
+    .menuRight__item:hover > .subitem {
+        display: flex; /* O 'block' si no necesitas flexbox dentro */
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto; /* Activo para el ratón cuando está visible */
+        visibility: visible;
+    }
+
+
 
     /* Estilos de los submenús en desktop (desplegables al pasar el ratón) */
     .subitem, .subitem2 {
+        /*border: 2px solid red !important;  Temporalmente para ver si aparecen */
+        /* background-color: yellow !important; */
         display: none; /* Ocultar submenús por defecto en desktop */
         position: absolute;
         top: 100%; /* Posicionamiento debajo del ítem padre */
         left: 0;
-        background-color: var(--background-submenu-desktop); /* Fondo del submenú */
+        background-color: var(--secondary); /* Fondo del submenú */
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        min-width: 220px; /* Ancho mínimo para submenú */
+        min-width: max-content; /* Ancho mínimo para submenú */
         padding: 10px 0;
         border-left: none; /* Eliminar borde izquierdo */
-        max-height: none; /* Sin animación de max-height en desktop */
-        opacity: 1; /* Siempre visible al activar hover/focus */
-        z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+        opacity: 0; /* Siempre visible al activar hover/focus */
+        z-index: 999; /* Asegúrate de que esté por encima de otros elementos */
         flex-direction: column; /* Volver a columna para submenús */
+        /* Transición para la aparición */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateY(10px); /* Ligeramente desplazado hacia abajo al aparecer */
+        pointer-events: none; /* Desactiva eventos de ratón cuando no está visible */
+        max-height: none; /* Sin animación de max-height en desktop */
+        /* height: 30rem; */
+        border-radius: 10px;
+        /* border: 2px solid blue !important; Para ver los límites */
+        overflow: visible;
     }
 
     /* Mostrar submenús al hacer hover sobre el ítem principal */
-    .menuRight__item:hover > .subitem {
+    .menuRight__item:hover > .subitem,
+    .subitem h3:hover + .subitem2 {
         display: flex; /* Mostrar el primer nivel de submenú */
+        transform: translateY(0); /* Se desliza a su posición final */
+        pointer-events: auto; /* Habilita eventos de ratón */
     }
 
     /* Para el segundo nivel de submenú (subitem2) que aparece al hacer hover sobre el h3 del subitem */
-    .subitem > .menuRight__item:hover > .subitem2, /* Si tu HTML permite anidar items */
-    .subitem h3:hover + .subitem2 { /* Si el h3 es hermano del subitem2 */
-        display: flex;
+    /*.subitem > .menuRight__item:hover > .subitem2,  Si tu HTML permite anidar items */
+    /*.subitem h3:hover + .subitem2 {  Si el h3 es hermano del subitem2 */
+       /* display: flex;
+    }*/
+
+    .subitem2 {
+        left: 100%; /* Aparece a la derecha del subitem padre */
+        top: 0; /* Alineado con el top del subitem padre */
+        /* margin-left: 0; */
+
+        display: none; /* Por defecto oculto */
+        opacity: 0;
+        transform: translateY(10px); /* Opcional, si quieres una animación similar */
+        pointer-events: none; /* Inactivo para el ratón cuando está oculto */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        /* Asegúrate de su posicionamiento */
+        position: absolute;
     }
+
+    .subitem__wrapper:hover > .subitem2 {
+        display: flex; /* O 'block' */
+        opacity: 1;
+        transform: translateY(0); /* Si usas transform */
+        pointer-events: auto; /* Activo para el ratón cuando está visible */
+    }
+
 
     .subitem a, .subitem2 a {
         padding: 8px 15px; /* Padding dentro de los ítems del submenú */
         white-space: nowrap; /* Evita que los ítems de submenú se rompan */
-        color: var(--text-color-desktop-submenu); /* Color de texto para submenús de escritorio */
+       /* color: var(--text-color-desktop-submenu);  Color de texto para submenús de escritorio */
+        transition: background-color 0.2s ease, color 0.2s ease;
+        color: var(--fifth);
+    }
+
+     /* HOVER EN ÍTEMS DE SUBMENÚ */
+    .subitem a:hover,
+    .subitem2 a:hover {
+        background-color: var(--primary); /* Fondo al hacer hover en subítems */
+        color: var(--fifth); /* Color del texto al hacer hover en subítems */
+    }
+
+    .subitem h3 {
+        padding: 8px 15px; /* Padding para los títulos de submenú */
+        color: var(--fifth);
+        position: relative;
+        z-index: 1;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .subitem h3:hover {
+        background-color: var(--primary);
+        color: var(--fifth);
+    }
+
+    .subitem h3::after {
+        content: '►'; /* Cambiar a una flecha que apunte a la derecha para sub-submenús */
+        font-size: 0.7em;
+        display: inline-block; /* CLAVE: Para que el margin-left funcione */
+        margin-left: 2px !important; /* Espacio fijo entre el texto del subitem y su flecha */
+        vertical-align: middle;
+        color: var(--fifth); /* O el color que desees para estas flechas */
+        transform: rotate(0deg); /* Flecha apuntando a la derecha por defecto */
+        transform-origin: center center;
+        transition: transform 0.3s ease;
+        margin-right: 5px;
+        /* ELIMINAR CUALQUIER POSICIONAMIENTO ABSOLUTO QUE TENGAS AQUÍ */
+        /* right: 0px !important;  <-- ELIMINA ESTO */
+        /* top: 35%; <-- ELIMINA ESTO */
+    }
+
+     /* Rotar la flecha de .subitem h3 al hacer hover para mostrar .subitem2 */
+    .subitem h3:hover::after {
+        transform: rotate(90deg); /* Gira 90 grados para apuntar hacia abajo/arriba */
+        color: var(--fifth); /* Cambia el color al hacer hover */
+    }
+
+    /* Ocultar la flecha si el subitem h3 no tiene un .subitem2 */
+    /* Necesitas tener una estructura que lo permita o una clase extra */
+    .subitem h3:not(:has(+ .subitem2))::after {
+        content: none;
+        margin-left: 0;
+    }
+
+     /* OCULTA el subitem2 por defecto */
+    .subitem2 {
+        display: none;
+        position: absolute;
+        left: 100%; /* A la derecha del wrapper */
+        top: 0;
+        /* ... (resto de tus reglas para .subitem2) ... */
+        pointer-events: none; /* Oculto por defecto */
+    }
+
+    /* ESTO ES LO CLAVE: Hacer hover sobre el WRAPPER completo */
+    .subitem__wrapper:hover > .subitem2 {
+        display: flex; /* Mostrar el subitem2 */
+        pointer-events: auto; /* Habilitar interacción */
+        transform: translateY(0); /* Si tienes transform para la animación */
+    }
+
+    /* Asegúrate de que el wrapper sea posicionado para que subitem2 se posicione correctamente */
+    .subitem__wrapper {
+        position: relative; /* Importante para el posicionamiento absoluto del subitem2 */
+    }
+
+    /* Ajusta el padding para los h3 y a dentro del wrapper */
+    .subitem__wrapper h3,
+    .subitem__wrapper a {
+        padding: 8px 15px; /* Asegura un área de click generosa */
     }
 }
