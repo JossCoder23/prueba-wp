@@ -244,6 +244,10 @@ header {
     transform: rotate(180deg);
 }
 
+.menuRight__item--enabled {
+    display: none;
+}
+
 /* --- Media Query: Ocultar menú móvil en pantallas grandes --- */
 @media (min-width: 769px) { /* Ajusta este breakpoint según tu diseño de escritorio */
     
@@ -552,4 +556,9 @@ header {
     .subitem__wrapper a {
         padding: 8px 15px; /* Asegura un área de click generosa */
     }
+
+    .menuRight__item--enabled {
+        display: block;
+    }
+
 }
