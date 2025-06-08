@@ -1,7 +1,7 @@
 // ARCHIVO: js/enamm-menu-builder.js (en la raíz de tu tema, dentro de la carpeta 'js')
 
 document.addEventListener('DOMContentLoaded', function() {
-    alert("Hola")
+    // alert("Hola")
     const menuBuilderContainer = document.getElementById('enamm-menu-builder-container');
     const menuList = document.getElementById('enamm-menu-sortable');
 
