@@ -18,19 +18,230 @@ function enamm_add_header_options_page() {
 }
 add_action( 'admin_menu', 'enamm_add_header_options_page' );
 
-// 2. Definir la función que renderiza el contenido HTML de la página de opciones
+
+// Encolar scripts y estilos para el backend (para la gestión del menú)
+function enamm_enqueue_admin_header_scripts() {
+    // Asegúrate de que este script solo se carga en tu página de opciones
+    if ( 'toplevel_page_enamm-header-options' === get_current_screen()->id ) {
+         wp_enqueue_script(
+            'sortablejs', // Un identificador único para el script
+            'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js', // URL del CDN
+            array(), // SortableJS no tiene dependencias (al menos, no de jQuery)
+            '1.15.0', // Versión de SortableJS
+            true // Cargar el script en el footer
+        );
+        wp_enqueue_script(
+            'enamm-menu-builder',
+            get_template_directory_uri() . '/assets/js/admin/header-admin.js', // ¡Crearemos este archivo!
+            array(), // Necesitamos jQuery UI Sortable para arrastrar y soltar
+            '1.0',
+            true
+        );
+        wp_enqueue_style(
+            'enamm-admin-styles',
+            get_template_directory_uri() . '/assets/css/admin/admin-header.css', // ¡Crearemos este archivo!
+            array(),
+            '1.0'
+        );
+    }
+}
+add_action( 'admin_enqueue_scripts', 'enamm_enqueue_admin_header_scripts' );
+
+//- =========================================================
+//- BACKEND ACA =============================================
+//- =========================================================
+
+/**
+ * Descripción: Define los campos y la interfaz para la página de opciones del header,
+ * incluyendo la gestión de un menú anidado personalizado.
+ */
+
+// Registrar los ajustes y campos para las opciones del header
+function enamm_header_options_init() {
+    // 1. Sección para el logo
+    add_settings_section(
+        'enamm_header_logo_section',
+        'Configuración del Logo',
+        'enamm_header_logo_section_callback',
+        'enamm-header-options'
+    );
+    add_settings_field(
+        'enamm_header_logo_url',
+        'URL del Logo',
+        'enamm_header_logo_url_callback',
+        'enamm-header-options',
+        'enamm_header_logo_section'
+    );
+    register_setting(
+        'enamm_header_settings_group',
+        'enamm_header_logo_url',
+        array(
+            'type' => 'string',
+            'sanitize_callback' => 'esc_url_raw', // Sanitiza la URL
+            'default' => '',
+        )
+    );
+
+    // 2. Sección para el menú de navegación
+    add_settings_section(
+        'enamm_header_menu_section',
+        'Configuración del Menú de Navegación',
+        'enamm_header_menu_section_callback',
+        'enamm-header-options'
+    );
+    add_settings_field(
+        'enamm_header_nav_menu', // ID del campo que contendrá todos los ítems del menú
+        'Ítems del Menú',
+        'enamm_header_nav_menu_callback',
+        'enamm-header-options',
+        'enamm_header_menu_section'
+    );
+    // Registra la opción del menú completo (se guardará como un array serializado)
+    register_setting(
+        'enamm_header_settings_group',
+        'enamm_header_nav_menu',
+        array(
+            'type' => 'array',
+            'sanitize_callback' => 'enamm_sanitize_menu_items', // Función para sanitizar todos los datos del menú
+            'default' => array(),
+        )
+    );
+}
+add_action( 'admin_init', 'enamm_header_options_init' );
+
+// --- Funciones de Callback para renderizar los campos en el panel ---
+
+// Callback para la sección del logo
+function enamm_header_logo_section_callback() {
+    echo '<p>Introduce la URL de la imagen del logo de tu sitio.</p>';
+}
+
+// Callback para el campo de la URL del logo
+function enamm_header_logo_url_callback() {
+    $logo_url = get_option( 'enamm_header_logo_url' );
+    echo '<input type="url" id="enamm_header_logo_url" name="enamm_header_logo_url" value="' . esc_url( $logo_url ) . '" class="regular-text">';
+    echo '<p class="description">Por ejemplo: <code>https://tusitio.com/ruta/a/tu-logo.png</code></p>';
+}
+
+// Callback para la sección del menú de navegación
+function enamm_header_menu_section_callback() {
+    echo '<p>Gestiona los ítems de tu menú. Puedes arrastrar y soltar para reordenar y anidar. Usa las clases `menuRight__item--enabled` y `menuRight__item--disabled` para controlar la visibilidad.</p>';
+}
+
+// Callback para el campo del menú de navegación (la interfaz de usuario)
+function enamm_header_nav_menu_callback() {
+    $menu_items = get_option( 'enamm_header_nav_menu', array() ); // Obtiene los ítems guardados
+
+    echo '<div id="enamm-menu-builder-container">';
+    echo '<ul id="enamm-menu-sortable" class="enamm-menu-list">';
+
+    // Renderiza los ítems existentes
+    if ( ! empty( $menu_items ) ) {
+        enamm_render_menu_items_recursive( $menu_items, 'enamm_header_nav_menu', 0 );
+    }
+
+    echo '</ul>';
+    echo '<button type="button" class="button button-primary" id="add-menu-item">Añadir Nuevo Ítem</button>';
+    echo '</div>'; // #enamm-menu-builder-container
+}
+
+/**
+ * Función recursiva para renderizar ítems de menú y sus subítems en el backend.
+ *
+ * @param array  $items Los ítems de menú a renderizar.
+ * @param string $field_name El nombre base del campo HTML (ej. 'enamm_header_nav_menu').
+ * @param int    $depth La profundidad actual del menú (0 para el nivel superior).
+ */
+function enamm_render_menu_items_recursive( $items, $field_name, $depth ) {
+    foreach ( $items as $index => $item ) {
+        $unique_id = uniqid('menu_item_'); // Genera un ID único para cada ítem en el DOM
+        ?>
+        <li class="enamm-menu-item <?php echo 'depth-' . esc_attr($depth); ?>" data-item-id="<?php echo esc_attr($unique_id); ?>">
+            <div class="enamm-menu-item-header">
+                <span class="handle dashicons dashicons-move"></span>
+                <span class="item-title"><?php echo esc_html( ! empty( $item['title'] ) ? $item['title'] : 'Nuevo Ítem' ); ?></span>
+                <button type="button" class="toggle-item-details dashicons dashicons-arrow-down-alt2"></button>
+                <button type="button" class="remove-item button button-small dashicons dashicons-trash"></button>
+            </div>
+            <div class="enamm-menu-item-details" style="display:none;">
+                <p>
+                    <label for="<?php echo esc_attr($field_name . '[' . $index . '][type]'); ?>">Tipo de Ítem:</label>
+                    <select name="<?php echo esc_attr($field_name . '[' . $index . '][type]'); ?>" class="item-type-select">
+                        <option value="link" <?php selected( $item['type'], 'link' ); ?>>Enlace</option>
+                        <option value="heading" <?php selected( $item['type'], 'heading' ); ?>>Título (para submenú)</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="<?php echo esc_attr($field_name . '[' . $index . '][title]'); ?>">Título:</label>
+                    <input type="text" name="<?php echo esc_attr($field_name . '[' . $index . '][title]'); ?>" value="<?php echo esc_attr( $item['title'] ); ?>" class="item-title-input regular-text">
+                </p>
+                <p class="item-url-field <?php echo ($item['type'] === 'heading' ? 'hidden' : ''); ?>">
+                    <label for="<?php echo esc_attr($field_name . '[' . $index . '][url]'); ?>">URL:</label>
+                    <input type="url" name="<?php echo esc_attr($field_name . '[' . $index . '][url]'); ?>" value="<?php echo esc_url( $item['url'] ); ?>" class="regular-text">
+                </p>
+                <p>
+                    <label for="<?php echo esc_attr($field_name . '[' . $index . '][classes]'); ?>">Clases CSS Adicionales (separadas por espacio):</label>
+                    <input type="text" name="<?php echo esc_attr($field_name . '[' . $index . '][classes]'); ?>" value="<?php echo esc_attr( $item['classes'] ); ?>" class="regular-text">
+                    <span class="description">Ej: `menuRight__item--enabled`, `solo-escritorio`</span>
+                </p>
+                <button type="button" class="add-subitem button button-secondary">Añadir Sub-ítem</button>
+                <ul class="enamm-submenu-list enamm-menu-list">
+                    <?php
+                    if ( ! empty( $item['children'] ) && is_array( $item['children'] ) ) {
+                        enamm_render_menu_items_recursive( $item['children'], $field_name . '[' . $index . '][children]', $depth + 1 );
+                    }
+                    ?>
+                </ul>
+            </div>
+        </li>
+        <?php
+    }
+}
+
+/**
+ * Función para sanitizar los ítems de menú antes de guardarlos.
+ * Se llama recursivamente para sanitizar subítems.
+ *
+ * @param array $items Los ítems de menú a sanitizar.
+ * @return array Los ítems de menú sanitizados.
+ */
+function enamm_sanitize_menu_items( $items ) {
+    $sanitized_items = array();
+    if ( ! is_array( $items ) || empty( $items ) ) {
+        return $sanitized_items;
+    }
+
+    foreach ( $items as $item ) {
+        $sanitized_item = array();
+        $sanitized_item['type']    = isset( $item['type'] ) && in_array( $item['type'], array('link', 'heading') ) ? sanitize_text_field( $item['type'] ) : 'link';
+        $sanitized_item['title']   = isset( $item['title'] ) ? sanitize_text_field( $item['title'] ) : '';
+        $sanitized_item['url']     = isset( $item['url'] ) ? esc_url_raw( $item['url'] ) : '';
+        $sanitized_item['classes'] = isset( $item['classes'] ) ? sanitize_text_field( $item['classes'] ) : '';
+
+        // Si tiene hijos, sanitízalos recursivamente
+        if ( isset( $item['children'] ) && is_array( $item['children'] ) ) {
+            $sanitized_item['children'] = enamm_sanitize_menu_items( $item['children'] );
+        } else {
+            $sanitized_item['children'] = array(); // Asegura que siempre es un array
+        }
+        $sanitized_items[] = $sanitized_item;
+    }
+    return $sanitized_items;
+}
+
+// Función para renderizar la página de opciones del header (la misma que ya tienes)
 function enamm_header_options_page_html() {
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
     }
-    settings_errors( 'enamm_header_messages' ); // Muestra mensajes de error/éxito
+    settings_errors( 'enamm_header_messages' );
     ?>
     <div class="wrap">
         <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
         <form action="options.php" method="post">
             <?php
-            settings_fields( 'enamm_header_settings_group' ); // Grupo de opciones registrado
-            do_settings_sections( 'enamm-header-options' );   // Slug de la página de opciones
+            settings_fields( 'enamm_header_settings_group' );
+            do_settings_sections( 'enamm-header-options' );
             submit_button( 'Guardar cambios' );
             ?>
         </form>
@@ -38,132 +249,8 @@ function enamm_header_options_page_html() {
     <?php
 }
 
-// 3. Registrar la configuración, secciones y campos para el header
-function enamm_header_settings_init() {
-    // Registrar el grupo de opciones para el header
-    register_setting(
-        'enamm_header_settings_group', // Nombre del grupo de opciones
-        'enamm_header_options',        // Nombre de la opción en la base de datos (clave del array)
-        array(
-            'type'              => 'array',
-            'sanitize_callback' => 'enamm_sanitize_header_options', // Función de saneamiento
-            'default'           => array(
-                'logo_url'     => '',
-                'site_tagline' => get_bloginfo( 'description' ), // Por defecto, la descripción del sitio
-                'phone_header' => '',
-                'email_header' => '',
-            ),
-        )
-    );
 
-    // Añadir una sección a la página de opciones del header
-    add_settings_section(
-        'enamm_header_general_section',     // ID único de la sección
-        'Configuración General del Header', // Título de la sección
-        'enamm_header_general_section_callback', // Función de callback para descripción
-        'enamm-header-options'              // Slug de la página donde se mostrará
-    );
 
-    // Añadir campos individuales a la sección
-    add_settings_field(
-        'enamm_header_logo_field',      // ID único del campo
-        'URL del Logo',                 // Etiqueta del campo
-        'enamm_header_logo_field_callback', // Función para renderizar el campo
-        'enamm-header-options',         // Slug de la página
-        'enamm_header_general_section', // ID de la sección a la que pertenece
-        array( 'label_for' => 'enamm_header_logo_field' )
-    );
 
-    add_settings_field(
-        'enamm_header_tagline_field',
-        'Lema del Sitio (Tagline)',
-        'enamm_header_tagline_field_callback',
-        'enamm-header-options',
-        'enamm_header_general_section',
-        array( 'label_for' => 'enamm_header_tagline_field' )
-    );
 
-    add_settings_field(
-        'enamm_header_phone_field',
-        'Teléfono en Header',
-        'enamm_header_phone_field_callback',
-        'enamm-header-options',
-        'enamm_header_general_section',
-        array( 'label_for' => 'enamm_header_phone_field' )
-    );
 
-    add_settings_field(
-        'enamm_header_email_field',
-        'Correo Electrónico en Header',
-        'enamm_header_email_field_callback',
-        'enamm-header-options',
-        'enamm_header_general_section',
-        array( 'label_for' => 'enamm_header_email_field' )
-    );
-}
-add_action( 'admin_init', 'enamm_header_settings_init' );
-
-// Función de callback para la descripción de la sección del header
-function enamm_header_general_section_callback() {
-    echo '<p>Configura los elementos principales que aparecerán en la cabecera de tu sitio.</p>';
-}
-
-// Funciones de callback para renderizar los campos individuales del header
-function enamm_header_logo_field_callback() {
-    $options = get_option( 'enamm_header_options' );
-    $value   = isset( $options['logo_url'] ) ? $options['logo_url'] : '';
-    ?>
-    <input type="text" id="enamm_header_logo_field" name="enamm_header_options[logo_url]" value="<?php echo esc_url( $value ); ?>" class="regular-text">
-    <p class="description">Introduce la URL completa de tu logo. Puedes subirla a la biblioteca de medios y copiar la URL.</p>
-    <?php
-}
-
-function enamm_header_tagline_field_callback() {
-    $options = get_option( 'enamm_header_options' );
-    $value   = isset( $options['site_tagline'] ) ? $options['site_tagline'] : get_bloginfo( 'description' );
-    ?>
-    <input type="text" id="enamm_header_tagline_field" name="enamm_header_options[site_tagline]" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
-    <p class="description">El lema o descripción corta de tu sitio.</p>
-    <?php
-}
-
-function enamm_header_phone_field_callback() {
-    $options = get_option( 'enamm_header_options' );
-    $value   = isset( $options['phone_header'] ) ? $options['phone_header'] : '';
-    ?>
-    <input type="text" id="enamm_header_phone_field" name="enamm_header_options[phone_header]" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
-    <p class="description">Introduce el número de teléfono para el header.</p>
-    <?php
-}
-
-function enamm_header_email_field_callback() {
-    $options = get_option( 'enamm_header_options' );
-    $value   = isset( $options['email_header'] ) ? $options['email_header'] : '';
-    ?>
-    <input type="email" id="enamm_header_email_field" name="enamm_header_options[email_header]" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
-    <p class="description">Introduce el correo electrónico para el header.</p>
-    <?php
-}
-
-// 4. Función de saneamiento de las opciones del header
-function enamm_sanitize_header_options( $input ) {
-    $output = array();
-
-    if ( isset( $input['logo_url'] ) ) {
-        $output['logo_url'] = esc_url_raw( $input['logo_url'] ); // Sanea URLs
-    }
-
-    if ( isset( $input['site_tagline'] ) ) {
-        $output['site_tagline'] = sanitize_text_field( $input['site_tagline'] );
-    }
-
-    if ( isset( $input['phone_header'] ) ) {
-        $output['phone_header'] = sanitize_text_field( $input['phone_header'] );
-    }
-
-    if ( isset( $input['email_header'] ) ) {
-        $output['email_header'] = sanitize_email( $input['email_header'] );
-    }
-
-    return $output;
-}
