@@ -8,7 +8,16 @@
   --fourth: #DBDBDB;
   --fifth: #FFFFFF;
 
+  --text-title-mobile-footer: 16px;
+  --text-subtitle-mobile-footer: 15px;
+
+  --text-title-desktop-footer: 11px;
+  --text-subtitle-desktop-footer: 10px;
+
   --text-title-menu-desktop: 8px;
+
+  --container-mobile: 280px;
+  --container-desktop-1020: 900px;
 }
 
 h1, h2, h3, h4, h5, h6 {

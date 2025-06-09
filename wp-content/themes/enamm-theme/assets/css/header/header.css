@@ -10,7 +10,7 @@ header {
 
 .header__container {
     display: flex;
-    width: 280px; /* Esto es un ancho fijo, considera usar porcentajes o max-width para responsividad */
+    width: var(--container-mobile); /* Esto es un ancho fijo, considera usar porcentajes o max-width para responsividad */
     height: auto;
     justify-content: space-between;
     align-items: center;
@@ -259,13 +259,13 @@ header {
 
     .header__logo {
         filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(7475%) hue-rotate(125deg) brightness(101%) contrast(106%);
-        width: 90px;
+        width: 140px;
     }
 
     .header__container {
         /* overflow: hidden; */
-        width: 680px;
-        border: 2px solid green;
+        width: var(--container-desktop-1020);
+        /* border: 2px solid green; */
         flex-direction: row;
         column-gap: 1.5rem;
     }

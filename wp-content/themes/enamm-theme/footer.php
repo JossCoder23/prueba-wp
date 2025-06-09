@@ -116,7 +116,9 @@
 
 
     </div>
-    <div class="footerMiddle"></div>
+    <div class="footerMiddle">
+      <div class="footerMiddleSep"></div>
+    </div>
     <div class="footerBottom">
       <div class="footerTop__contactos footerTop__cts">
         <h3 class="footerTop__ct--title"><?php echo esc_html( $footer_options['footer_contact_title'] ?? 'CONTÁCTANOS' ); ?></h3>
