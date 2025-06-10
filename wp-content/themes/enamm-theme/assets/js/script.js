@@ -365,40 +365,43 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupBloque2() {
         updateBackgroundImage();
 
-        const windowWidth = window.innerWidth; // Obtiene el ancho de la ventana
+        const windowWidth = window.innerWidth; // Gets the window width
         const isMobileView = windowWidth < desktopBreakpoint;
 
         if (isMobileView) {
-            // --- ACTIVAR MODO SLIDER EN MÓVIL ---
+            // --- ACTIVATE SLIDER MODE FOR MOBILE ---
             isSliderActive = true;
             sliderTrack.style.transition = 'transform 0.5s ease-in-out';
             sliderTrack.style.display = 'flex';
 
-            // *** LÓGICA DE VALIDACIÓN DE ANCHO PARA LAS TARJETAS AQUÍ ***
-            let cardWidthPercentage = '100%'; // Valor por defecto si no encaja en las condiciones
-            if (windowWidth >= 360) {
-                cardWidthPercentage = '94.5%'; // Si la pantalla es 360px o más, 90%
-            } else if (windowWidth >= 320) {
-                cardWidthPercentage = '83%'; // Si la pantalla es 320px o más (y menos de 360px), 85%
+            // *** UPDATED WIDTH VALIDATION LOGIC FOR CARDS ***
+            let cardWidthPercentage = '100%'; // Default value for uncaught cases or the smallest
+            if (windowWidth > 400) { // If screen is more than 400px (e.g., 400.1px onwards)
+                cardWidthPercentage = '99.5%';
+            } else if (windowWidth > 390) { // If screen is more than 390px (and up to 400px)
+                cardWidthPercentage = '100.5%';
+            } else if (windowWidth >= 360) { // If screen is 360px or more (and up to 390px)
+                cardWidthPercentage = '90%';
+            } else if (windowWidth >= 320) { // If screen is 320px or more (and up to 359px)
+                cardWidthPercentage = '85%';
             } 
-            // Para pantallas menores a 320px, se mantendrá el 100% que ya tiene la tarjeta por CSS
-            // o podrías definir un 80% aquí si lo necesitas:
-            // else { cardWidthPercentage = '80%'; }
+            // For screens smaller than 320px, it will remain '100%' by default,
+            // or you can add an 'else { cardWidthPercentage = "some_other_percentage%"; }' if needed.
 
 
             sliderCards.forEach(card => {
-                card.style.width = cardWidthPercentage; // Aplica el porcentaje calculado
+                card.style.width = cardWidthPercentage; // Apply the calculated percentage
             });
-            // *** FIN DE LA LÓGICA DE VALIDACIÓN ***
+            // *** END OF WIDTH VALIDATION LOGIC ***
 
-            // Después de ajustar el ancho de las tarjetas, posicionamos el slider
+            // After adjusting card width, position the slider
             moveToSlide(currentIndex);
 
             prevArrow.style.display = 'block';
             nextArrow.style.display = 'block';
 
         } else {
-            // --- DESACTIVAR MODO SLIDER EN ESCRITORIO ---
+            // --- DEACTIVATE SLIDER MODE FOR DESKTOP ---
             isSliderActive = false;
             sliderTrack.style.transform = 'none';
             sliderTrack.style.transition = 'none';
@@ -408,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextArrow.style.display = 'none';
 
             sliderCards.forEach(card => {
-                card.style.width = 'auto'; // Vuelve al ancho automático para el grid en desktop
+                card.style.width = 'auto'; // Revert to auto width for grid on desktop
             });
 
             currentIndex = 0;
