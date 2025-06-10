@@ -3,6 +3,7 @@
 .bloque3 {
   position: relative;
   overflow: hidden;
+  background-color: red;
 }
 
 .bloque3__container {
