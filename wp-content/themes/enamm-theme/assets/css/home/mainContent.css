@@ -1,5 +1,6 @@
 main {
   background-color: red;
+  overflow: hidden;
 }
 
 .slider-container {
@@ -26,12 +27,13 @@ main {
 .slider-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    height: 70vh;
+    height: 65vh;
 }
 
 .slider-card {
     flex-shrink: 0;
     width: 100vw;
+    padding-top: 40px;
     /* Cada tarjeta ocupa el 100% del viewport width */
     box-sizing: border-box;
     margin: 0;
@@ -47,7 +49,7 @@ main {
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     /* min-height: 100vh; */
     /* Opcional: cada slide ocupa toda la altura de la vista */
     position: relative;
@@ -55,26 +57,59 @@ main {
 
     /* height: ; */
 }
+@media (min-width: 1020px) {
+    .slider-card {
+        padding-top: 0;
+    }
+}
 
 .card-content {
     position: relative;
     z-index: 2;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    /* background-color: red; */
+    width: var(--container-mobile);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    row-gap: 5px;
+}
+@media (min-width: 1020px) {
+    .card-content {
+        width: var(--container-desktop-1020);
+        height: 100%;
+        justify-content: center;
+    }
+}
+
+.card-content h3,
+.card-content h2 {
+    margin: 0;
+}
+
+.card-content h3 {
+    font-size: 16px;
+    font-weight: 400;
+    background-color: var(--primary);
+    width: 210px;
     text-align: center;
-    padding: 20px;
-    background-color: red;
-    border-radius: 8px;
-    max-width: 80%;
+    color: var(--fifth);
+    padding: .3rem;
+    border-radius: 10px;
 }
 
 .card-content h2 {
-    margin-top: 0;
-    font-size: 2em;
+    color: var(--fifth);
+    font-weight: 600;
 }
-
-.card-content p {
-    font-size: 1.2em;
+@media (min-width: 1020px) {
+    .card-content h3 {
+        font-size: 20px;
+        width: 260px;
+    }
+    .card-content h2 {
+        font-size: 40px;
+    }
 }
 
 /* Flechas de Navegación: ¡OCULTAS PERMANENTEMENTE! */
@@ -97,16 +132,22 @@ main {
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
+    width: 13px;
+    height: 4px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.4);
     /* Puntos blancos semi-transparentes */
     margin: 0 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    /* border: 1px solid rgba(255, 255, 255, 0.8); */
     /* Borde para visibilidad en fondos claros */
+}
+@media (min-width: 1020px) {
+    .dot {
+        width: 30px;
+        height: 10px; 
+    }
 }
 
 .dot.active {

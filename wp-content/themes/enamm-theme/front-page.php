@@ -61,31 +61,30 @@ get_header(); // Incluye el contenido de header.php
                     data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
                     data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
                     <div class="card-content">
-                        <h2>Título Card 1</h2>
-                        <p>Descripción breve de la Card 1.</p>
+                        <h3>Bienvenidos a la Escuela</h3>
+                        <h2>Nacional de Marina <br> Mercante "Almirante <br> Miguel Grau"</h2>
                     </div>
                 </div>
                 <div class="slider-card"
                     data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
                     data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
                     <div class="card-content">
-                        <h2>Título Card 2</h2>
-                        <p>Descripción breve de la Card 2.</p>
+                        <h3>Bienvenidos a la Escuela</h3>
+                        <h2>Nacional de Marina <br> Mercante "Almirante <br> Miguel Grau"</h2>
                     </div>
                 </div>
                 <div class="slider-card"
                     data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
                     data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
                     <div class="card-content">
-                        <h2>Título Card 3</h2>
-                        <p>Descripción breve de la Card 3.</p>
+                        <h3>Bienvenidos a la Escuela</h3>
+                        <h2>Nacional de Marina <br> Mercante "Almirante <br> Miguel Grau"</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="slider-dots"></div>
     </div>
-
     <div class="bloque2">
         <div class="bloque2__container">
             <div class="bloque2__slider">
@@ -122,73 +121,6 @@ get_header(); // Incluye el contenido de header.php
             <div class="bloque2__imageDesktop"></div>
         </div> 
     </div>
-
-    <!-- <div class="bloque3">
-        <div class="bloque3__container">
-            <h3 class="bloque3__title">Programas de Posgrado</h3>
-            <div class="bloque3__slider">
-
-            </div>
-        </div>
-    </div> -->
-    <!-- <div class="bloque3">
-        <div class="bloque3__container">
-            <h3 class="bloque3__title">Programas de Posgrado</h3>
-            <div class="bloque3__slider">
-                <div class="bloque3__slider--container">
-                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/eu4fdt56u7jbf4sttqkt.webp" alt="Anterior" class="bloque3__slider--arrow bloque3__slider--arrow--left">
-                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/hlj5zpzqbfsv0bbtrqt1.webp" alt="Siguiente" class="bloque3__slider--arrow bloque3__slider--arrow--right">
-
-                    <div class="bloque3__slider--wrapper">
-                        <div class="bloque3__slider--track">
-                            <div class="bloque3__slider--card">
-                                <div class="bloque3__card--content"
-                                    data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
-                                    data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
-                                    <h3>Maestría en Gestión Empresarial</h3>
-                                    <p>Lidera equipos y proyectos hacia el éxito empresarial.</p>
-                                </div>
-                            </div>
-
-                            <div class="bloque3__slider--card">
-                                <div class="bloque3__card--content"
-                                    data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
-                                    data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
-                                    <h3>Doctorado en Ciencias Sociales</h3>
-                                    <p>Investiga y contribuye al conocimiento en la sociedad.</p>
-                                </div>
-                            </div>
-
-                            <div class="bloque3__slider--card">
-                                <div class="bloque3__card--content"
-                                    data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
-                                    data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
-                                    <h3>Especialización en Big Data</h3>
-                                    <p>Analiza grandes volúmenes de datos para tomar decisiones estratégicas.</p>
-                                </div>
-                            </div>
-                            <div class="bloque3__slider--card">
-                                <div class="bloque3__card--content"
-                                    data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
-                                    data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
-                                    <h3>Maestría en Inteligencia Artificial</h3>
-                                    <p>Aprende a desarrollar sistemas inteligentes y machine learning.</p>
-                                </div>
-                            </div>
-                            <div class="bloque3__slider--card">
-                                <div class="bloque3__card--content"
-                                    data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/ck18czqqem2ekcmwsnan.webp"
-                                    data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/icsez5rowewz6kz0iz3x.webp">
-                                    <h3>Diplomado en Ciberseguridad</h3>
-                                    <p>Protege la información y los sistemas contra amenazas digitales.</p>
-                                </div>
-                            </div>
-                        </div> 
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-    </div> -->
     <div class="bloque3">
         <div class="bloque3__container">
             <div class="bloque3__slider">

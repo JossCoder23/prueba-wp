@@ -288,8 +288,8 @@ header {
         display: block; /* O flex si lo prefieres para tu diseño de desktop */
         /* overflow: hidden; */
         /* border: 1px solid red; */
-        padding: .5rem;
-        border-radius: 5px;
+        padding: .8rem;
+        border-radius: 18px;
     }
 
     .menu__left {

@@ -9,7 +9,7 @@
     
     <?php wp_body_open(); // Hook para WordPress 5.2+ ?>
 
-    <!-- <header>
+    <header>
         <div class="header__container">
             <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014513/ebiwesr325mxt3ifb43w.webp" alt="" class="header__logo">
             <button class="header__buttonMobile" aria-controls="primary-menu" aria-expanded="false">
@@ -129,9 +129,9 @@
                 </nav>
             </div>
         </div>
-    </header> -->
+    </header>
 
-    <?php 
+    <!-- <?php 
     // Función para renderizar el menú (puede ir en functions.php o aquí)
 function enamm_render_frontend_menu( $menu_items ) {
     if ( empty( $menu_items ) || ! is_array( $menu_items ) ) {
@@ -265,7 +265,7 @@ function enamm_render_frontend_menu_recursive_items( $items, $parent_classes ) {
                 </nav>
             </div>
         </div>
-    </header>
+    </header> -->
 
     <?php wp_footer(); // Esencial: Carga scripts JavaScript al final. ?>
 </body>

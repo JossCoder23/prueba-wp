@@ -2,6 +2,7 @@
 
 .bloque3 {
   position: relative;
+  overflow: hidden;
 }
 
 .bloque3__container {

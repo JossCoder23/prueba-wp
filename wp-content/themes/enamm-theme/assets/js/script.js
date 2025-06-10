@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let animationId;
 
     let autoplayInterval; // Variable para controlar el autoplay
-    const autoplayDelay = 5000; // 5 segundos para el autoplay
+    const autoplayDelay = 4000; // 5 segundos para el autoplay
 
     // --- Funciones de Utilidad ---
 
