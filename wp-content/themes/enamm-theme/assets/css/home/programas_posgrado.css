@@ -1,0 +1,108 @@
+/* Estilos Generales */
+
+.bloque3 {
+  position: relative;
+}
+
+.bloque3__container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+}
+
+.bloque3__slider--wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.bloque3__slider--track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    /* Animación de deslizamiento */
+}
+
+.bloque3__slider--card {
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    margin: 10px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+}
+
+/* Flechas de Navegación */
+.bloque3__slider--arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.bloque3__slider--arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.bloque3__prev--arrow {
+  background-color: blue;
+    left: 10px;
+}
+
+.bloque3__next--arrow {
+    right: 10px;
+}
+
+/* Puntos de Paginación */
+.bloque3__slider--dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.bloque3__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bloque3__dot.active {
+    background-color: #333;
+}
+
+/* Media Queries para Responsividad */
+@media (min-width: 768px) {
+    .bloque3__slider--card {
+        width: calc(100% / 3 - 20px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .bloque3__slider--card {
+        width: calc(100% / 3 - 20px);
+    }
+}

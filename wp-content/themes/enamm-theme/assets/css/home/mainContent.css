@@ -1,0 +1,115 @@
+main {
+  background-color: red;
+}
+
+.slider-container {
+    position: relative;
+    width: 100vw;
+    /* Ocupa el 100% del viewport width */
+    max-width: none;
+    /* No tiene un ancho máximo fijo */
+    margin: 0;
+    /* Sin márgenes en el contenedor */
+    overflow: hidden;
+    /* border: none;  // Puedes quitar el borde si quieres que se fusione con el fondo */
+    box-shadow: none;
+    /* Quitar sombra para look full width */
+    background-color: #fff;
+    padding: 0;
+    /* Eliminar padding del contenedor */
+}
+
+.slider-wrapper {
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 70vh;
+}
+
+.slider-card {
+    flex-shrink: 0;
+    width: 100vw;
+    /* Cada tarjeta ocupa el 100% del viewport width */
+    box-sizing: border-box;
+    margin: 0;
+    /* Sin márgenes entre tarjetas */
+    background-color: #e0e0e0;
+    border-radius: 0;
+    /* Quitar bordes redondeados para un look full-width */
+
+    /* Estilos para la imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    /* Opcional: cada slide ocupa toda la altura de la vista */
+    position: relative;
+    overflow: hidden;
+
+    /* height: ; */
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 20px;
+    background-color: red;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.card-content h2 {
+    margin-top: 0;
+    font-size: 2em;
+}
+
+.card-content p {
+    font-size: 1.2em;
+}
+
+/* Flechas de Navegación: ¡OCULTAS PERMANENTEMENTE! */
+.slider-arrow {
+    display: none;
+    /* Esto oculta las flechas en todas las pantallas */
+}
+
+/* Puntos de Paginación */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    /* Posicionamiento absoluto para que estén sobre el slider */
+    bottom: 20px;
+    /* Distancia desde la parte inferior */
+    width: 100%;
+    /* Ocupa todo el ancho para centrar fácilmente */
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    /* Puntos blancos semi-transparentes */
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    /* Borde para visibilidad en fondos claros */
+}
+
+.dot.active {
+    background-color: white;
+    /* Punto activo en blanco sólido */
+}
