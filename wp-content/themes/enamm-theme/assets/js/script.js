@@ -376,9 +376,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // *** UPDATED WIDTH VALIDATION LOGIC FOR CARDS ***
             let cardWidthPercentage = '100%'; // Default value for uncaught cases or the smallest
-            if (windowWidth > 400) { // If screen is more than 400px (e.g., 400.1px onwards)
+            if (windowWidth >= 400) { // If screen is more than 400px (e.g., 400.1px onwards)
                 cardWidthPercentage = '99.5%';
-            } else if (windowWidth > 390) { // If screen is more than 390px (and up to 400px)
+            } else if (windowWidth >= 390) { // If screen is more than 390px (and up to 400px)
                 cardWidthPercentage = '100.5%';
             } else if (windowWidth >= 360) { // If screen is 360px or more (and up to 390px)
                 cardWidthPercentage = '90%';
