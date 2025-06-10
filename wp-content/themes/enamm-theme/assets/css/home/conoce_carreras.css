@@ -71,20 +71,20 @@
     position: relative;
     z-index: 2;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); */
     text-align: center;
     padding: 20px;
     border-radius: 8px;
     width: 85%; /* Mejor un porcentaje del ancho de la tarjeta */
     max-width: 300px; /* Límite para que el contenido no sea muy ancho en móviles grandes */
     box-sizing: border-box;
-    min-height: 80%; /* Altura mínima para el contenido */
+    min-height: 380px; /* Altura mínima para el contenido */
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, 0.4);
+    /* background-color: rgba(0, 0, 0, 0.4); */
 }
 
 .bloque2__card--content h3 {
