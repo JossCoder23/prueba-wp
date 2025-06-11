@@ -122,7 +122,9 @@ get_header(); // Incluye el contenido de header.php
         </div> 
     </div>
     <div class="bloque3">
+        <div class="bloque3background"></div>
         <div class="bloque3__container">
+            <h3 class="bloque3__title">Programas de Posgrado</h3>
             <div class="bloque3__slider">
                 <div class="bloque3__slider--wrapper">
                     <div class="bloque3__slider--track">
@@ -137,8 +139,8 @@ get_header(); // Incluye el contenido de header.php
                         <div class="bloque3__slider--card">Card 9</div>
                     </div>
                 </div>
-                <button class="bloque3__slider--arrow bloque3__prev--arrow">&#10094;</button>
-                <button class="bloque3__slider--arrow bloque3__next--arrow">&#10095;</button>
+                <button class="bloque3__slider--arrow bloque3__prev--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/nm5llpdj22jw3dfgxblc.png" alt=""></button>
+                <button class="bloque3__slider--arrow bloque3__next--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/dhfmoox4hmjnkwknlioz.png" alt=""></button>
                 <div class="bloque3__slider--dots">
                 </div>
             </div>

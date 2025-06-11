@@ -1,21 +1,47 @@
 /* Estilos Generales */
 
 .bloque3 {
-  position: relative;
-  overflow: hidden;
-  background-color: red;
+    position: relative;
+    overflow: hidden;
+    background: #2D2D2D;
+    background: linear-gradient(160deg, rgba(45, 45, 45, 1) 27%, rgba(49, 93, 192, 1) 100%, rgba(31, 88, 219, 1) 100%, rgba(31, 88, 219, 1) 62%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.bloque3background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(256,256,256,.3); */
+    backdrop-filter: blur(2px);
+    z-index: 1;
 }
 
 .bloque3__container {
+    z-index: 2;
     position: relative;
-    width: 90%;
+    width: 220px;
     max-width: 1200px;
-    margin: 20px auto;
+    /* margin: 20px auto; */
     overflow: hidden;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    padding: 20px;
+    /* border: 1px solid #ccc; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* background-color: #fff; */
+    /* padding: 20px; */
+}
+@media (min-width: 1020px) {
+    .bloque3__container {
+        width: 900px;
+    }
+}
+
+.bloque3__slider {
+    position: relative;
 }
 
 .bloque3__slider--wrapper {
@@ -31,19 +57,25 @@
 
 .bloque3__slider--card {
     flex-shrink: 0;
-    width: 100%;
+    width: 97%;
     box-sizing: border-box;
-    padding: 15px;
-    margin: 10px;
+    /* padding: 15px;
+    margin: 10px; */
     background-color: #e0e0e0;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 150px;
+    min-height: auto;
     font-size: 1.2em;
     color: #333;
     text-align: center;
+    margin: 0 5px;
+}
+@media (min-width: 1020px) {
+    .bloque3__slider--card {
+        margin: 0 10px;
+    }
 }
 
 /* Flechas de Navegación */
@@ -51,10 +83,10 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: transparent;
+    /* color: white; */
     border: none;
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
     font-size: 1.5em;
     cursor: pointer;
     z-index: 10;
@@ -62,17 +94,18 @@
     transition: background-color 0.3s ease;
 }
 
-.bloque3__slider--arrow:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+.bloque3__slider--arrow img {
+    width: calc(auto + 8px);
+    height: 40px;
 }
 
 .bloque3__prev--arrow {
-  background-color: blue;
-    left: 10px;
+  /* background-color: blue; */
+    left: 0px;
 }
 
 .bloque3__next--arrow {
-    right: 10px;
+    right: 0px;
 }
 
 /* Puntos de Paginación */
