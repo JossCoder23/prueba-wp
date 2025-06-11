@@ -376,17 +376,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // *** UPDATED WIDTH VALIDATION LOGIC FOR CARDS ***
             let cardWidthPercentage = '100%'; // Default value for uncaught cases or the smallest
-            if (windowWidth >= 400) { // If screen is more than 400px (e.g., 400.1px onwards)
-                cardWidthPercentage = '99.5%';
-            } else if (windowWidth >= 380) { // If screen is more than 390px (and up to 400px)
-                cardWidthPercentage = '100.5%';
-            } else if (windowWidth >= 360) { // If screen is 360px or more (and up to 390px)
-                cardWidthPercentage = '90%';
+            if (windowWidth >= 360) { // If screen is more than 400px (e.g., 400.1px onwards)
+                cardWidthPercentage = '100%';
+            // } else if (windowWidth >= 380) { // If screen is more than 390px (and up to 400px)
+            //     cardWidthPercentage = '100.5%';
+            // } else if (windowWidth >= 360) { // If screen is 360px or more (and up to 390px)
+            //     cardWidthPercentage = '90%';
             } else if (windowWidth >= 320) { // If screen is 320px or more (and up to 359px)
-                cardWidthPercentage = '85%';
+                // cardWidthPercentage = '91%';
+                cardWidthPercentage = '100%';
             } 
-            // For screens smaller than 320px, it will remain '100%' by default,
-            // or you can add an 'else { cardWidthPercentage = "some_other_percentage%"; }' if needed.
+            // // For screens smaller than 320px, it will remain '100%' by default,
+            // // or you can add an 'else { cardWidthPercentage = "some_other_percentage%"; }' if needed.
 
 
             sliderCards.forEach(card => {

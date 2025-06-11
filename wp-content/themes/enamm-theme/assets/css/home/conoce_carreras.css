@@ -11,24 +11,38 @@
     width: var(--container-mobile); /* Ahora usa la variable */
     max-width: 1200px; /* Asegura un límite máximo en pantallas muy grandes */
     margin: 0 auto;
-    overflow: hidden; /* IMPORTANTE: asegura que el contenido que excede este contenedor se oculte */
+    /* overflow: hidden; IMPORTANTE: asegura que el contenido que excede este contenedor se oculte */
     position: relative;
+}
+
+.bloque2__slider {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* --- Estilos para el Título del Slider --- */
 .bloque2__slider--title {
     text-align: center;
-    font-size: 23px;
+    font-size: 19px;
     font-weight: 550;
     margin-bottom: 20px;
     margin: 0;
+    /* background-color: purple; */
+    width: 270px;
+    padding: .5rem 0;
+    border-radius: 15px;
+    border: 2px solid black
 }
 
 /* --- Estilos para el Contenedor Principal del Slider (donde están flechas) --- */
 .bloque2__slider--container {
     position: relative;
     width: 100%; /* Ocupa el 100% del .bloque2__container (que tiene 90% o max-width) */
-    overflow: hidden; /* OCULTA las tarjetas que se salen de vista del SLIDER */
+    /* overflow: hidden; OCULTA las tarjetas que se salen de vista del SLIDER */
     height: auto; /* Altura automática basada en el contenido */
 }
 
@@ -55,13 +69,13 @@
     width: 100%; 
     box-sizing: border-box;
     height: auto; /* Altura fija para las cards en móvil, ajusta según necesites */
-    background-color: white;
+    /* background-color: white; */
 
     display: flex; /* Para centrar el contenido */
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Resto del CSS del .bloque2__card--content y flechas queda igual, ya que centran el contenido DENTRO de la tarjeta. */
@@ -73,27 +87,47 @@
     color: white;
     /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); */
     text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    width: 85%; /* Mejor un porcentaje del ancho de la tarjeta */
-    max-width: 300px; /* Límite para que el contenido no sea muy ancho en móviles grandes */
+    padding: 15px 15px 40px 15px;
+    border-radius: 15px;
+    width: 76%; /* Mejor un porcentaje del ancho de la tarjeta */
+    /* max-width: 300px; Límite para que el contenido no sea muy ancho en móviles grandes */
     box-sizing: border-box;
-    min-height: 380px; /* Altura mínima para el contenido */
+    /* min-height: 380px; Altura mínima para el contenido */
+    height: 380px;
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: multiply;
     /* background-color: rgba(0, 0, 0, 0.4); */
+    /* background-color: purple; */
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    row-gap: 5px;
+}
+
+.bloque2__card--content h3, 
+.bloque2__card--content h2 {
+    margin: 0;
+    font-size: 16px;
+    color: white;
+    text-align: left;
 }
 
 .bloque2__card--content h3 {
-    margin-top: 0;
-    font-size: 1.8em; /* Ajusta para móviles */
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 7px;
+    background-color: var(--primary);
+    font-weight: 400;
 }
 
-.bloque2__card--content p {
-    font-size: 1em; /* Ajusta para móviles */
+.bloque2__card--content h2 {
+    font-weight: 600;
 }
 
 /* --- Flechas de Navegación --- */
@@ -101,8 +135,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
     cursor: pointer;
     z-index: 10;
     padding: 5px;
@@ -117,11 +151,13 @@
 }
 
 .bloque2__slider--arrow--left {
-    left:-7px;
+    /* left:-13px; */
+    left: 0px;
 }
 
 .bloque2__slider--arrow--right {
-    right:-6px;
+    /* right:-14px; */
+    right: 0px;
 }
 
 /* --- Contenedor de Imagen de Escritorio (no relacionado con el slider) --- */
