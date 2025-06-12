@@ -1,3 +1,4 @@
+/* Tu CSS existente */
 .bloque4 {
   background-color: var(--fourth);
   display: flex;
@@ -6,14 +7,14 @@
 }
 
 .bloque4Container {
-  /* background-color: green; */
   width: var(--container-mobile);
   display: flex;
   flex-direction: column;
   row-gap: 15px;
 }
+
 @media (min-width:1020px) {
-  .bloque4Container { 
+  .bloque4Container {
     width: 900px;
     flex-direction: row;
     column-gap: 30px;
@@ -33,8 +34,9 @@
   align-items: center;
   box-sizing: border-box;
 }
+
 @media (min-width: 1020px) {
-  .bloque4__left { 
+  .bloque4__left {
     flex: 1;
     width: 50%;
   }
@@ -81,6 +83,9 @@
 
 .bloque4__right--wrapper {
   position: relative;
+  /* Necesario para posicionar las flechas */
+  overflow: hidden;
+  /* Oculta las imágenes que no están activas */
 }
 
 .bloque4__slider--arrow {
@@ -88,18 +93,44 @@
   top: 45%;
   width: 35px;
   height: 35px;
+  cursor: pointer;
+  /* Indica que son clicables */
+  z-index: 10;
+  /* Asegura que las flechas estén por encima de las imágenes */
 }
 
 .bloque4__slider--arrow--right {
   right: 0;
 }
 
+.bloque4__slider--arrow--left {
+  left: 0;
+}
+
 .bloque4__right--card {
   width: 100%;
+  /* height: 100%; */
+  height: 13rem;
+  /* Asegura que ocupe todo el espacio del wrapper */
+  position: relative;
+  /* Necesario para posicionar las imágenes del slider */
 }
 
 .bloque4__right--card img {
   width: 100%;
   height: auto;
   border-radius: 25px;
+  position: absolute;
+  /* Permite que las imágenes se superpongan */
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /* Oculta por defecto */
+  transition: opacity 0.5s ease-in-out;
+  /* Transición suave al cambiar de imagen */
+}
+
+.bloque4__right--card img.active {
+  opacity: 1;
+  /* Muestra la imagen activa */
 }
