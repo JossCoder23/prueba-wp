@@ -179,6 +179,29 @@ get_header(); // Incluye el contenido de header.php
             </div>
         </div>
     </div>
+    <div class="bloque4">
+        <div class="bloque4Container">
+            <div class="bloque4__left">
+                <h4>Curso</h4>
+                <h3>Capacitación y entrenamiento</h3>
+                <p>Somos un centro homologado por la Dirección General de Capitanías y Guardacostas, para impartir los cursos de especialidad marítima. Con la garantía y homologación de:</p>
+                <div class="bloque4__left--content">
+                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014489/veva6lm3vtgyu6wrq3zt.webp" alt="">
+                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014489/vo44ihfat9onegilhyhp.webp" alt="">
+                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014489/xwiticwc9eyvgidqzpee.webp" alt="">
+                </div>
+            </div>
+            <div class="bloque4__right">
+                <div class="bloque4__right--wrapper">
+                    <div class="bloque4__right--card">
+                        <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014490/bzuwb6wj2pdb6aytvjre.webp" alt="">
+                    </div>
+                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/phfrqlfusszh4r17cyvo.webp" alt="Anterior" class="bloque4__slider--arrow bloque4__slider--arrow--left">
+                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014490/wh4ij8lmsns2unwohzxf.webp" alt="Siguiente" class="bloque4__slider--arrow bloque4__slider--arrow--right">
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 

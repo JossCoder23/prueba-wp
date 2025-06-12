@@ -23,7 +23,7 @@
   --title-mobile-size: 19px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
   font-family: var(--font-heading), var(--font-fallback);
   font-weight: 700; /* Asume que encolaste el peso 700 de Montserrat */
   color: #222;
