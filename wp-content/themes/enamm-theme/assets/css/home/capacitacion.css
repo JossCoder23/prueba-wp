@@ -116,6 +116,18 @@
   /* Necesario para posicionar las imágenes del slider */
 }
 
+@media (min-width: 380px) {
+  .bloque4__right--card {
+    height: 15rem;
+  }
+}
+
+@media (min-width: 410px) {
+  .bloque4__right--card {
+    height: 16rem;
+  }
+}
+
 .bloque4__right--card img {
   width: 100%;
   height: auto;
