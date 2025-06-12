@@ -131,8 +131,8 @@ main {
 }
 
 .dot {
-    width: 13px;
-    height: 4px;
+    width: 18px;
+    height: 8px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.4);
     /* Puntos blancos semi-transparentes */

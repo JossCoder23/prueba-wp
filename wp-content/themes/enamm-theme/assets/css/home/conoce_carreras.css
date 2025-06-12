@@ -27,9 +27,8 @@
 /* --- Estilos para el Título del Slider --- */
 .bloque2__slider--title {
     text-align: center;
-    font-size: 19px;
-    font-weight: 550;
-    margin-bottom: 20px;
+    font-size: var(--title-mobile-size);
+    font-weight: var(--title-mobile-weight);
     margin: 0;
     /* background-color: purple; */
     width: 270px;

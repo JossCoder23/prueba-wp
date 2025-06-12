@@ -128,15 +128,48 @@ get_header(); // Incluye el contenido de header.php
             <div class="bloque3__slider">
                 <div class="bloque3__slider--wrapper">
                     <div class="bloque3__slider--track">
-                        <div class="bloque3__slider--card">Card 1</div>
-                        <div class="bloque3__slider--card">Card 2</div>
-                        <div class="bloque3__slider--card">Card 3</div>
-                        <div class="bloque3__slider--card">Card 4</div>
-                        <div class="bloque3__slider--card">Card 5</div>
-                        <div class="bloque3__slider--card">Card 6</div>
-                        <div class="bloque3__slider--card">Card 7</div>
-                        <div class="bloque3__slider--card">Card 8</div>
-                        <div class="bloque3__slider--card">Card 9</div>
+                        <div class="bloque3__slider--card">
+                            <div class="bloque3__slider--content">
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/vi1pg9jsiwmmsmzkzpkg.webp" alt="">
+                                <h3><span>Maestría en</span> <br> Gestión Naviera</h3>
+                                <button>Ingresar</button>
+                            </div>
+                        </div>
+                        <div class="bloque3__slider--card">
+                            <div class="bloque3__slider--content">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/gbtq3flbxn5iyhd0kg8t.webp" alt="">
+                               <h3><span>Maestría en</span> <br> Administración Marítima Portuaria y Pesquera</h3>
+                               <button>Ingresar</button>
+                            </div>
+                        </div>
+                        <div class="bloque3__slider--card">
+                            <div class="bloque3__slider--content">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/vh5w1d9fejsgdiserctf.webp" alt="">
+                               <h3><span>Doctorado en</span> <br> Ciencias Marítimas</h3>
+                               <button>Ingresar</button>
+                            </div>
+                        </div>
+                        <div class="bloque3__slider--card">
+                            <div class="bloque3__slider--content">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/juegraqfddyuayvfi9cs.webp" alt="">
+                               <h3><span>Diplomado en</span> <br> Medio Ambiente y Derecho Marítimo</h3>
+                               <button>Ingresar</button>
+                            </div>
+                        </div>
+                        <div class="bloque3__slider--card">
+                            <div class="bloque3__slider--content">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/bm6xvvf50pu24ahvchdo.webp" alt="">
+                               <h3><span>Diplomado en</span> <br> Gestión Marítima Portuaria y Pesquera</h3>
+                               <button>Ingresar</button>
+                            </div>
+                        </div>
+                        <div class="bloque3__slider--card">
+                            <div class="bloque3__slider--content">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/lsc5ba1emu1mgafdxq5f.webp" alt="">
+                               <h3><span>Diplomado en</span> <br> Comercio y Finanzas Marítima Portuaria</h3>
+                               <button>Ingresar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button class="bloque3__slider--arrow bloque3__prev--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/nm5llpdj22jw3dfgxblc.png" alt=""></button>

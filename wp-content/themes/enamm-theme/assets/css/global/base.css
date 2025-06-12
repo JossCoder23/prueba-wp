@@ -18,6 +18,9 @@
 
   --container-mobile: 280px;
   --container-desktop-1020: 900px;
+
+  --title-mobile-weight: 550;
+  --title-mobile-size: 19px;
 }
 
 h1, h2, h3, h4, h5, h6 {
