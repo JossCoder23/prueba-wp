@@ -239,7 +239,7 @@ get_header(); // Incluye el contenido de header.php
                                     </div>
                                 </div>
                                 <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/pcoyompain0zuttjarjm.webp" alt="">
-                                <h3>Convocatoria de la XXXIII Maestría</h3>
+                                <h3 class="bloque8__slider--title">Convocatoria de la XXXIII Maestría</h3>
                             </div>
                         </div>
                         <div class="bloque8__slider--card">
@@ -252,7 +252,7 @@ get_header(); // Incluye el contenido de header.php
                                     </div>
                                 </div>
                                 <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/pcoyompain0zuttjarjm.webp" alt="">
-                                <h3>Convocatoria de la XXXIII Maestría</h3>
+                                <h3 class="bloque8__slider--title">Convocatoria de la XXXIII Maestría</h3>
                             </div>
                         </div>
                         <div class="bloque8__slider--card">
@@ -265,7 +265,7 @@ get_header(); // Incluye el contenido de header.php
                                     </div>
                                 </div>
                                 <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/pcoyompain0zuttjarjm.webp" alt="">
-                                <h3>Convocatoria de la XXXIII Maestría</h3>
+                                <h3 class="bloque8__slider--title">Convocatoria de la XXXIII Maestría</h3>
                             </div>
                         </div>
                     </div>

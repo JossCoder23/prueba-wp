@@ -111,16 +111,17 @@
     height: auto;
     padding: 20px 15px;
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 8px;
+    row-gap: 15px;
 }
 
 .bloque8__slider--item {
     background-color: var(--fifth);
     width: 110px;
-    border-radius: 13px;
+    border-radius: 16px;
     overflow: hidden;
 }
 
@@ -135,18 +136,56 @@
 }
 
 .bloque8__item--bottom {
-    min-height: 100px;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: -10px;
+    position: relative;
 }
 
 .bloque8__item--bottom h3,
 .bloque8__item--bottom h4 {
     color: var(--primary);
     font-weight: 600;
-    font-size: 40px;
+    font-size: 60px;
 }
 
 .bloque8__item--bottom h4 {
-    font-size: 25px;
+    font-size: 26px;
+}
+
+@keyframes jumpInfinite {
+  0% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: 10px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+.bloque8__slider--content img {
+    position: absolute;
+    top: 163px;
+    width: 20px;
+    animation: jumpInfinite 1.5s infinite;
+}
+
+.bloque8__slider--title {
+    margin: 0;
+    color: white;
+    font-weight: 400;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid var(--fifth);
+    width: 170px;
+    padding: 10px 0;
+    border-radius: 15px;
+    margin-top: 45px;
 }
 
 /* Flechas de Navegación */
