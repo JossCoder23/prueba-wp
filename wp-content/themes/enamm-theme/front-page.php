@@ -165,9 +165,26 @@ get_header(); // Incluye el contenido de header.php
     </div>
 
     <div class="bloque5">
+        <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014492/idekvlaltcopvre1zoh4.webp" class="bloque5__backimage_top" alt="">
+        <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014492/zkrvisvy9iv7inogxhsq.webp" class="bloque5__backimage_bottom" alt="">
         <div class="bloque5__container">
-            <div class="bloque5__left"></div>
-            <div class="bloque5__right"></div>
+            <div class="bloque5__left">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014492/hkbp5qejgqbz8350z5la.webp" alt="">
+            </div>
+            <div class="bloque5__right">
+                <div class="bloque5__item bloque5__item--curso1">
+                    <h3>Cursos OMI</h3>
+                    <h4>Ver curso</h4>
+                </div>
+                <div class="bloque5__item bloque5__item--curso2">
+                    <h3>Cursos OMI</h3>
+                    <h4>Ver curso</h4>
+                </div>
+                <div class="bloque5__item bloque5__item--curso3">
+                    <h3>Cursos OMI</h3>
+                    <h4>Ver curso</h4>
+                </div>
+            </div>
         </div>
     </div>
 

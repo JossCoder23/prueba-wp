@@ -1,0 +1,30 @@
+.bloque6 {
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.bloque6__container {
+  /* background-color: red; */
+  width: var(--container-mobile);
+  border-radius: 15px;
+
+  background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/dyragedlgkki2pmbcnjw.png');
+  background-size: cover; /* Ajusta la imagen para cubrir el div */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  position: relative;
+  min-height: 30rem;
+}
+@media(min-width:1020px) {
+  .bloque6__container {
+    /* background-position: left center; */
+    height: auto;
+    width: 100%;
+    min-height: 21.7rem;
+    background-size: contain;
+    width: var(--container-desktop-1020);
+    background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/gi5sci0jqgr2w9by318g.png');
+  }
+}
