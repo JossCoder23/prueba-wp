@@ -280,50 +280,43 @@ get_header(); // Incluye el contenido de header.php
 
     <div class="bloque9">
         <div class="bloque9__container">
-            <h3 class="bloque9__title">Programas de Posgrado</h3>
+            <h3 class="bloque9__title">Noticias</h3>
             <div class="bloque9__slider">
                 <div class="bloque9__slider--wrapper">
                     <div class="bloque9__slider--track">
                         <div class="bloque9__slider--card">
                             <div class="bloque9__slider--content">
-                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/vi1pg9jsiwmmsmzkzpkg.webp" alt="">
-                                <h3><span>Maestría en</span> <br> Gestión Naviera</h3>
-                                <button>Ingresar</button>
+                                <h3>1 marzo de 2025</h3>
+                                <p>Aspirantes a Cadetes Náuticos Visitan Buques de la Armada del Perú</p>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/eklrnliynocftkkkq83f.webp" alt="">
                             </div>
                         </div>
                         <div class="bloque9__slider--card">
                             <div class="bloque9__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/gbtq3flbxn5iyhd0kg8t.webp" alt="">
-                               <h3><span>Maestría en</span> <br> Administración Marítima Portuaria y Pesquera</h3>
-                               <button>Ingresar</button>
+                                <h3>1 marzo de 2025</h3>
+                                <p>Aspirantes a Cadetes Náuticos Visitan Buques de la Armada del Perú</p>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014500/shyikgach77lg2qvnz1g.webp" alt="">
                             </div>
                         </div>
                         <div class="bloque9__slider--card">
                             <div class="bloque9__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/vh5w1d9fejsgdiserctf.webp" alt="">
-                               <h3><span>Doctorado en</span> <br> Ciencias Marítimas</h3>
-                               <button>Ingresar</button>
+                                <h3>1 marzo de 2025</h3>
+                                <p>Aspirantes a Cadetes Náuticos Visitan Buques de la Armada del Perú</p>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014500/x3mwcgzlomil1zaf12wf.webp" alt="">
                             </div>
                         </div>
                         <div class="bloque9__slider--card">
                             <div class="bloque9__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/juegraqfddyuayvfi9cs.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Medio Ambiente y Derecho Marítimo</h3>
-                               <button>Ingresar</button>
+                                <h3>1 marzo de 2025</h3>
+                                <p>Aspirantes a Cadetes Náuticos Visitan Buques de la Armada del Perú</p>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014500/e8ifpsfk96tkwcxmmkod.webp" alt="">
                             </div>
                         </div>
                         <div class="bloque9__slider--card">
                             <div class="bloque9__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/bm6xvvf50pu24ahvchdo.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Gestión Marítima Portuaria y Pesquera</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque9__slider--card">
-                            <div class="bloque9__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/lsc5ba1emu1mgafdxq5f.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Comercio y Finanzas Marítima Portuaria</h3>
-                               <button>Ingresar</button>
+                                <h3>1 marzo de 2025</h3>
+                                <p>Aspirantes a Cadetes Náuticos Visitan Buques de la Armada del Perú</p>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014500/ii3j0ewhaxjj2o3sksmc.webp" alt="">
                             </div>
                         </div>
                     </div>
@@ -332,6 +325,10 @@ get_header(); // Incluye el contenido de header.php
                 <button class="bloque9__slider--arrow bloque9__next--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/dhfmoox4hmjnkwknlioz.png" alt=""></button>
                 <div class="bloque9__slider--dots">
                 </div>
+            </div>
+            <div class="bloque9__todo">
+                <h3>Ver Todo</h3>
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/z9p1ukgynzqqojbvxboy.webp" alt="">
             </div>
         </div>
     </div>
@@ -393,6 +390,27 @@ get_header(); // Incluye el contenido de header.php
             </div>
         </div>
     </div> -->
+
+    <div class="bloque11">
+        <div class="bloque11__container">
+            <h3>Los mejores profesionales del sector Instituciones y entidades colaboradoras</h3>
+            <div class="bloque11__container--content">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014513/jnns3k8mvcicivyxzmj9.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014510/pguuuww5wavyu0jihtkv.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014510/ub5ks6ctio5r8vdore8j.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014510/ivm3k7tt4pazjtawgzzw.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014510/gjmt3p7haf3jjhojb93g.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014510/walihs7zfsponhatwcas.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014510/nceqduobusnpeeltkyhq.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014506/p8xd1t3vwg29n9lxgtbq.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014506/vuudu7yqvmoaoitodslh.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014506/a32iyrs0zaw57hezohhl.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014506/nhp7wrbra7fzlttww4p1.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014506/prxpqf2yrhmdpatftbhq.webp" alt="">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014506/zbe4gkirtimtzktv8gye.webp" alt="">
+            </div>
+        </div>
+    </div>
 
 </main>
 

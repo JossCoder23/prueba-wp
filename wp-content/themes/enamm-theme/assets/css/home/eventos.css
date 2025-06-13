@@ -123,6 +123,11 @@ background: linear-gradient(162deg, rgba(45, 45, 45, 1) 18%, rgba(31, 88, 219, 1
     /* height: auto; */
     height: 140px;
 }
+@media(min-width:1020px) {
+    .bloque7__slider--content img {
+        height: 230px;
+    }
+}
 
 .bloque7__slider--content h3 {
     margin: 0;
