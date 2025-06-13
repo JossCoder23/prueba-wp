@@ -200,11 +200,11 @@
 }
 
 /* Media Queries para Responsividad */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .bloque7__slider--card {
         width: calc(100% / 3 - 20px);
     }
-}
+} */
 
 @media (min-width: 1024px) {
     .bloque7__slider--card {

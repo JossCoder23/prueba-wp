@@ -65,7 +65,7 @@
     margin: 0;
     border-radius: 10px;
 }
-@media(min-width: 1020px) {
+@media(min-width: 1024px) {
     .bloque3__title {
         font-size: var(--title-desktop-size);
         width: 310px;
@@ -132,8 +132,8 @@
 
 .bloque3__slider--content h3 {
     margin: 0;
-    font-size: 13px;
-    min-height: 50px;
+    font-size: 16px;
+    min-height: 60px;
     font-weight: 650;
     /* background-color: green; */
     width: 100%;
@@ -141,7 +141,7 @@
 
 .bloque3__slider--content h3 span {
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--primary);
 }
 
@@ -234,11 +234,11 @@
 }
 
 /* Media Queries para Responsividad */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .bloque3__slider--card {
         width: calc(100% / 3 - 20px);
     }
-}
+} */
 
 @media (min-width: 1024px) {
     .bloque3__slider--card {

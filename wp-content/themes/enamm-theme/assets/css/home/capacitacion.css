@@ -18,6 +18,7 @@
     width: 900px;
     flex-direction: row;
     column-gap: 30px;
+    height: 60vh;
   }
 }
 
@@ -34,17 +35,26 @@
   align-items: center;
   box-sizing: border-box;
 }
-
 @media (min-width: 1020px) {
   .bloque4__left {
-    flex: 1;
+    flex: .8;
     width: 50%;
+    align-items: flex-start;
+    height: 100%;
+    justify-content: center;
   }
 }
 
 .bloque4__left h3 {
   text-align: center;
   font-size: var(--title-mobile-size);
+}
+@media (min-width:1020px) {
+  .bloque4__left h3 {
+    text-align: left;
+    width: 100%;
+    font-size: 30px;
+  }
 }
 
 .bloque4__left h4 {
@@ -55,6 +65,11 @@
   border-radius: 15px;
   font-size: 12px;
 }
+@media (min-width:1020px) {
+  .bloque4__left h4 {
+    font-size: 15px;
+  }
+}
 
 .bloque4__left p {
   font-weight: 400;
@@ -62,10 +77,22 @@
   text-align: center;
   width: 230px;
 }
+@media(min-width:1020px) {
+  .bloque4__left p {
+    text-align: left;
+    width: 100%;
+    font-size: 22px;
+  }
+}
 
 .bloque4__left--content {
   display: flex;
   column-gap: 5px;
+}
+@media(min-width:1020px) {
+  .bloque4__left--content {
+    column-gap: 10px;
+  }
 }
 
 .bloque4__left--content img {
@@ -73,11 +100,19 @@
   height: auto;
   border-radius: 5px;
 }
+@media(min-width:1020px) {
+  .bloque4__left--content img {
+    width: 115px;
+  }
+}
 
 @media(min-width:1020px) {
   .bloque4__right {
     flex: 1;
     width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -86,6 +121,13 @@
   /* Necesario para posicionar las flechas */
   overflow: hidden;
   /* Oculta las imágenes que no están activas */
+}
+@media(min-width:1020px) {
+  .bloque4__right--wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .bloque4__slider--arrow {
@@ -110,15 +152,19 @@
 .bloque4__right--card {
   width: 100%;
   /* height: 100%; */
-  height: 13rem;
+  height: 12rem;
   /* Asegura que ocupe todo el espacio del wrapper */
   position: relative;
   /* Necesario para posicionar las imágenes del slider */
 }
-
 @media (min-width: 380px) {
   .bloque4__right--card {
     height: 12rem;
+  }
+}
+@media (min-width: 1020px) {
+  .bloque4__right--card {
+    height: 20rem;
   }
 }
 

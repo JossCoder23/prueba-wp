@@ -620,8 +620,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Determina cuántas tarjetas se muestran según el ancho de la pantalla
         if (window.innerWidth >= 1024) {
             cardsPerView = 3;
-        } else if (window.innerWidth >= 768) {
-            cardsPerView = 3;
         } else {
             cardsPerView = 1;
         }
@@ -889,8 +887,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Determina cuántas tarjetas se muestran según el ancho de la pantalla
         if (window.innerWidth >= 1024) {
             cardsPerView = 3;
-        } else if (window.innerWidth >= 768) {
-            cardsPerView = 3;
         } else {
             cardsPerView = 1;
         }
@@ -1118,8 +1114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Determina cuántas tarjetas se muestran según el ancho de la pantalla
         if (window.innerWidth >= 1024) {
-            cardsPerView = 3;
-        } else if (window.innerWidth >= 768) {
             cardsPerView = 3;
         } else {
             cardsPerView = 1;
@@ -1349,8 +1343,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Determina cuántas tarjetas se muestran según el ancho de la pantalla
         if (window.innerWidth >= 1024) {
             cardsPerView = 3;
-        } else if (window.innerWidth >= 768) {
-            cardsPerView = 3;
         } else {
             cardsPerView = 1;
         }
@@ -1578,8 +1570,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Determina cuántas tarjetas se muestran según el ancho de la pantalla
         if (window.innerWidth >= 1024) {
-            cardsPerView = 3;
-        } else if (window.innerWidth >= 768) {
             cardsPerView = 3;
         } else {
             cardsPerView = 1;
