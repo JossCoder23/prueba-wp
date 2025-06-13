@@ -1,0 +1,213 @@
+/* Estilos Generales */
+
+.bloque10 {
+    position: relative;
+    overflow: hidden;
+    background: #2D2D2D;
+    background: linear-gradient(160deg, rgba(45, 45, 45, 1) 27%, rgba(49, 93, 192, 1) 100%, rgba(31, 88, 219, 1) 100%, rgba(31, 88, 219, 1) 62%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.bloque10background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(256,256,256,.3); */
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.bloque10__container {
+    z-index: 2;
+    position: relative;
+    width: var(--container-mobile);
+    /* width: 240px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+    /* max-width: 1200px; */
+    align-items: center;
+    /* align-items: center; */
+    /* margin: 20px auto; */
+    /* overflow: hidden; */
+    /* border: 1px solid #ccc; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* background-color: #fff; */
+    /* padding: 20px; */
+}
+@media (min-width: 1020px) {
+    .bloque10__container {
+        width: 900px;
+    }
+}
+
+.bloque10__title {
+    background-color: var(--secondary);
+    color: var(--fifth);
+    font-size: var(--title-mobile-size);
+    /* font-size: 15px; */
+    font-weight: var(--title-mobile-weight);
+    text-align: center;
+    padding: 5px 10px;
+    border: 1.5px solid var(--fifth);
+    width: 240px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+.bloque10__slider {
+    width: 100%;
+    position: relative;
+}
+
+.bloque10__slider--wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.bloque10__slider--track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    /* Animación de deslizamiento */
+    /* column-gap: 8px; */
+}
+
+.bloque10__slider--card {
+    flex-shrink: 0;
+    width:100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    /* padding: 20px; */
+    /* background-color: green; */
+}
+@media (min-width: 1020px) {
+    .bloque10__slider--card { 
+        margin: 0 10px;
+    }     
+}
+
+.bloque10__slider--content {
+    background-color: var(--fifth);
+    border-radius: 15px;
+    width: 180px;
+    height: auto;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 8px;
+}
+@media(min-width:1020px) {
+    .bloque10__slider--content { 
+        width: 100%;
+    }
+}
+
+.bloque10__slider--content img {
+    width: 100%;
+    height: auto;
+}
+
+.bloque10__slider--content h3 {
+    margin: 0;
+    font-size: 13px;
+    min-height: 50px;
+    font-weight: 650;
+    /* background-color: green; */
+    width: 100%;
+}
+
+.bloque10__slider--content h3 span {
+    margin: 0;
+    font-size: 12px;
+    color: var(--primary);
+}
+
+.bloque10__slider--content button {
+    width: 100px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--fifth);
+    height: 28px;
+    border-radius: 8px;
+}
+
+/* Flechas de Navegación */
+.bloque10__slider--arrow {
+    position: absolute;
+    top: 43%;
+    /* transform: translateY(-50%); */
+    background-color: transparent;
+    /* color: white; */
+    border: none;
+    /* padding: 10px 15px; */
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    /* background-color: blue; */
+}
+
+.bloque10__slider--arrow img {
+    width: calc(auto + 8px);
+    height: 40px;
+}
+
+.bloque10__prev--arrow {
+  /* background-color: blue; */
+    left: 0px;
+}
+
+.bloque10__next--arrow {
+    right: 0px;
+}
+
+/* Puntos de Paginación */
+.bloque10__slider--dots {
+    display: none;
+    justify-content: center;
+    margin-top: 20px;
+}
+@media (min-width: 1020px) {
+    .bloque10__slider--dots {
+        display: flex;
+    }
+}
+
+.bloque10__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bloque10__dot.active {
+    background-color: #333;
+}
+
+/* Media Queries para Responsividad */
+@media (min-width: 768px) {
+    .bloque10__slider--card {
+        width: calc(100% / 3 - 20px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .bloque10__slider--card {
+        width: calc(100% / 3 - 20px);
+    }
+}

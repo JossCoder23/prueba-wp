@@ -713,3 +713,923 @@ document.addEventListener('DOMContentLoaded', () => {
 //- =================================================================
 //- =======================FIN BLOQUE4===============================
 //- =================================================================
+
+//- =================================================================
+//- =========================BLOQUE7=================================
+//- =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Selectores de elementos del DOM con tus clases específicas
+    const sliderTrack = document.querySelector('.bloque7__slider--track');
+    const originalCards = Array.from(document.querySelectorAll('.bloque7__slider--card'));
+    const prevArrow = document.querySelector('.bloque7__prev--arrow');
+    const nextArrow = document.querySelector('.bloque7__next--arrow');
+    const sliderDotsContainer = document.querySelector('.bloque7__slider--dots');
+
+    // Validación inicial: asegúrate de que todos los elementos existan
+    if (!sliderTrack || !originalCards.length || !prevArrow || !nextArrow || !sliderDotsContainer) {
+        console.error('Error: Uno o más elementos del slider no fueron encontrados. Revisa que las clases en tu HTML y JavaScript coincidan.');
+        return; // Detener la ejecución si faltan elementos cruciales
+    }
+
+    // Variables de estado del slider
+    let cardsPerView = 1; // Número de tarjetas visibles a la vez (se ajusta con la responsividad)
+    const totalCards = originalCards.length; // Cantidad total de tarjetas originales (fija en 9 en tu caso)
+    let clonedCardsCount = 0; // Cantidad de tarjetas clonadas a cada lado para el efecto infinito
+    let currentIndex = 0; // Índice de la tarjeta activa en el track (incluye clones)
+
+    // Ya no necesitamos `totalPages` como una variable de estado dinámica para los dots,
+    // porque siempre serán 9. Pero la mantenemos para depuración si la necesitas.
+    // let totalPages = 0; 
+
+    /**
+     * @function updateCardsPerView
+     * Ajusta `cardsPerView` según el ancho de la ventana y reconfigura el slider.
+     */
+    const updateCardsPerView = () => {
+        const previousCardsPerView = cardsPerView;
+
+        // Determina cuántas tarjetas se muestran según el ancho de la pantalla
+        if (window.innerWidth >= 1024) {
+            cardsPerView = 3;
+        } else if (window.innerWidth >= 768) {
+            cardsPerView = 3;
+        } else {
+            cardsPerView = 1;
+        }
+
+        // Si `cardsPerView` ha cambiado o es la primera inicialización, reconfigura los clones.
+        if (cardsPerView !== previousCardsPerView || clonedCardsCount === 0) {
+            setupInfiniteSlider();
+        }
+
+        // No necesitamos `totalPages` para la generación de dots si siempre son 9.
+        // Si necesitas saber cuántas "páginas" lógicas hay para otra cosa, podrías calcularlo aquí.
+        // totalPages = Math.ceil(totalCards / cardsPerView); 
+
+        generateDots(); // (Re)genera los puntos de paginación.
+
+        // Reposiciona el slider al inicio del primer grupo de tarjetas originales sin animación.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false);
+    };
+
+    /**
+     * @function setupInfiniteSlider
+     * Configura el track del slider con clones al principio y al final para un bucle infinito.
+     */
+    const setupInfiniteSlider = () => {
+        // Elimina cualquier clon existente antes de añadir nuevos.
+        const existingClones = sliderTrack.querySelectorAll('.bloque7__slider--card.clone');
+        existingClones.forEach(clone => clone.remove());
+
+        // Limpia el track y añade las tarjetas originales de nuevo para asegurar el orden.
+        // Esto es vital antes de añadir los clones.
+        sliderTrack.innerHTML = '';
+        originalCards.forEach(card => sliderTrack.appendChild(card));
+
+        // El número de clones es igual a `cardsPerView` para un bucle fluido.
+        clonedCardsCount = cardsPerView;
+
+        // Clona tarjetas del principio y las añade al final del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[i % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-end');
+            sliderTrack.appendChild(clone);
+        }
+
+        // Clona tarjetas del final y las añade al principio del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[(totalCards - 1 - i + totalCards) % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-start');
+            sliderTrack.prepend(clone);
+        }
+
+        // Establece el `currentIndex` para que apunte a la primera tarjeta original.
+        currentIndex = clonedCardsCount;
+    };
+
+    /**
+     * @function generateDots
+     * Genera dinámicamente los elementos de puntos de paginación. **Ahora siempre 9 dots.**
+     */
+    const generateDots = () => {
+        sliderDotsContainer.innerHTML = ''; // Limpia los puntos existentes.
+
+        // Los puntos corresponden a CADA tarjeta original, por lo tanto, siempre `totalCards` (que es 9).
+        for (let i = 0; i < totalCards; i++) { // Bucle hasta totalCards para generar 9 dots.
+            const dot = document.createElement('div');
+            dot.classList.add('bloque7__dot'); // Usa tu clase para los puntos.
+
+            dot.addEventListener('click', () => {
+                // Al hacer clic en un punto, el slider se mueve a la tarjeta individual correspondiente.
+                currentIndex = i + clonedCardsCount; // 'i' es el índice de la tarjeta original.
+                updateSliderPosition(true);
+            });
+            sliderDotsContainer.appendChild(dot);
+        }
+        updateDots(); // Actualiza el estado activo del punto recién generado.
+    };
+
+    /**
+     * @function updateSliderPosition
+     * Actualiza la posición translateX del `sliderTrack` para mostrar la tarjeta actual.
+     * @param {boolean} animate - Si la transición debe ser animada.
+     */
+    const updateSliderPosition = (animate = true) => {
+        const firstCard = originalCards[0];
+        if (!firstCard) {
+            console.warn('No hay tarjetas originales para calcular el ancho.');
+            return;
+        }
+
+        // Calcula el ancho total de una tarjeta, incluyendo sus márgenes.
+        const cardWidth = firstCard.offsetWidth +
+            parseFloat(getComputedStyle(firstCard).marginLeft) +
+            parseFloat(getComputedStyle(firstCard).marginRight);
+
+        // Calcula el desplazamiento horizontal necesario.
+        const offset = -currentIndex * cardWidth;
+
+        // Aplica la transición y el desplazamiento.
+        sliderTrack.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
+        sliderTrack.style.transform = `translateX(${offset}px)`;
+
+        updateDots(); // Actualiza el estado de los puntos.
+        updateArrows(); // Asegura que las flechas estén habilitadas.
+    };
+
+    /**
+     * @function updateDots
+     * Actualiza la clase 'active' del punto de paginación correspondiente a la tarjeta actual. **Ahora cada dot representa una tarjeta.**
+     */
+    const updateDots = () => {
+        const dots = document.querySelectorAll('.bloque7__dot'); // Selecciona los puntos con la nueva clase.
+
+        // Calcula el índice de la tarjeta real que está actualmente visible.
+        // Aquí no se usa `cardsPerView` para los dots, solo el índice de la tarjeta individual.
+        const currentRealCardIndex = (currentIndex - clonedCardsCount + totalCards) % totalCards;
+
+        dots.forEach((dot, index) => {
+            if (index === currentRealCardIndex) { // Compara con el índice real de la tarjeta.
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    /**
+     * @function updateArrows
+     * Asegura que las flechas de navegación no estén deshabilitadas en un slider infinito.
+     */
+    const updateArrows = () => {
+        prevArrow.disabled = false;
+        nextArrow.disabled = false;
+    };
+
+    // --- Listeners para la navegación con flechas ---
+    nextArrow.addEventListener('click', () => {
+        // Siempre avanza el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex++;
+        updateSliderPosition(true);
+    });
+
+    prevArrow.addEventListener('click', () => {
+        // Siempre retrocede el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex--;
+        updateSliderPosition(true);
+    });
+
+    // --- Listener para el final de la transición (manejo del bucle infinito) ---
+    sliderTrack.addEventListener('transitionend', () => {
+        // Calcula el índice de la tarjeta real actual (sin contar los clones).
+        let realCardOffset = currentIndex - clonedCardsCount;
+
+        // Si el slider se ha movido más allá del final de las tarjetas reales (a un clon 'end').
+        if (realCardOffset >= totalCards) {
+            // Salta instantáneamente a la posición equivalente al principio de las tarjetas reales.
+            currentIndex = clonedCardsCount + (realCardOffset % totalCards);
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+        // Si el slider se ha movido antes del principio de las tarjetas reales (a un clon 'start').
+        else if (realCardOffset < 0) {
+            // Salta instantáneamente a la posición equivalente al final de las tarjetas reales.
+            // Asegura que el índice de destino sea positivo y dentro del rango original.
+            let targetRealIndex = (totalCards + (realCardOffset % totalCards)) % totalCards;
+            if (targetRealIndex < 0) targetRealIndex += totalCards; // Asegura que sea positivo.
+
+            // No necesitamos alinear a `cardsPerView` aquí para los dots, ya que cada dot es individual.
+            // Pero si el salto en el bucle te lleva a una posición que visualmente no es el inicio de un grupo,
+            // y quieres que el primer dot visible se active, esta línea podría necesitarse.
+            // Por simplicidad, si los dots son 1:1 con las tarjetas, no se necesita.
+            // targetRealIndex = Math.floor(targetRealIndex / cardsPerView) * cardsPerView; 
+
+            currentIndex = clonedCardsCount + targetRealIndex;
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+    });
+
+    // --- Listener para el redimensionamiento de la ventana ---
+    window.addEventListener('resize', () => {
+        updateCardsPerView(); // Reajusta la vista y los clones. Los dots se regenerarán y serán 9.
+        // Después de redimensionar, reposiciona el slider al inicio del primer grupo original.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false); // Sin animación durante el redimensionamiento.
+    });
+
+    // --- Inicialización del slider ---
+    updateCardsPerView(); // Llama a la función principal para configurar el slider al cargar la página.
+});
+//- =================================================================
+//- =======================FIN BLOQUE7===============================
+//- =================================================================
+
+//- =================================================================
+//- =========================BLOQUE8=================================
+//- =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Selectores de elementos del DOM con tus clases específicas
+    const sliderTrack = document.querySelector('.bloque8__slider--track');
+    const originalCards = Array.from(document.querySelectorAll('.bloque8__slider--card'));
+    const prevArrow = document.querySelector('.bloque8__prev--arrow');
+    const nextArrow = document.querySelector('.bloque8__next--arrow');
+    const sliderDotsContainer = document.querySelector('.bloque8__slider--dots');
+
+    // Validación inicial: asegúrate de que todos los elementos existan
+    if (!sliderTrack || !originalCards.length || !prevArrow || !nextArrow || !sliderDotsContainer) {
+        console.error('Error: Uno o más elementos del slider no fueron encontrados. Revisa que las clases en tu HTML y JavaScript coincidan.');
+        return; // Detener la ejecución si faltan elementos cruciales
+    }
+
+    // Variables de estado del slider
+    let cardsPerView = 1; // Número de tarjetas visibles a la vez (se ajusta con la responsividad)
+    const totalCards = originalCards.length; // Cantidad total de tarjetas originales (fija en 9 en tu caso)
+    let clonedCardsCount = 0; // Cantidad de tarjetas clonadas a cada lado para el efecto infinito
+    let currentIndex = 0; // Índice de la tarjeta activa en el track (incluye clones)
+
+    // Ya no necesitamos `totalPages` como una variable de estado dinámica para los dots,
+    // porque siempre serán 9. Pero la mantenemos para depuración si la necesitas.
+    // let totalPages = 0; 
+
+    /**
+     * @function updateCardsPerView
+     * Ajusta `cardsPerView` según el ancho de la ventana y reconfigura el slider.
+     */
+    const updateCardsPerView = () => {
+        const previousCardsPerView = cardsPerView;
+
+        // Determina cuántas tarjetas se muestran según el ancho de la pantalla
+        if (window.innerWidth >= 1024) {
+            cardsPerView = 3;
+        } else if (window.innerWidth >= 768) {
+            cardsPerView = 3;
+        } else {
+            cardsPerView = 1;
+        }
+
+        // Si `cardsPerView` ha cambiado o es la primera inicialización, reconfigura los clones.
+        if (cardsPerView !== previousCardsPerView || clonedCardsCount === 0) {
+            setupInfiniteSlider();
+        }
+
+        // No necesitamos `totalPages` para la generación de dots si siempre son 9.
+        // Si necesitas saber cuántas "páginas" lógicas hay para otra cosa, podrías calcularlo aquí.
+        // totalPages = Math.ceil(totalCards / cardsPerView); 
+
+        generateDots(); // (Re)genera los puntos de paginación.
+
+        // Reposiciona el slider al inicio del primer grupo de tarjetas originales sin animación.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false);
+    };
+
+    /**
+     * @function setupInfiniteSlider
+     * Configura el track del slider con clones al principio y al final para un bucle infinito.
+     */
+    const setupInfiniteSlider = () => {
+        // Elimina cualquier clon existente antes de añadir nuevos.
+        const existingClones = sliderTrack.querySelectorAll('.bloque8__slider--card.clone');
+        existingClones.forEach(clone => clone.remove());
+
+        // Limpia el track y añade las tarjetas originales de nuevo para asegurar el orden.
+        // Esto es vital antes de añadir los clones.
+        sliderTrack.innerHTML = '';
+        originalCards.forEach(card => sliderTrack.appendChild(card));
+
+        // El número de clones es igual a `cardsPerView` para un bucle fluido.
+        clonedCardsCount = cardsPerView;
+
+        // Clona tarjetas del principio y las añade al final del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[i % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-end');
+            sliderTrack.appendChild(clone);
+        }
+
+        // Clona tarjetas del final y las añade al principio del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[(totalCards - 1 - i + totalCards) % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-start');
+            sliderTrack.prepend(clone);
+        }
+
+        // Establece el `currentIndex` para que apunte a la primera tarjeta original.
+        currentIndex = clonedCardsCount;
+    };
+
+    /**
+     * @function generateDots
+     * Genera dinámicamente los elementos de puntos de paginación. **Ahora siempre 9 dots.**
+     */
+    const generateDots = () => {
+        sliderDotsContainer.innerHTML = ''; // Limpia los puntos existentes.
+
+        // Los puntos corresponden a CADA tarjeta original, por lo tanto, siempre `totalCards` (que es 9).
+        for (let i = 0; i < totalCards; i++) { // Bucle hasta totalCards para generar 9 dots.
+            const dot = document.createElement('div');
+            dot.classList.add('bloque8__dot'); // Usa tu clase para los puntos.
+
+            dot.addEventListener('click', () => {
+                // Al hacer clic en un punto, el slider se mueve a la tarjeta individual correspondiente.
+                currentIndex = i + clonedCardsCount; // 'i' es el índice de la tarjeta original.
+                updateSliderPosition(true);
+            });
+            sliderDotsContainer.appendChild(dot);
+        }
+        updateDots(); // Actualiza el estado activo del punto recién generado.
+    };
+
+    /**
+     * @function updateSliderPosition
+     * Actualiza la posición translateX del `sliderTrack` para mostrar la tarjeta actual.
+     * @param {boolean} animate - Si la transición debe ser animada.
+     */
+    const updateSliderPosition = (animate = true) => {
+        const firstCard = originalCards[0];
+        if (!firstCard) {
+            console.warn('No hay tarjetas originales para calcular el ancho.');
+            return;
+        }
+
+        // Calcula el ancho total de una tarjeta, incluyendo sus márgenes.
+        const cardWidth = firstCard.offsetWidth +
+            parseFloat(getComputedStyle(firstCard).marginLeft) +
+            parseFloat(getComputedStyle(firstCard).marginRight);
+
+        // Calcula el desplazamiento horizontal necesario.
+        const offset = -currentIndex * cardWidth;
+
+        // Aplica la transición y el desplazamiento.
+        sliderTrack.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
+        sliderTrack.style.transform = `translateX(${offset}px)`;
+
+        updateDots(); // Actualiza el estado de los puntos.
+        updateArrows(); // Asegura que las flechas estén habilitadas.
+    };
+
+    /**
+     * @function updateDots
+     * Actualiza la clase 'active' del punto de paginación correspondiente a la tarjeta actual. **Ahora cada dot representa una tarjeta.**
+     */
+    const updateDots = () => {
+        const dots = document.querySelectorAll('.bloque8__dot'); // Selecciona los puntos con la nueva clase.
+
+        // Calcula el índice de la tarjeta real que está actualmente visible.
+        // Aquí no se usa `cardsPerView` para los dots, solo el índice de la tarjeta individual.
+        const currentRealCardIndex = (currentIndex - clonedCardsCount + totalCards) % totalCards;
+
+        dots.forEach((dot, index) => {
+            if (index === currentRealCardIndex) { // Compara con el índice real de la tarjeta.
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    /**
+     * @function updateArrows
+     * Asegura que las flechas de navegación no estén deshabilitadas en un slider infinito.
+     */
+    const updateArrows = () => {
+        prevArrow.disabled = false;
+        nextArrow.disabled = false;
+    };
+
+    // --- Listeners para la navegación con flechas ---
+    nextArrow.addEventListener('click', () => {
+        // Siempre avanza el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex++;
+        updateSliderPosition(true);
+    });
+
+    prevArrow.addEventListener('click', () => {
+        // Siempre retrocede el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex--;
+        updateSliderPosition(true);
+    });
+
+    // --- Listener para el final de la transición (manejo del bucle infinito) ---
+    sliderTrack.addEventListener('transitionend', () => {
+        // Calcula el índice de la tarjeta real actual (sin contar los clones).
+        let realCardOffset = currentIndex - clonedCardsCount;
+
+        // Si el slider se ha movido más allá del final de las tarjetas reales (a un clon 'end').
+        if (realCardOffset >= totalCards) {
+            // Salta instantáneamente a la posición equivalente al principio de las tarjetas reales.
+            currentIndex = clonedCardsCount + (realCardOffset % totalCards);
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+        // Si el slider se ha movido antes del principio de las tarjetas reales (a un clon 'start').
+        else if (realCardOffset < 0) {
+            // Salta instantáneamente a la posición equivalente al final de las tarjetas reales.
+            // Asegura que el índice de destino sea positivo y dentro del rango original.
+            let targetRealIndex = (totalCards + (realCardOffset % totalCards)) % totalCards;
+            if (targetRealIndex < 0) targetRealIndex += totalCards; // Asegura que sea positivo.
+
+            // No necesitamos alinear a `cardsPerView` aquí para los dots, ya que cada dot es individual.
+            // Pero si el salto en el bucle te lleva a una posición que visualmente no es el inicio de un grupo,
+            // y quieres que el primer dot visible se active, esta línea podría necesitarse.
+            // Por simplicidad, si los dots son 1:1 con las tarjetas, no se necesita.
+            // targetRealIndex = Math.floor(targetRealIndex / cardsPerView) * cardsPerView; 
+
+            currentIndex = clonedCardsCount + targetRealIndex;
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+    });
+
+    // --- Listener para el redimensionamiento de la ventana ---
+    window.addEventListener('resize', () => {
+        updateCardsPerView(); // Reajusta la vista y los clones. Los dots se regenerarán y serán 9.
+        // Después de redimensionar, reposiciona el slider al inicio del primer grupo original.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false); // Sin animación durante el redimensionamiento.
+    });
+
+    // --- Inicialización del slider ---
+    updateCardsPerView(); // Llama a la función principal para configurar el slider al cargar la página.
+});
+//- =================================================================
+//- =======================FIN BLOQUE8===============================
+//- =================================================================
+
+//- =================================================================
+//- =========================BLOQUE9=================================
+//- =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Selectores de elementos del DOM con tus clases específicas
+    const sliderTrack = document.querySelector('.bloque9__slider--track');
+    const originalCards = Array.from(document.querySelectorAll('.bloque9__slider--card'));
+    const prevArrow = document.querySelector('.bloque9__prev--arrow');
+    const nextArrow = document.querySelector('.bloque9__next--arrow');
+    const sliderDotsContainer = document.querySelector('.bloque9__slider--dots');
+
+    // Validación inicial: asegúrate de que todos los elementos existan
+    if (!sliderTrack || !originalCards.length || !prevArrow || !nextArrow || !sliderDotsContainer) {
+        console.error('Error: Uno o más elementos del slider no fueron encontrados. Revisa que las clases en tu HTML y JavaScript coincidan.');
+        return; // Detener la ejecución si faltan elementos cruciales
+    }
+
+    // Variables de estado del slider
+    let cardsPerView = 1; // Número de tarjetas visibles a la vez (se ajusta con la responsividad)
+    const totalCards = originalCards.length; // Cantidad total de tarjetas originales (fija en 9 en tu caso)
+    let clonedCardsCount = 0; // Cantidad de tarjetas clonadas a cada lado para el efecto infinito
+    let currentIndex = 0; // Índice de la tarjeta activa en el track (incluye clones)
+
+    // Ya no necesitamos `totalPages` como una variable de estado dinámica para los dots,
+    // porque siempre serán 9. Pero la mantenemos para depuración si la necesitas.
+    // let totalPages = 0; 
+
+    /**
+     * @function updateCardsPerView
+     * Ajusta `cardsPerView` según el ancho de la ventana y reconfigura el slider.
+     */
+    const updateCardsPerView = () => {
+        const previousCardsPerView = cardsPerView;
+
+        // Determina cuántas tarjetas se muestran según el ancho de la pantalla
+        if (window.innerWidth >= 1024) {
+            cardsPerView = 3;
+        } else if (window.innerWidth >= 768) {
+            cardsPerView = 3;
+        } else {
+            cardsPerView = 1;
+        }
+
+        // Si `cardsPerView` ha cambiado o es la primera inicialización, reconfigura los clones.
+        if (cardsPerView !== previousCardsPerView || clonedCardsCount === 0) {
+            setupInfiniteSlider();
+        }
+
+        // No necesitamos `totalPages` para la generación de dots si siempre son 9.
+        // Si necesitas saber cuántas "páginas" lógicas hay para otra cosa, podrías calcularlo aquí.
+        // totalPages = Math.ceil(totalCards / cardsPerView); 
+
+        generateDots(); // (Re)genera los puntos de paginación.
+
+        // Reposiciona el slider al inicio del primer grupo de tarjetas originales sin animación.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false);
+    };
+
+    /**
+     * @function setupInfiniteSlider
+     * Configura el track del slider con clones al principio y al final para un bucle infinito.
+     */
+    const setupInfiniteSlider = () => {
+        // Elimina cualquier clon existente antes de añadir nuevos.
+        const existingClones = sliderTrack.querySelectorAll('.bloque9__slider--card.clone');
+        existingClones.forEach(clone => clone.remove());
+
+        // Limpia el track y añade las tarjetas originales de nuevo para asegurar el orden.
+        // Esto es vital antes de añadir los clones.
+        sliderTrack.innerHTML = '';
+        originalCards.forEach(card => sliderTrack.appendChild(card));
+
+        // El número de clones es igual a `cardsPerView` para un bucle fluido.
+        clonedCardsCount = cardsPerView;
+
+        // Clona tarjetas del principio y las añade al final del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[i % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-end');
+            sliderTrack.appendChild(clone);
+        }
+
+        // Clona tarjetas del final y las añade al principio del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[(totalCards - 1 - i + totalCards) % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-start');
+            sliderTrack.prepend(clone);
+        }
+
+        // Establece el `currentIndex` para que apunte a la primera tarjeta original.
+        currentIndex = clonedCardsCount;
+    };
+
+    /**
+     * @function generateDots
+     * Genera dinámicamente los elementos de puntos de paginación. **Ahora siempre 9 dots.**
+     */
+    const generateDots = () => {
+        sliderDotsContainer.innerHTML = ''; // Limpia los puntos existentes.
+
+        // Los puntos corresponden a CADA tarjeta original, por lo tanto, siempre `totalCards` (que es 9).
+        for (let i = 0; i < totalCards; i++) { // Bucle hasta totalCards para generar 9 dots.
+            const dot = document.createElement('div');
+            dot.classList.add('bloque9__dot'); // Usa tu clase para los puntos.
+
+            dot.addEventListener('click', () => {
+                // Al hacer clic en un punto, el slider se mueve a la tarjeta individual correspondiente.
+                currentIndex = i + clonedCardsCount; // 'i' es el índice de la tarjeta original.
+                updateSliderPosition(true);
+            });
+            sliderDotsContainer.appendChild(dot);
+        }
+        updateDots(); // Actualiza el estado activo del punto recién generado.
+    };
+
+    /**
+     * @function updateSliderPosition
+     * Actualiza la posición translateX del `sliderTrack` para mostrar la tarjeta actual.
+     * @param {boolean} animate - Si la transición debe ser animada.
+     */
+    const updateSliderPosition = (animate = true) => {
+        const firstCard = originalCards[0];
+        if (!firstCard) {
+            console.warn('No hay tarjetas originales para calcular el ancho.');
+            return;
+        }
+
+        // Calcula el ancho total de una tarjeta, incluyendo sus márgenes.
+        const cardWidth = firstCard.offsetWidth +
+            parseFloat(getComputedStyle(firstCard).marginLeft) +
+            parseFloat(getComputedStyle(firstCard).marginRight);
+
+        // Calcula el desplazamiento horizontal necesario.
+        const offset = -currentIndex * cardWidth;
+
+        // Aplica la transición y el desplazamiento.
+        sliderTrack.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
+        sliderTrack.style.transform = `translateX(${offset}px)`;
+
+        updateDots(); // Actualiza el estado de los puntos.
+        updateArrows(); // Asegura que las flechas estén habilitadas.
+    };
+
+    /**
+     * @function updateDots
+     * Actualiza la clase 'active' del punto de paginación correspondiente a la tarjeta actual. **Ahora cada dot representa una tarjeta.**
+     */
+    const updateDots = () => {
+        const dots = document.querySelectorAll('.bloque9__dot'); // Selecciona los puntos con la nueva clase.
+
+        // Calcula el índice de la tarjeta real que está actualmente visible.
+        // Aquí no se usa `cardsPerView` para los dots, solo el índice de la tarjeta individual.
+        const currentRealCardIndex = (currentIndex - clonedCardsCount + totalCards) % totalCards;
+
+        dots.forEach((dot, index) => {
+            if (index === currentRealCardIndex) { // Compara con el índice real de la tarjeta.
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    /**
+     * @function updateArrows
+     * Asegura que las flechas de navegación no estén deshabilitadas en un slider infinito.
+     */
+    const updateArrows = () => {
+        prevArrow.disabled = false;
+        nextArrow.disabled = false;
+    };
+
+    // --- Listeners para la navegación con flechas ---
+    nextArrow.addEventListener('click', () => {
+        // Siempre avanza el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex++;
+        updateSliderPosition(true);
+    });
+
+    prevArrow.addEventListener('click', () => {
+        // Siempre retrocede el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex--;
+        updateSliderPosition(true);
+    });
+
+    // --- Listener para el final de la transición (manejo del bucle infinito) ---
+    sliderTrack.addEventListener('transitionend', () => {
+        // Calcula el índice de la tarjeta real actual (sin contar los clones).
+        let realCardOffset = currentIndex - clonedCardsCount;
+
+        // Si el slider se ha movido más allá del final de las tarjetas reales (a un clon 'end').
+        if (realCardOffset >= totalCards) {
+            // Salta instantáneamente a la posición equivalente al principio de las tarjetas reales.
+            currentIndex = clonedCardsCount + (realCardOffset % totalCards);
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+        // Si el slider se ha movido antes del principio de las tarjetas reales (a un clon 'start').
+        else if (realCardOffset < 0) {
+            // Salta instantáneamente a la posición equivalente al final de las tarjetas reales.
+            // Asegura que el índice de destino sea positivo y dentro del rango original.
+            let targetRealIndex = (totalCards + (realCardOffset % totalCards)) % totalCards;
+            if (targetRealIndex < 0) targetRealIndex += totalCards; // Asegura que sea positivo.
+
+            // No necesitamos alinear a `cardsPerView` aquí para los dots, ya que cada dot es individual.
+            // Pero si el salto en el bucle te lleva a una posición que visualmente no es el inicio de un grupo,
+            // y quieres que el primer dot visible se active, esta línea podría necesitarse.
+            // Por simplicidad, si los dots son 1:1 con las tarjetas, no se necesita.
+            // targetRealIndex = Math.floor(targetRealIndex / cardsPerView) * cardsPerView; 
+
+            currentIndex = clonedCardsCount + targetRealIndex;
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+    });
+
+    // --- Listener para el redimensionamiento de la ventana ---
+    window.addEventListener('resize', () => {
+        updateCardsPerView(); // Reajusta la vista y los clones. Los dots se regenerarán y serán 9.
+        // Después de redimensionar, reposiciona el slider al inicio del primer grupo original.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false); // Sin animación durante el redimensionamiento.
+    });
+
+    // --- Inicialización del slider ---
+    updateCardsPerView(); // Llama a la función principal para configurar el slider al cargar la página.
+});
+//- =================================================================
+//- =======================FIN BLOQUE9===============================
+//- =================================================================
+
+//- =================================================================
+//- =========================BLOQUE9=================================
+//- =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Selectores de elementos del DOM con tus clases específicas
+    const sliderTrack = document.querySelector('.bloque10__slider--track');
+    const originalCards = Array.from(document.querySelectorAll('.bloque10__slider--card'));
+    const prevArrow = document.querySelector('.bloque10__prev--arrow');
+    const nextArrow = document.querySelector('.bloque10__next--arrow');
+    const sliderDotsContainer = document.querySelector('.bloque10__slider--dots');
+
+    // Validación inicial: asegúrate de que todos los elementos existan
+    if (!sliderTrack || !originalCards.length || !prevArrow || !nextArrow || !sliderDotsContainer) {
+        console.error('Error: Uno o más elementos del slider no fueron encontrados. Revisa que las clases en tu HTML y JavaScript coincidan.');
+        return; // Detener la ejecución si faltan elementos cruciales
+    }
+
+    // Variables de estado del slider
+    let cardsPerView = 1; // Número de tarjetas visibles a la vez (se ajusta con la responsividad)
+    const totalCards = originalCards.length; // Cantidad total de tarjetas originales (fija en 9 en tu caso)
+    let clonedCardsCount = 0; // Cantidad de tarjetas clonadas a cada lado para el efecto infinito
+    let currentIndex = 0; // Índice de la tarjeta activa en el track (incluye clones)
+
+    // Ya no necesitamos `totalPages` como una variable de estado dinámica para los dots,
+    // porque siempre serán 9. Pero la mantenemos para depuración si la necesitas.
+    // let totalPages = 0; 
+
+    /**
+     * @function updateCardsPerView
+     * Ajusta `cardsPerView` según el ancho de la ventana y reconfigura el slider.
+     */
+    const updateCardsPerView = () => {
+        const previousCardsPerView = cardsPerView;
+
+        // Determina cuántas tarjetas se muestran según el ancho de la pantalla
+        if (window.innerWidth >= 1024) {
+            cardsPerView = 3;
+        } else if (window.innerWidth >= 768) {
+            cardsPerView = 3;
+        } else {
+            cardsPerView = 1;
+        }
+
+        // Si `cardsPerView` ha cambiado o es la primera inicialización, reconfigura los clones.
+        if (cardsPerView !== previousCardsPerView || clonedCardsCount === 0) {
+            setupInfiniteSlider();
+        }
+
+        // No necesitamos `totalPages` para la generación de dots si siempre son 9.
+        // Si necesitas saber cuántas "páginas" lógicas hay para otra cosa, podrías calcularlo aquí.
+        // totalPages = Math.ceil(totalCards / cardsPerView); 
+
+        generateDots(); // (Re)genera los puntos de paginación.
+
+        // Reposiciona el slider al inicio del primer grupo de tarjetas originales sin animación.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false);
+    };
+
+    /**
+     * @function setupInfiniteSlider
+     * Configura el track del slider con clones al principio y al final para un bucle infinito.
+     */
+    const setupInfiniteSlider = () => {
+        // Elimina cualquier clon existente antes de añadir nuevos.
+        const existingClones = sliderTrack.querySelectorAll('.bloque10__slider--card.clone');
+        existingClones.forEach(clone => clone.remove());
+
+        // Limpia el track y añade las tarjetas originales de nuevo para asegurar el orden.
+        // Esto es vital antes de añadir los clones.
+        sliderTrack.innerHTML = '';
+        originalCards.forEach(card => sliderTrack.appendChild(card));
+
+        // El número de clones es igual a `cardsPerView` para un bucle fluido.
+        clonedCardsCount = cardsPerView;
+
+        // Clona tarjetas del principio y las añade al final del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[i % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-end');
+            sliderTrack.appendChild(clone);
+        }
+
+        // Clona tarjetas del final y las añade al principio del track.
+        for (let i = 0; i < clonedCardsCount; i++) {
+            const clone = originalCards[(totalCards - 1 - i + totalCards) % totalCards].cloneNode(true);
+            clone.classList.add('clone', 'clone-start');
+            sliderTrack.prepend(clone);
+        }
+
+        // Establece el `currentIndex` para que apunte a la primera tarjeta original.
+        currentIndex = clonedCardsCount;
+    };
+
+    /**
+     * @function generateDots
+     * Genera dinámicamente los elementos de puntos de paginación. **Ahora siempre 9 dots.**
+     */
+    const generateDots = () => {
+        sliderDotsContainer.innerHTML = ''; // Limpia los puntos existentes.
+
+        // Los puntos corresponden a CADA tarjeta original, por lo tanto, siempre `totalCards` (que es 9).
+        for (let i = 0; i < totalCards; i++) { // Bucle hasta totalCards para generar 9 dots.
+            const dot = document.createElement('div');
+            dot.classList.add('bloque10__dot'); // Usa tu clase para los puntos.
+
+            dot.addEventListener('click', () => {
+                // Al hacer clic en un punto, el slider se mueve a la tarjeta individual correspondiente.
+                currentIndex = i + clonedCardsCount; // 'i' es el índice de la tarjeta original.
+                updateSliderPosition(true);
+            });
+            sliderDotsContainer.appendChild(dot);
+        }
+        updateDots(); // Actualiza el estado activo del punto recién generado.
+    };
+
+    /**
+     * @function updateSliderPosition
+     * Actualiza la posición translateX del `sliderTrack` para mostrar la tarjeta actual.
+     * @param {boolean} animate - Si la transición debe ser animada.
+     */
+    const updateSliderPosition = (animate = true) => {
+        const firstCard = originalCards[0];
+        if (!firstCard) {
+            console.warn('No hay tarjetas originales para calcular el ancho.');
+            return;
+        }
+
+        // Calcula el ancho total de una tarjeta, incluyendo sus márgenes.
+        const cardWidth = firstCard.offsetWidth +
+            parseFloat(getComputedStyle(firstCard).marginLeft) +
+            parseFloat(getComputedStyle(firstCard).marginRight);
+
+        // Calcula el desplazamiento horizontal necesario.
+        const offset = -currentIndex * cardWidth;
+
+        // Aplica la transición y el desplazamiento.
+        sliderTrack.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
+        sliderTrack.style.transform = `translateX(${offset}px)`;
+
+        updateDots(); // Actualiza el estado de los puntos.
+        updateArrows(); // Asegura que las flechas estén habilitadas.
+    };
+
+    /**
+     * @function updateDots
+     * Actualiza la clase 'active' del punto de paginación correspondiente a la tarjeta actual. **Ahora cada dot representa una tarjeta.**
+     */
+    const updateDots = () => {
+        const dots = document.querySelectorAll('.bloque10__dot'); // Selecciona los puntos con la nueva clase.
+
+        // Calcula el índice de la tarjeta real que está actualmente visible.
+        // Aquí no se usa `cardsPerView` para los dots, solo el índice de la tarjeta individual.
+        const currentRealCardIndex = (currentIndex - clonedCardsCount + totalCards) % totalCards;
+
+        dots.forEach((dot, index) => {
+            if (index === currentRealCardIndex) { // Compara con el índice real de la tarjeta.
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    /**
+     * @function updateArrows
+     * Asegura que las flechas de navegación no estén deshabilitadas en un slider infinito.
+     */
+    const updateArrows = () => {
+        prevArrow.disabled = false;
+        nextArrow.disabled = false;
+    };
+
+    // --- Listeners para la navegación con flechas ---
+    nextArrow.addEventListener('click', () => {
+        // Siempre avanza el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex++;
+        updateSliderPosition(true);
+    });
+
+    prevArrow.addEventListener('click', () => {
+        // Siempre retrocede el slider una tarjeta a la vez, independientemente de `cardsPerView`.
+        currentIndex--;
+        updateSliderPosition(true);
+    });
+
+    // --- Listener para el final de la transición (manejo del bucle infinito) ---
+    sliderTrack.addEventListener('transitionend', () => {
+        // Calcula el índice de la tarjeta real actual (sin contar los clones).
+        let realCardOffset = currentIndex - clonedCardsCount;
+
+        // Si el slider se ha movido más allá del final de las tarjetas reales (a un clon 'end').
+        if (realCardOffset >= totalCards) {
+            // Salta instantáneamente a la posición equivalente al principio de las tarjetas reales.
+            currentIndex = clonedCardsCount + (realCardOffset % totalCards);
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+        // Si el slider se ha movido antes del principio de las tarjetas reales (a un clon 'start').
+        else if (realCardOffset < 0) {
+            // Salta instantáneamente a la posición equivalente al final de las tarjetas reales.
+            // Asegura que el índice de destino sea positivo y dentro del rango original.
+            let targetRealIndex = (totalCards + (realCardOffset % totalCards)) % totalCards;
+            if (targetRealIndex < 0) targetRealIndex += totalCards; // Asegura que sea positivo.
+
+            // No necesitamos alinear a `cardsPerView` aquí para los dots, ya que cada dot es individual.
+            // Pero si el salto en el bucle te lleva a una posición que visualmente no es el inicio de un grupo,
+            // y quieres que el primer dot visible se active, esta línea podría necesitarse.
+            // Por simplicidad, si los dots son 1:1 con las tarjetas, no se necesita.
+            // targetRealIndex = Math.floor(targetRealIndex / cardsPerView) * cardsPerView; 
+
+            currentIndex = clonedCardsCount + targetRealIndex;
+            updateSliderPosition(false); // Sin animación para el salto.
+        }
+    });
+
+    // --- Listener para el redimensionamiento de la ventana ---
+    window.addEventListener('resize', () => {
+        updateCardsPerView(); // Reajusta la vista y los clones. Los dots se regenerarán y serán 9.
+        // Después de redimensionar, reposiciona el slider al inicio del primer grupo original.
+        currentIndex = clonedCardsCount;
+        updateSliderPosition(false); // Sin animación durante el redimensionamiento.
+    });
+
+    // --- Inicialización del slider ---
+    updateCardsPerView(); // Llama a la función principal para configurar el slider al cargar la página.
+});
+//- =================================================================
+//- =======================FIN BLOQUE9===============================
+//- =================================================================
