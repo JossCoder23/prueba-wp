@@ -3,8 +3,8 @@
 .bloque7 {
     position: relative;
     overflow: hidden;
-    background: #2D2D2D;
-    background: linear-gradient(160deg, rgba(45, 45, 45, 1) 27%, rgba(49, 93, 192, 1) 100%, rgba(31, 88, 219, 1) 100%, rgba(31, 88, 219, 1) 62%);
+    /* background: #2D2D2D; */
+    /* background: linear-gradient(160deg, rgba(45, 45, 45, 1) 27%, rgba(49, 93, 192, 1) 100%, rgba(31, 88, 219, 1) 100%, rgba(31, 88, 219, 1) 62%); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,14 +17,19 @@
     width: 100%;
     top: 0;
     left: 0;
-    /* background-color: rgba(256,256,256,.3); */
-    backdrop-filter: blur(2px);
-    z-index: 1;
+    background-color: red;
+    /* backdrop-filter: blur(2px); */
+    z-index: 2;
 }
 
 .bloque7__container {
     z-index: 2;
     position: relative;
+    /* background-color: var(--primary); */
+    background: #2D2D2D;
+background: linear-gradient(162deg, rgba(45, 45, 45, 1) 18%, rgba(31, 88, 219, 1) 100%);
+    border-radius: 15px;
+    padding: 40px 0;
     width: var(--container-mobile);
     /* width: 240px; */
     display: flex;
@@ -48,17 +53,17 @@
 }
 
 .bloque7__title {
-    background-color: var(--secondary);
-    color: var(--fifth);
+    background-color: var(--fifth);
+    color: var(--seconary);
     font-size: var(--title-mobile-size);
     /* font-size: 15px; */
     font-weight: var(--title-mobile-weight);
     text-align: center;
     padding: 5px 10px;
     border: 1.5px solid var(--fifth);
-    width: 240px;
+    width: 185px;
     margin: 0;
-    border-radius: 10px;
+    border-radius: 13px;
 }
 
 .bloque7__slider {
@@ -96,9 +101,9 @@
 }
 
 .bloque7__slider--content {
-    background-color: var(--fifth);
+    background-color: var(--primary);
     border-radius: 15px;
-    width: 180px;
+    width: 140px;
     height: auto;
     padding: 20px 15px;
     display: flex;
@@ -115,7 +120,8 @@
 
 .bloque7__slider--content img {
     width: 100%;
-    height: auto;
+    /* height: auto; */
+    height: 140px;
 }
 
 .bloque7__slider--content h3 {
@@ -157,6 +163,7 @@
     border-radius: 50%;
     transition: background-color 0.3s ease;
     /* background-color: blue; */
+    padding: 0;
 }
 
 .bloque7__slider--arrow img {

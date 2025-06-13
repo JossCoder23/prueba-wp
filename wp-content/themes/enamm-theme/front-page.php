@@ -194,56 +194,29 @@ get_header(); // Incluye el contenido de header.php
 
     <div class="bloque7">
         <div class="bloque7__container">
-            <h3 class="bloque7__title">Programas de Posgrado</h3>
+            <h3 class="bloque7__title">Próximos Eventos</h3>
             <div class="bloque7__slider">
                 <div class="bloque7__slider--wrapper">
                     <div class="bloque7__slider--track">
                         <div class="bloque7__slider--card">
                             <div class="bloque7__slider--content">
-                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/vi1pg9jsiwmmsmzkzpkg.webp" alt="">
-                                <h3><span>Maestría en</span> <br> Gestión Naviera</h3>
-                                <button>Ingresar</button>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/nsouzimldbtvfhylyate.webp" alt="">
                             </div>
                         </div>
                         <div class="bloque7__slider--card">
                             <div class="bloque7__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/gbtq3flbxn5iyhd0kg8t.webp" alt="">
-                               <h3><span>Maestría en</span> <br> Administración Marítima Portuaria y Pesquera</h3>
-                               <button>Ingresar</button>
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014495/xgnkwvbogkkbatzv18iz.webp" alt="">
                             </div>
                         </div>
                         <div class="bloque7__slider--card">
                             <div class="bloque7__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/vh5w1d9fejsgdiserctf.webp" alt="">
-                               <h3><span>Doctorado en</span> <br> Ciencias Marítimas</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque7__slider--card">
-                            <div class="bloque7__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/juegraqfddyuayvfi9cs.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Medio Ambiente y Derecho Marítimo</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque7__slider--card">
-                            <div class="bloque7__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/bm6xvvf50pu24ahvchdo.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Gestión Marítima Portuaria y Pesquera</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque7__slider--card">
-                            <div class="bloque7__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/lsc5ba1emu1mgafdxq5f.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Comercio y Finanzas Marítima Portuaria</h3>
-                               <button>Ingresar</button>
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014495/ibp7mdacsmdpohmth4ic.webp" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="bloque7__slider--arrow bloque7__prev--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/nm5llpdj22jw3dfgxblc.png" alt=""></button>
-                <button class="bloque7__slider--arrow bloque7__next--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/dhfmoox4hmjnkwknlioz.png" alt=""></button>
+                <button class="bloque7__slider--arrow bloque7__prev--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014495/uaa1f9ft3xwncwbf5kjk.webp" alt=""></button>
+                <button class="bloque7__slider--arrow bloque7__next--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014495/ln6cekhdsrjyvafjysch.webp" alt=""></button>
                 <div class="bloque7__slider--dots">
                 </div>
             </div>
@@ -252,56 +225,53 @@ get_header(); // Incluye el contenido de header.php
 
     <div class="bloque8">
         <div class="bloque8__container">
-            <h3 class="bloque8__title">Programas de Posgrado</h3>
+            <h3 class="bloque8__title">Comunicados</h3>
             <div class="bloque8__slider">
                 <div class="bloque8__slider--wrapper">
                     <div class="bloque8__slider--track">
                         <div class="bloque8__slider--card">
                             <div class="bloque8__slider--content">
-                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/vi1pg9jsiwmmsmzkzpkg.webp" alt="">
-                                <h3><span>Maestría en</span> <br> Gestión Naviera</h3>
-                                <button>Ingresar</button>
+                                <div class="bloque8__slider--item">
+                                    <div class="bloque8__item--top"></div>
+                                    <div class="bloque8__item--bottom">
+                                        <h3>03</h3>
+                                        <h4>MAR</h4>
+                                    </div>
+                                </div>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/pcoyompain0zuttjarjm.webp" alt="">
+                                <h3>Convocatoria de la XXXIII Maestría</h3>
                             </div>
                         </div>
                         <div class="bloque8__slider--card">
                             <div class="bloque8__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/gbtq3flbxn5iyhd0kg8t.webp" alt="">
-                               <h3><span>Maestría en</span> <br> Administración Marítima Portuaria y Pesquera</h3>
-                               <button>Ingresar</button>
+                                <div class="bloque8__slider--item">
+                                    <div class="bloque8__item--top"></div>
+                                    <div class="bloque8__item--bottom">
+                                        <h3>03</h3>
+                                        <h4>MAR</h4>
+                                    </div>
+                                </div>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/pcoyompain0zuttjarjm.webp" alt="">
+                                <h3>Convocatoria de la XXXIII Maestría</h3>
                             </div>
                         </div>
                         <div class="bloque8__slider--card">
                             <div class="bloque8__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/vh5w1d9fejsgdiserctf.webp" alt="">
-                               <h3><span>Doctorado en</span> <br> Ciencias Marítimas</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque8__slider--card">
-                            <div class="bloque8__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/juegraqfddyuayvfi9cs.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Medio Ambiente y Derecho Marítimo</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque8__slider--card">
-                            <div class="bloque8__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/bm6xvvf50pu24ahvchdo.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Gestión Marítima Portuaria y Pesquera</h3>
-                               <button>Ingresar</button>
-                            </div>
-                        </div>
-                        <div class="bloque8__slider--card">
-                            <div class="bloque8__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/lsc5ba1emu1mgafdxq5f.webp" alt="">
-                               <h3><span>Diplomado en</span> <br> Comercio y Finanzas Marítima Portuaria</h3>
-                               <button>Ingresar</button>
+                                <div class="bloque8__slider--item">
+                                    <div class="bloque8__item--top"></div>
+                                    <div class="bloque8__item--bottom">
+                                        <h3>03</h3>
+                                        <h4>MAR</h4>
+                                    </div>
+                                </div>
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/pcoyompain0zuttjarjm.webp" alt="">
+                                <h3>Convocatoria de la XXXIII Maestría</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="bloque8__slider--arrow bloque8__prev--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/nm5llpdj22jw3dfgxblc.png" alt=""></button>
-                <button class="bloque8__slider--arrow bloque8__next--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749623199/dhfmoox4hmjnkwknlioz.png" alt=""></button>
+                <button class="bloque8__slider--arrow bloque8__prev--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/eu4fdt56u7jbf4sttqkt.webp" alt=""></button>
+                <button class="bloque8__slider--arrow bloque8__next--arrow"><img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014497/hlj5zpzqbfsv0bbtrqt1.webp" alt=""></button>
                 <div class="bloque8__slider--dots">
                 </div>
             </div>
@@ -366,7 +336,7 @@ get_header(); // Incluye el contenido de header.php
         </div>
     </div>
 
-    <div class="bloque10">
+    <!-- <div class="bloque10">
         <div class="bloque10__container">
             <h3 class="bloque10__title">Programas de Posgrado</h3>
             <div class="bloque10__slider">
@@ -422,7 +392,7 @@ get_header(); // Incluye el contenido de header.php
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </main>
 
