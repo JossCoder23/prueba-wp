@@ -281,7 +281,171 @@ document.addEventListener('DOMContentLoaded', () => {
 //- =================================================================
 //- =========================BLOQUE2=================================
 //- =================================================================
+// document.addEventListener('DOMContentLoaded', () => {
+//     const sliderContainer = document.querySelector('.bloque2__slider--container');
+//     const sliderTrack = document.querySelector('.bloque2__slider--track');
+//     const sliderCards = document.querySelectorAll('.bloque2__slider--card');
+//     const sliderContents = document.querySelectorAll('.bloque2__card--content');
+//     const prevArrow = document.querySelector('.bloque2__slider--arrow--left');
+//     const nextArrow = document.querySelector('.bloque2__slider--arrow--right');
+
+//     let currentIndex = 0;
+//     const desktopBreakpoint = 1020;
+//     let isSliderActive = false;
+
+//     if (!sliderTrack || sliderCards.length === 0 || !prevArrow || !nextArrow) {
+//         console.warn('Bloque2 Slider: Elementos no encontrados o insuficientes. El slider podría no funcionar correctamente.');
+//         return;
+//     }
+
+//     function updateBackgroundImage() {
+//         const isMobileView = window.innerWidth < desktopBreakpoint;
+//         sliderContents.forEach(content => {
+//             let imageUrl = isMobileView ? content.dataset.bgImageMobile : content.dataset.bgImageDesktop;
+//             if (imageUrl) {
+//                 content.style.backgroundImage = `url('${imageUrl}')`;
+//             } else {
+//                 content.style.backgroundImage = 'none';
+//             }
+//         });
+//     }
+
+//     function moveToSlide(index) {
+//         if (!isSliderActive) {
+//             return;
+//         }
+
+//         if (index < 0) {
+//             currentIndex = sliderCards.length - 1;
+//         } else if (index >= sliderCards.length) {
+//             currentIndex = 0;
+//         } else {
+//             currentIndex = index;
+//         }
+
+//         // *** CAMBIO CLAVE AQUÍ ***
+//         // Para centrar, debemos asegurarnos de que el `slideWidth` sea el ancho
+//         // del contenedor visible del slider, que es `sliderWrapper.offsetWidth`.
+//         // O simplemente el ancho de la primera tarjeta, que ahora toma el 100% de ese contenedor.
+//         // `sliderCards[0].offsetWidth` ya debería ser el valor correcto.
+//         const slideWidth = sliderCards[0].offsetWidth; // Este es el ancho de una tarjeta individual
+//         const offset = -currentIndex * slideWidth;
+//         sliderTrack.style.transform = `translateX(${offset}px)`;
+//     }
+
+//     // function setupBloque2() {
+//     //     updateBackgroundImage();
+
+//     //     const isMobileView = window.innerWidth < desktopBreakpoint;
+
+//     //     if (isMobileView) {
+//     //         isSliderActive = true;
+//     //         sliderTrack.style.transition = 'transform 0.5s ease-in-out';
+//     //         sliderTrack.style.display = 'flex';
+
+//     //         // Asegurarse de que el track se posiciona correctamente al activar el slider
+//     //         // Esto es crucial para que la primera tarjeta esté centrada si no lo estaba.
+//     //         moveToSlide(currentIndex); // Reposicionar en el slide actual para centrarlo.
+
+//     //         prevArrow.style.display = 'block';
+//     //         nextArrow.style.display = 'block';
+
+//     //         sliderCards.forEach(card => {
+//     //             card.style.width = '85%'; // Asegura que cada tarjeta sea el 100% del contenedor
+//     //         });
+
+//     //     } else {
+//     //         isSliderActive = false;
+//     //         sliderTrack.style.transform = 'none';
+//     //         sliderTrack.style.transition = 'none';
+//     //         sliderTrack.style.display = 'contents'; // Permite que el grid del padre controle el layout
+
+//     //         prevArrow.style.display = 'none';
+//     //         nextArrow.style.display = 'none';
+
+//     //         sliderCards.forEach(card => {
+//     //             card.style.width = 'auto'; // Vuelve al ancho automático para el grid
+//     //         });
+
+//     //         currentIndex = 0;
+//     //     }
+//     // }
+
+//     function setupBloque2() {
+//         updateBackgroundImage();
+
+//         const windowWidth = window.innerWidth; // Gets the window width
+//         const isMobileView = windowWidth < desktopBreakpoint;
+
+//         if (isMobileView) {
+//             // --- ACTIVATE SLIDER MODE FOR MOBILE ---
+//             isSliderActive = true;
+//             sliderTrack.style.transition = 'transform 0.5s ease-in-out';
+//             sliderTrack.style.display = 'flex';
+
+//             // *** UPDATED WIDTH VALIDATION LOGIC FOR CARDS ***
+//             let cardWidthPercentage = '100%'; // Default value for uncaught cases or the smallest
+//             if (windowWidth >= 360) { // If screen is more than 400px (e.g., 400.1px onwards)
+//                 cardWidthPercentage = '100%';
+//                 // } else if (windowWidth >= 380) { // If screen is more than 390px (and up to 400px)
+//                 //     cardWidthPercentage = '100.5%';
+//                 // } else if (windowWidth >= 360) { // If screen is 360px or more (and up to 390px)
+//                 //     cardWidthPercentage = '90%';
+//             } else if (windowWidth >= 320) { // If screen is 320px or more (and up to 359px)
+//                 // cardWidthPercentage = '91%';
+//                 cardWidthPercentage = '100%';
+//             }
+//             // // For screens smaller than 320px, it will remain '100%' by default,
+//             // // or you can add an 'else { cardWidthPercentage = "some_other_percentage%"; }' if needed.
+
+
+//             sliderCards.forEach(card => {
+//                 card.style.width = cardWidthPercentage; // Apply the calculated percentage
+//             });
+//             // *** END OF WIDTH VALIDATION LOGIC ***
+
+//             // After adjusting card width, position the slider
+//             moveToSlide(currentIndex);
+
+//             prevArrow.style.display = 'block';
+//             nextArrow.style.display = 'block';
+
+//         } else {
+//             // --- DEACTIVATE SLIDER MODE FOR DESKTOP ---
+//             isSliderActive = false;
+//             sliderTrack.style.transform = 'none';
+//             sliderTrack.style.transition = 'none';
+//             sliderTrack.style.display = 'contents';
+
+//             prevArrow.style.display = 'none';
+//             nextArrow.style.display = 'none';
+
+//             // sliderCards.forEach(card => {
+//             //     card.style.width = 'auto'; // Revert to auto width for grid on desktop
+//             // });
+
+//             currentIndex = 0;
+//         }
+//     }
+
+//     prevArrow.addEventListener('click', () => moveToSlide(currentIndex - 1));
+//     nextArrow.addEventListener('click', () => moveToSlide(currentIndex + 1));
+
+//     setupBloque2();
+
+//     let resizeTimer;
+//     window.addEventListener('resize', () => {
+//         clearTimeout(resizeTimer);
+//         resizeTimer = setTimeout(() => {
+//             setupBloque2();
+//         }, 250);
+//     });
+// });
 document.addEventListener('DOMContentLoaded', () => {
+
+    //- =================================================================
+    //- =========================BLOQUE2=================================
+    //- =================================================================
     const sliderContainer = document.querySelector('.bloque2__slider--container');
     const sliderTrack = document.querySelector('.bloque2__slider--track');
     const sliderCards = document.querySelectorAll('.bloque2__slider--card');
@@ -289,19 +453,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevArrow = document.querySelector('.bloque2__slider--arrow--left');
     const nextArrow = document.querySelector('.bloque2__slider--arrow--right');
 
-    let currentIndex = 0;
+    // Define el breakpoint de escritorio.
     const desktopBreakpoint = 1020;
-    let isSliderActive = false;
+    let currentIndex = 0;
+    let isSliderActive = false; // Controla si la lógica del slider está activa
 
+    // Valida que los elementos esenciales existan.
     if (!sliderTrack || sliderCards.length === 0 || !prevArrow || !nextArrow) {
         console.warn('Bloque2 Slider: Elementos no encontrados o insuficientes. El slider podría no funcionar correctamente.');
-        return;
+        return; // Detiene la ejecución si faltan elementos cruciales.
     }
 
+    /**
+     * @function updateBackgroundImage
+     * Actualiza la imagen de fondo de las tarjetas según el ancho de la ventana.
+     */
     function updateBackgroundImage() {
         const isMobileView = window.innerWidth < desktopBreakpoint;
         sliderContents.forEach(content => {
-            let imageUrl = isMobileView ? content.dataset.bgImageMobile : content.dataset.bgImageDesktop;
+            const imageUrl = isMobileView ? content.dataset.bgImageMobile : content.dataset.bgImageDesktop;
             if (imageUrl) {
                 content.style.backgroundImage = `url('${imageUrl}')`;
             } else {
@@ -310,11 +480,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * @function moveToSlide
+     * Mueve el track del slider a la posición de la tarjeta indicada.
+     * Solo se ejecuta si el slider está activo (en vista móvil).
+     */
     function moveToSlide(index) {
         if (!isSliderActive) {
-            return;
+            return; // No hace nada si el slider no está activo.
         }
 
+        // Lógica de bucle para el slider móvil.
         if (index < 0) {
             currentIndex = sliderCards.length - 1;
         } else if (index >= sliderCards.length) {
@@ -323,123 +499,85 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIndex = index;
         }
 
-        // *** CAMBIO CLAVE AQUÍ ***
-        // Para centrar, debemos asegurarnos de que el `slideWidth` sea el ancho
-        // del contenedor visible del slider, que es `sliderWrapper.offsetWidth`.
-        // O simplemente el ancho de la primera tarjeta, que ahora toma el 100% de ese contenedor.
-        // `sliderCards[0].offsetWidth` ya debería ser el valor correcto.
-        const slideWidth = sliderCards[0].offsetWidth; // Este es el ancho de una tarjeta individual
+        const slideWidth = sliderCards[0].offsetWidth; // Obtiene el ancho actual de una tarjeta.
         const offset = -currentIndex * slideWidth;
         sliderTrack.style.transform = `translateX(${offset}px)`;
     }
 
-    // function setupBloque2() {
-    //     updateBackgroundImage();
-
-    //     const isMobileView = window.innerWidth < desktopBreakpoint;
-
-    //     if (isMobileView) {
-    //         isSliderActive = true;
-    //         sliderTrack.style.transition = 'transform 0.5s ease-in-out';
-    //         sliderTrack.style.display = 'flex';
-
-    //         // Asegurarse de que el track se posiciona correctamente al activar el slider
-    //         // Esto es crucial para que la primera tarjeta esté centrada si no lo estaba.
-    //         moveToSlide(currentIndex); // Reposicionar en el slide actual para centrarlo.
-
-    //         prevArrow.style.display = 'block';
-    //         nextArrow.style.display = 'block';
-
-    //         sliderCards.forEach(card => {
-    //             card.style.width = '85%'; // Asegura que cada tarjeta sea el 100% del contenedor
-    //         });
-
-    //     } else {
-    //         isSliderActive = false;
-    //         sliderTrack.style.transform = 'none';
-    //         sliderTrack.style.transition = 'none';
-    //         sliderTrack.style.display = 'contents'; // Permite que el grid del padre controle el layout
-
-    //         prevArrow.style.display = 'none';
-    //         nextArrow.style.display = 'none';
-
-    //         sliderCards.forEach(card => {
-    //             card.style.width = 'auto'; // Vuelve al ancho automático para el grid
-    //         });
-
-    //         currentIndex = 0;
-    //     }
-    // }
-
+    /**
+     * @function setupBloque2
+     * Configura el comportamiento del bloque 2 según el ancho de la ventana (móvil o desktop).
+     */
     function setupBloque2() {
-        updateBackgroundImage();
+        updateBackgroundImage(); // Siempre actualiza las imágenes de fondo.
 
-        const windowWidth = window.innerWidth; // Gets the window width
+        const windowWidth = window.innerWidth;
         const isMobileView = windowWidth < desktopBreakpoint;
 
         if (isMobileView) {
-            // --- ACTIVATE SLIDER MODE FOR MOBILE ---
+            // --- ACTIVA el modo slider para móvil ---
             isSliderActive = true;
             sliderTrack.style.transition = 'transform 0.5s ease-in-out';
-            sliderTrack.style.display = 'flex';
+            sliderTrack.style.display = 'flex'; // Asegura que el track sea flex para el slider.
 
-            // *** UPDATED WIDTH VALIDATION LOGIC FOR CARDS ***
-            let cardWidthPercentage = '100%'; // Default value for uncaught cases or the smallest
-            if (windowWidth >= 360) { // If screen is more than 400px (e.g., 400.1px onwards)
-                cardWidthPercentage = '100%';
-                // } else if (windowWidth >= 380) { // If screen is more than 390px (and up to 400px)
-                //     cardWidthPercentage = '100.5%';
-                // } else if (windowWidth >= 360) { // If screen is 360px or more (and up to 390px)
-                //     cardWidthPercentage = '90%';
-            } else if (windowWidth >= 320) { // If screen is 320px or more (and up to 359px)
-                // cardWidthPercentage = '91%';
-                cardWidthPercentage = '100%';
+            // Lógica de ancho de tarjeta para móvil (si es necesaria, como en tu original).
+            // Si el CSS ya lo maneja bien con `width: 100%`, puedes simplificar esto.
+            let cardWidthPercentage = '100%';
+            if (windowWidth >= 320) {
+                 cardWidthPercentage = '100%'; // Puedes ajustar esto si tienes porcentajes finos.
             }
-            // // For screens smaller than 320px, it will remain '100%' by default,
-            // // or you can add an 'else { cardWidthPercentage = "some_other_percentage%"; }' if needed.
-
-
             sliderCards.forEach(card => {
-                card.style.width = cardWidthPercentage; // Apply the calculated percentage
+                card.style.width = cardWidthPercentage;
             });
-            // *** END OF WIDTH VALIDATION LOGIC ***
 
-            // After adjusting card width, position the slider
+            // Posiciona el slider al activar o redimensionar.
             moveToSlide(currentIndex);
 
             prevArrow.style.display = 'block';
             nextArrow.style.display = 'block';
 
         } else {
-            // --- DEACTIVATE SLIDER MODE FOR DESKTOP ---
+            // --- DESACTIVA el modo slider para desktop ---
             isSliderActive = false;
-            sliderTrack.style.transform = 'none';
-            sliderTrack.style.transition = 'none';
-            sliderTrack.style.display = 'contents';
+            sliderTrack.style.transform = 'none'; // Elimina cualquier transformación de slider.
+            sliderTrack.style.transition = 'none'; // Deshabilita transiciones.
+            sliderTrack.style.display = 'flex'; // Mantiene 'flex' para que las reglas CSS de desktop funcionen.
 
-            prevArrow.style.display = 'none';
+            // Restablece el ancho de las tarjetas para que el CSS en desktop las controle.
+            // sliderCards.forEach(card => {
+            //     card.style.width = 'auto'; // Deja que el CSS determine el ancho.
+            // });
+
+            prevArrow.style.display = 'none'; // Oculta las flechas.
             nextArrow.style.display = 'none';
 
-            sliderCards.forEach(card => {
-                card.style.width = 'auto'; // Revert to auto width for grid on desktop
-            });
-
-            currentIndex = 0;
+            currentIndex = 0; // Reinicia el índice al pasar a desktop.
         }
     }
 
+    // Event listeners para las flechas.
     prevArrow.addEventListener('click', () => moveToSlide(currentIndex - 1));
     nextArrow.addEventListener('click', () => moveToSlide(currentIndex + 1));
 
+    // Inicializa el bloque al cargar la página.
     setupBloque2();
 
+    // Listener para el redimensionamiento de la ventana con debounce.
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            setupBloque2();
-        }, 250);
+            setupBloque2(); // Reconfigura el bloque al redimensionar.
+        }, 250); // Pequeño retraso para evitar ejecuciones excesivas.
     });
+    //- =================================================================
+    //- =======================FIN BLOQUE2===============================
+    //- =================================================================
+
+    // NOTA: Si tienes otros scripts para bloque3 y bloque7, asegúrate de que también estén dentro de este mismo
+    // document.addEventListener('DOMContentLoaded', ...) o en sus propios listeners si prefieres mantenerlos separados.
+    // Lo ideal sería usar la función initializeBlock si se ajusta a sus necesidades.
+
 });
 //- =================================================================
 //- =======================FIN BLOQUE2===============================

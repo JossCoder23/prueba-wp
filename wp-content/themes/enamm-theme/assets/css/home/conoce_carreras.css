@@ -1,7 +1,6 @@
-/* Definir variable CSS para el ancho del contenedor en móvil */
+/* Definir variable CSS para el ancho del contenedor en móvil
 :root {
     --container-mobile: 90%; /* Por ejemplo, 90% del ancho del viewport */
-}
 
 .bloque2 {
     padding: 30px 0;
@@ -166,79 +165,101 @@
 
 /* --- Media Query para Desktop (más de 1020px) --- */
 @media (min-width: 1020px) {
-    .bloque2__container {
-        max-width: 1200px;
-        padding: 0 20px;
+    .bloque2 {
         display: flex;
-        gap: 40px;
-        align-items: flex-start;
+        justify-content: center;
+    }
+    .bloque2__container {
+        width: var(--container-desktop-1020);
+        display: flex;
+        align-items: center;
+        max-width: none;
+        margin: 0;
+        height: 100%;
+        justify-content: center;
     }
 
     .bloque2__slider {
-        flex: 1;
-        min-width: 0;
+        width: 100%; /* Ocupa el 100% del espacio disponible */
+        /* Asegúrate de que el ancho se gestione correctamente */
+        flex: 1; /* Permite que el slider ocupe el espacio restante */
     }
 
     .bloque2__slider--title {
-        text-align: left;
+        width: 350px;
+        font-weight: var(--title-desktop-weight);
+        font-size: var(--title-desktop-size);
     }
 
     .bloque2__slider--container {
-        width: auto;
+        display: flex; /* Esto era `grid` en tu CSS comentado, vamos con flex por ahora */
+        width: 100%;
         height: auto;
-        overflow: visible;
-        position: static;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
+        overflow: visible; /* Asegura que no haya ocultamiento forzado */
     }
 
     .bloque2__slider--wrapper {
-        overflow: visible;
+        overflow: visible; /* No necesitamos ocultar aquí */
         height: auto;
+        width: 100%; /* El wrapper ocupa todo el ancho */
     }
 
     .bloque2__slider--track {
-        display: contents;
-        transition: none;
-        transform: none;
-        width: auto;
+        /* Aquí está el cambio crucial para desktop */
+        display: flex; /* Usa flex para distribuir las tarjetas */
+        justify-content: space-between; /* Distribuye espacio entre tarjetas */
+        width: 100%; /* Ocupa el 100% del wrapper */
+        transition: none; /* Sin transiciones */
+        transform: none; /* Sin transformaciones */
+        flex-wrap: wrap; /* Permite que las tarjetas se envuelvan si no caben en una línea */
     }
 
     .bloque2__slider--card {
-        width: auto;
+        width: 290px; /* Ancho fijo para cada tarjeta en desktop */
         height: 400px;
-        /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
-        border-radius: 12px;
-        background-color: white;
+        flex-shrink: 0; /* Asegura que no se encojan */
+        /* Margin derecho para el espacio entre tarjetas si no usas gap */
+        /* margin-right: 20px; Ajusta según necesidad, o usa gap en el track */
     }
 
     .bloque2__card--content {
-        max-width: 100%;
+        width: 100%; /* Se ajusta al 100% de la tarjeta */
         min-height: 100%;
         border-radius: 12px;
     }
 
     .bloque2__slider--arrow {
-        display: none;
+        display: none; /* Oculta las flechas en desktop */
     }
 
     .bloque2__imageDesktop {
         display: block;
         flex-shrink: 0;
-        width: 400px;
-        height: 400px;
-        background-color: lightblue;
-        background-size: cover;
-        background-position: center;
+        width: 30%; 
+        height: auto;
+        min-height: 115vh; /* Mantiene la altura mínima que quieres */
+        
+        /* Nueva propiedad para la imagen de fondo */
+        background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/schvezrqzjksmr3s9a5x.webp');
+        
+        /* Para que la imagen se ajuste dentro del div sin recortarse y manteniendo su relación de aspecto */
+        background-size: contain; 
+        
+        /* Para pegar la imagen a la izquierda */
+        background-position: center right; 
+        
+        /* Para que la imagen no se repita si el div es más grande que la imagen */
+        background-repeat: no-repeat; 
+        
+        /* background-color: lightblue; El color de fondo se verá si la imagen no cubre todo (con 'contain') */
         border-radius: 8px;
     }
 
     .bloque2__card--content h3 {
-        font-size: 2em;
+        font-size: 16px; /* Estos valores parecen muy grandes para h3 y h2 dentro de una tarjeta de 170px */
     }
 
-    .bloque2__card--content p {
-        font-size: 1.2em;
+    .bloque2__card--content h2 {
+        font-size: 1.2em; /* Revisa estos tamaños de fuente, podrían desbordarse */
     }
 }
