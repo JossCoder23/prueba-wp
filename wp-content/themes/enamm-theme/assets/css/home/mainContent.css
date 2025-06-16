@@ -4,7 +4,8 @@ main {
 
 .slider-container {
     position: relative;
-    width: 100vw;
+    /* width: 100vw; */
+    width: 100%;
     /* Ocupa el 100% del viewport width */
     max-width: none;
     /* No tiene un ancho máximo fijo */
@@ -59,6 +60,7 @@ main {
 @media (min-width: 1020px) {
     .slider-card {
         padding-top: 0;
+        width: 100vw;
     }
 }
 

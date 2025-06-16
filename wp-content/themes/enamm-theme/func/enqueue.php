@@ -66,14 +66,17 @@ function tu_tema_enqueue_frontend_assets() {
     }, 10, 2 );
 
     // 7. Encolar tu archivo JS en assets/js/script.js
-    wp_enqueue_script( 'tu-tema-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '1.0.0', true );
+    wp_enqueue_script( 'tu-tema-main-script', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
    
-    // wp_enqueue_script(
-    //     'enamm-header-script',
-    //     get_template_directory_uri() . '/assets/js/admin/header-admin.js',
-    //     array('sortablejs'), // ¡Aquí ya no hay dependencia de jQuery!
-    //     filemtime( get_template_directory() . '/assets/js/admin/header-admin.js' ),
-    //     true
-    // );
+    
 }
 add_action( 'wp_enqueue_scripts', 'tu_tema_enqueue_frontend_assets' ); // Usamos un nombre más descriptivo
+
+function add_type_attribute_to_main_script( $tag, $handle, $src ) {
+    // Asegúrate de que el 'handle' aquí coincide con el handle de tu wp_enqueue_script
+    if ( 'tu-tema-main-script' === $handle ) {
+        $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+    }
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'add_type_attribute_to_main_script', 10, 3 );
