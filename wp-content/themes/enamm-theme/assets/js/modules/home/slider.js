@@ -45,7 +45,7 @@ export function initSlider() {
 
     // Función para aplicar la imagen de fondo a cada tarjeta
     const setCardBackgrounds = (cards) => {
-        const isMobile = window.innerWidth <= 1020; // Define tu breakpoint para móvil
+        const isMobile = window.innerWidth <= 768; // Define tu breakpoint para móvil
 
         cards.forEach(card => {
             let imageUrl;
