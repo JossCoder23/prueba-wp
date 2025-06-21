@@ -3,6 +3,7 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <?php wp_head(); // Esencial: Carga estilos, scripts, metadatos. ?>
 </head>
 <body <?php body_class(); ?>>
@@ -267,6 +268,7 @@ function enamm_render_frontend_menu_recursive_items( $items, $parent_classes ) {
         </div>
     </header>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <?php wp_footer(); // Esencial: Carga scripts JavaScript al final. ?>
 </body>
 </html>
