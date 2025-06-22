@@ -38,12 +38,14 @@ function tu_tema_enqueue_frontend_assets() {
         filemtime( get_template_directory() . '/assets/css/header/header.css' ) // Versión para cache-busting
     );
  
-    wp_enqueue_style(
-        'enamm-home-styles', // Handle único para los estilos de la página de inicio
-        get_template_directory_uri() . '/assets/css/home/home.css', // Ruta al archivo home.css consolidado
-        array('enamm-base'), // Asegura que se cargue después de tus estilos base
-        filemtime( get_template_directory() . '/assets/css/home/home.css' ) // Versión para cache-busting
-    );
+    if( is_front_page() ) {
+        wp_enqueue_style(
+            'enamm-home-styles', // Handle único para los estilos de la página de inicio
+            get_template_directory_uri() . '/assets/css/home/home.css', // Ruta al archivo home.css consolidado
+            array('enamm-base'), // Asegura que se cargue después de tus estilos base
+            filemtime( get_template_directory() . '/assets/css/home/home.css' ) // Versión para cache-busting
+        );
+    }
 
     // 4. Encolar tu style.css principal (si lo usas para estilos generales del tema)
     wp_enqueue_style( 'tu-tema-style', get_stylesheet_uri(), array('enamm-footer-styles', 'enamm-header-styles'), filemtime( get_stylesheet_directory() . '/style.css' ) );
