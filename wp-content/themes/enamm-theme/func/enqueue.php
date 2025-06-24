@@ -70,7 +70,7 @@ function tu_tema_enqueue_frontend_assets() {
     // 7. Encolar tu archivo JS en assets/js/script.js
     wp_enqueue_script( 'tu-tema-main-script', get_template_directory_uri() . '/assets/js/menu.js', array(), '1.0.0', true );
  
-    wp_enqueue_script( 'tu-tema-main-script', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'tu-tema-main-script-home', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
 
    
     
