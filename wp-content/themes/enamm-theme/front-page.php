@@ -88,8 +88,8 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
                             data-bg-image-mobile="<?php echo esc_url( $slider_card['data_bg_image_mobile'] ); ?>"
                             data-bg-image-desktop="<?php echo esc_url( $slider_card['data_bg_image_desktop'] ); ?>">
                             <div class="card-content">
-                                <h3><?php echo esc_html( $slider_card['h3_text'] ); ?></h3>
-                                <h2><?php echo wp_kses_post( $slider_card['h2_text'] ); ?></h2>
+                                <h3><?php echo esc_html( stripslashes( $slider_card['h3_text'] ) ); ?></h3>
+                                <h2><?php echo wp_kses_post( stripslashes( $slider_card['h2_text'] ) ); ?></h2>
                                 <?php // wp_kses_post permite etiquetas HTML básicas como <br> ?>
                             </div>
                         </div>
