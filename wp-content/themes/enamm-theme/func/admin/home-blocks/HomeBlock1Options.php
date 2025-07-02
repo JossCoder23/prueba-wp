@@ -25,8 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                     // Sanear las URLs de las imágenes
                     $mobile_image = isset( $card['data_bg_image_mobile'] ) ? esc_url_raw( $card['data_bg_image_mobile'] ) : '';
                     $desktop_image = isset( $card['data_bg_image_desktop'] ) ? esc_url_raw( $card['data_bg_image_desktop'] ) : '';
+                    
+                    // IMPORTANTE: Para h3_text, usamos sanitize_text_field(). Es correcto.
                     $h3_text = isset( $card['h3_text'] ) ? sanitize_text_field( $card['h3_text'] ) : '';
-                    $h2_text = isset( $card['h2_text'] ) ? sanitize_text_field( $card['h2_text'] ) : '';
+
+                    // IMPORTANTE: Para h2_text, que puede contener <br>, usamos wp_kses_post().
+                    // Esto permite HTML básico como <br> y sanitiza lo demás.
+                    $h2_text = isset( $card['h2_text'] ) ? wp_kses_post( $card['h2_text'] ) : '';
 
                     // Solo añadir si al menos tiene una imagen o texto
                     if ( ! empty( $mobile_image ) || ! empty( $desktop_image ) || ! empty( $h3_text ) || ! empty( $h2_text ) ) {
