@@ -78,17 +78,27 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     </td>
                                 </tr>
                                 <tr>
+                                <tr>
                                     <th scope="row"><label for="h3_text_<?php echo $index; ?>">Texto H3</label></th>
                                     <td>
-                                        <input type="text" id="h3_text_<?php echo $index; ?>" name="slider_cards[<?php echo $index; ?>][h3_text]" value="<?php echo esc_attr( $slider_card['h3_text'] ); ?>" class="regular-text" placeholder="Texto para el encabezado pequeño">
+                                        <input type="text"
+                                            id="h3_text_<?php echo $index; ?>"
+                                            name="slider_cards[<?php echo $index; ?>][h3_text]"
+                                            value="<?php echo esc_attr( stripslashes( $slider_card['h3_text'] ) ); ?>" // <--- CAMBIO AQUÍ
+                                            class="regular-text"
+                                            placeholder="Texto para el encabezado pequeño">
                                         <p class="description">Texto para el &lt;h3&gt; de la tarjeta del slider.</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row"><label for="h2_text_<?php echo $index; ?>">Texto H2</label></th>
                                     <td>
-                                        <textarea id="h2_text_<?php echo $index; ?>" name="slider_cards[<?php echo $index; ?>][h2_text]" rows="3" cols="50" class="large-text" placeholder="Texto para el encabezado grande"><?php echo esc_textarea( $slider_card['h2_text'] ); ?></textarea>
-                                        <p class="description">Texto para el &lt;h2&gt; de la tarjeta del slider. Puedes usar &lt;br&gt; para saltos de línea.</p>
+                                        <textarea id="h2_text_<?php echo $index; ?>"
+                                                name="slider_cards[<?php echo $index; ?>][h2_text]"
+                                                rows="3"
+                                                cols="50"
+                                                class="large-text"
+                                                placeholder="Texto para el encabezado grande"><?php echo esc_textarea( stripslashes( $slider_card['h2_text'] ) ); ?></textarea> <p class="description">Texto para el &lt;h2&gt; de la tarjeta del slider. Puedes usar &lt;br&gt; para saltos de línea.</p>
                                     </td>
                                 </tr>
                             </tbody>
