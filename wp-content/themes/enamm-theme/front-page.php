@@ -195,28 +195,28 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
                     <div class="bloque3__slider--track">
                         <div class="bloque3__slider--card">
                             <div class="bloque3__slider--content">
-                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/vi1pg9jsiwmmsmzkzpkg.webp" alt="">
+                                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/vi1pg9jsiwmmsmzkzpkg.webp" alt=""> ===
                                 <h3><span>Maestría en</span> <br> Gestión Naviera</h3>
                                 <button>Ingresar</button>
                             </div>
                         </div>
                         <div class="bloque3__slider--card">
                             <div class="bloque3__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/gbtq3flbxn5iyhd0kg8t.webp" alt="">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/gbtq3flbxn5iyhd0kg8t.webp" alt=""> ===
                                <h3><span>Maestría en</span> <br> Administración Marítima Portuaria y Pesquera</h3>
                                <button>Ingresar</button>
                             </div>
                         </div>
                         <div class="bloque3__slider--card">
                             <div class="bloque3__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/vh5w1d9fejsgdiserctf.webp" alt="">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/vh5w1d9fejsgdiserctf.webp" alt=""> ===
                                <h3><span>Doctorado en</span> <br> Ciencias Marítimas</h3>
                                <button>Ingresar</button>
                             </div>
                         </div>
                         <div class="bloque3__slider--card">
                             <div class="bloque3__slider--content">
-                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/juegraqfddyuayvfi9cs.webp" alt="">
+                               <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014488/juegraqfddyuayvfi9cs.webp" alt=""> ===
                                <h3><span>Diplomado en</span> <br> Medio Ambiente y Derecho Marítimo</h3>
                                <button>Ingresar</button>
                             </div>
@@ -676,13 +676,13 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
                         <?php if ( ! empty( $bloque9_cards ) ) : ?>
                             <?php foreach ( $bloque9_cards as $card ) : ?>
                                 <div class="bloque9__slider--card">
-                                    <a href="<?php echo esc_url( $card['card_link'] ); ?>" class="bloque9__card--link">
+                                    
                                         <div class="bloque9__slider--content">
                                             <h3><?php echo esc_html( $card['date_text'] ); ?></h3>
                                             <p><?php echo esc_html( $card['paragraph_text'] ); ?></p>
                                             <img src="<?php echo esc_url( $card['image_url'] ); ?>" alt="<?php echo esc_attr( $card['alt_text'] ); ?>">
                                         </div>
-                                    </a>
+                                    
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
