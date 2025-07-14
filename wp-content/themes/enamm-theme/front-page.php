@@ -557,18 +557,16 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
                         <?php if ( ! empty( $bloque8_cards ) ) : ?>
                             <?php foreach ( $bloque8_cards as $card ) : ?>
                                 <div class="bloque8__slider--card">
-                                    <div class="bloque8__slider--content">
-                                        <a href="<?php echo esc_url( $card['card_link'] ); ?>" class="bloque8__item--link">
-                                            <div class="bloque8__slider--item">
-                                                <div class="bloque8__item--top"></div>
-                                                <div class="bloque8__item--bottom">
-                                                    <h3><?php echo esc_html( $card['day_text'] ); ?></h3>
-                                                    <h4><?php echo esc_html( $card['month_text'] ); ?></h4>
-                                                </div>
+                                    <div class="bloque8__slider--content"> 
+                                        <div class="bloque8__slider--item">
+                                            <div class="bloque8__item--top"></div>
+                                            <div class="bloque8__item--bottom">
+                                                <h3><?php echo esc_html( $card['day_text'] ); ?></h3>
+                                                <h4><?php echo esc_html( $card['month_text'] ); ?></h4>
                                             </div>
-                                            <img src="<?php echo esc_url( $card['image_url'] ); ?>" alt="<?php echo esc_attr( $card['alt_text'] ); ?>">
-                                            <h3 class="bloque8__slider--title"><?php echo esc_html( $card['card_title'] ); ?></h3>
-                                        </a>
+                                        </div>
+                                        <img src="<?php echo esc_url( $card['image_url'] ); ?>" alt="<?php echo esc_attr( $card['alt_text'] ); ?>">
+                                        <h3 class="bloque8__slider--title"><?php echo esc_html( $card['card_title'] ); ?></h3>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
