@@ -236,6 +236,12 @@
     }
 }
 
+.bloque9__todo a {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1rem;
+}
+
 .bloque9__todo h3 {
     color: var(--fifth);
     margin: 0;
