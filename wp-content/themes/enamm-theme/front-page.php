@@ -413,9 +413,10 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
                         <img src="<?php echo esc_url( $image['url'] ); ?>" alt="Imagen de Bloque 6">
                     <?php endforeach; ?>
                 <?php else : ?>
-                    <img src="https://via.placeholder.com/150x80?text=Logo+1" alt="Default Logo 1">
+                    <h3>Aqui va la imagen del bloque6</h3>
+                    <!-- <img src="https://via.placeholder.com/150x80?text=Logo+1" alt="Default Logo 1">
                     <img src="https://via.placeholder.com/150x80?text=Logo+2" alt="Default Logo 2">
-                    <img src="https://via.placeholder.com/150x80?text=Logo+3" alt="Default Logo 3">
+                    <img src="https://via.placeholder.com/150x80?text=Logo+3" alt="Default Logo 3"> -->
                 <?php endif; ?>
             </div>
         </div>
