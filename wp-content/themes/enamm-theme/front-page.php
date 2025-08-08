@@ -25,8 +25,8 @@ $bloque5_backimage_bottom = get_option( 'my_theme_bloque5_backimage_bottom', 'ht
 $bloque5_left_image = get_option( 'my_theme_bloque5_left_image', 'https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014492/hkbp5qejgqbz8350z5la.webp' );
 $bloque5_items = get_option( 'my_theme_bloque5_items', array() );
 // --- RETRIEVE BLOCK 6 DATA ---
-$bloque6_title = get_option( 'my_theme_bloque6_title', 'Nuestros Aliados' );
-$bloque6_images = get_option( 'my_theme_bloque6_images', array() );
+$mobile_image_url = get_option( 'my_theme_bloque6_mobile_image', '' );
+$desktop_image_url = get_option( 'my_theme_bloque6_desktop_image', '' );
 // --- RECUPERAR DATOS DEL BLOQUE 7 ---
 $bloque7_main_title = get_option( 'my_theme_bloque7_main_title', 'Próximos Eventos' );
 $bloque7_cards = get_option( 'my_theme_bloque7_cards', array() );
@@ -401,24 +401,27 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
     </div>
 
     <!-- <div class="bloque6">
-        <div class="bloque6__container"></div>
+        <div class="bloque6__container">
+            <div class="bloque6__mobile">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/dyragedlgkki2pmbcnjw.png" alt="">
+            </div>
+            <div class="bloque6__desktop">
+                <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/gi5sci0jqgr2w9by318g.png" alt="">
+            </div>
+        </div>
     </div> -->
-
     <div class="bloque6">
         <div class="bloque6__container">
-            <h2 class="bloque6__title"><?php echo esc_html( $bloque6_title ); ?></h2>
-            <div class="bloque6__images">
-                <?php if ( ! empty( $bloque6_images ) ) : ?>
-                    <?php foreach ( $bloque6_images as $image ) : ?>
-                        <img src="<?php echo esc_url( $image['url'] ); ?>" alt="Imagen de Bloque 6">
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <!-- <h3>Aqui va la imagen del bloque6</h3> -->
-                    <!-- <img src="https://via.placeholder.com/150x80?text=Logo+1" alt="Default Logo 1">
-                    <img src="https://via.placeholder.com/150x80?text=Logo+2" alt="Default Logo 2">
-                    <img src="https://via.placeholder.com/150x80?text=Logo+3" alt="Default Logo 3"> -->
-                <?php endif; ?>
+            <?php if ( ! empty( $mobile_image_url ) ) : ?>
+            <div class="bloque6__mobile">
+                <img src="<?php echo esc_url( $mobile_image_url ); ?>" alt="Imagen para móvil">
             </div>
+            <?php endif; ?>
+                <?php if ( ! empty( $desktop_image_url ) ) : ?>
+                    <div class="bloque6__desktop">
+                    <img src="<?php echo esc_url( $desktop_image_url ); ?>" alt="Imagen para escritorio">
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 

@@ -5,6 +5,7 @@
   padding: 40px 0;
   /* padding: 40px 0; */
   position: relative;
+  overflow: hidden;
 }
 @media(min-width:1020px) {
   .bloque5 {
@@ -54,13 +55,14 @@
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita la repetición de la imagen */
     position: relative;
+    bottom: -2.5rem;
   }
   .bloque5__left img {
     display: block;
     position: absolute;
     left: 0;
     width: 110%;
-    bottom: 15px;
+    bottom: 38px;
   }
 }
 

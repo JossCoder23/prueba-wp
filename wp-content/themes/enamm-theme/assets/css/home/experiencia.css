@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   height: auto;
+  overflow: hidden;
 }
 
 .bloque6__container {
@@ -10,12 +11,30 @@
   width: var(--container-mobile);
   border-radius: 15px;
 
-  background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/dyragedlgkki2pmbcnjw.png');
-  background-size: cover; /* Ajusta la imagen para cubrir el div */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita la repetición de la imagen */
-  position: relative;
+  /* background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/dyragedlgkki2pmbcnjw.png');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  position: relative; */
   min-height: 30rem;
+}
+
+.bloque6__container div {
+  width: 100%;
+}
+
+.bloque6__container div img {
+  width: 100%;
+}
+
+.bloque6__mobile {}
+
+.bloque6__desktop {
+  display: none;
+}
+
+.bloque6__images img {
+  width: 100%;
 }
 @media(min-width:1020px) {
   .bloque6__container {
@@ -25,6 +44,12 @@
     min-height: 21.7rem;
     background-size: contain;
     width: var(--container-desktop-1020);
-    background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/gi5sci0jqgr2w9by318g.png');
+    /* background-image: url('https://res.cloudinary.com/dpuerx2lr/image/upload/v1749805123/gi5sci0jqgr2w9by318g.png'); */
+  }
+  .bloque6__mobile {
+    display: none;
+  }
+  .bloque6__desktop {
+    display: block;
   }
 }
