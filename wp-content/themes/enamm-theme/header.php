@@ -263,7 +263,23 @@ function enamm_render_frontend_menu_recursive_items( $items, $parent_classes ) {
                     // Renderizar el menú
                     enamm_render_frontend_menu( $enamm_menu_items );
                     ?>
+                    <div class="right--transparence">
+                        <a href="#">
+                            <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1754801721/rfe9s04bj8djj5xmggnn.png" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1754801721/mc3cz8mkydfe3y7ebmmc.png" alt="">
+                        </a>
+                    </div>
                 </nav>
+                <div class="desktop--trans">
+                    <a href="">
+                        <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1754801721/rfe9s04bj8djj5xmggnn.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1754801721/mc3cz8mkydfe3y7ebmmc.png" alt="">
+                    </a>
+                </div>
             </div>
         </div>
     </header>

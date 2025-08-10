@@ -2,7 +2,7 @@
   --font-heading: 'Montserrat', sans-serif; /* Para títulos y elementos destacados */
   --font-body: 'Poppins', sans-serif;       /* Para el texto principal y cuerpo */
   --font-fallback: sans-serif;              /* Siempre un fallback genérico */
-  --primary: #1F58DB;
+  --primary: #003362;
   --secondary: #2D2D2D;
   --third: #6C6C6C;
   --fourth: #DBDBDB;
@@ -14,7 +14,7 @@
   --text-title-desktop-footer: 11px;
   --text-subtitle-desktop-footer: 10px;
 
-  --text-title-menu-desktop: 10px;
+  --text-title-menu-desktop: 12px;
 
   --container-mobile: 280px;
   --container-desktop-1020: 900px;
