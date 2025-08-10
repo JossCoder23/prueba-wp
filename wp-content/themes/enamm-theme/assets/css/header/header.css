@@ -336,12 +336,12 @@ header {
         /* background-color: red; */
         column-gap: .5rem;
         justify-content: center;
-        margin-top: .2rem;
+        margin-top: .4rem;
     }
 
     .desktop--trans a {
         display: flex;
-        height: 100%;
+        height: 2.5rem;
         align-items: center;
         justify-content: center;
         
