@@ -407,10 +407,10 @@ header {
     }
 
     .menuRight__item a, .menuRight__item h3 {
-        padding: 5px 4px;
+        padding: 3px 2px;
         /*padding: 8px 10px;  Ajusta el padding para desktop */
         color: var(--fifth); /* Color específico para menú de escritorio */
-        font-size: var(--text-title-menu-desktop);
+        font-size: 10px;
         margin: 0;
         font-weight: 500;
         /* padding: 0 5px; */
