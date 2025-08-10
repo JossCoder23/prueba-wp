@@ -8,8 +8,13 @@
 get_header(); // Incluye el contenido de header.php
 $home_sliders = get_option( 'my_theme_home_sliders', array() );  // Recupera el array de sliders
 // --- RECUPERAR DATOS DEL BLOQUE 2 ---
-$bloque2_main_title = get_option( 'my_theme_bloque2_main_title', 'Conoce nuestras carreras' );
-$bloque2_cards = get_option( 'my_theme_bloque2_cards', array() );
+// $bloque2_main_title = get_option( 'my_theme_bloque2_main_title', 'Conoce nuestras carreras' );
+// $bloque2_cards = get_option( 'my_theme_bloque2_cards', array() );
+$main_title = get_option('my_theme_bloque2_main_title', 'Conoce nuestras carreras');
+$background_image_url = get_option('my_theme_bloque2_background_image', 'https://res.cloudinary.com/dpuerx2lr/image/upload/v1752339712/v29japwwpzbacnjf7i31.png');
+$arrow_left_url = get_option('my_theme_bloque2_arrow_left', 'https://res.cloudinary.com/dpuerx2lr/image/upload/v1749555263/vl4xio3v6pfebgxdhzou.png');
+$arrow_right_url = get_option('my_theme_bloque2_arrow_right', 'https://res.cloudinary.com/dpuerx2lr/image/upload/v1749555263/o4zvs6lbdd2jgz3su7en.png');
+$cards = get_option('my_theme_bloque2_cards', array());
 // --- RECUPERAR DATOS DEL BLOQUE 3 ---
 $bloque3_main_title = get_option( 'my_theme_bloque3_main_title', 'Programas de Posgrado' );
 $bloque3_cards = get_option( 'my_theme_bloque3_cards', array() );
@@ -110,6 +115,7 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
     </div>
 
     <!-- <div class="bloque2">
+        <img class="bloque2__background" src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1752339712/v29japwwpzbacnjf7i31.png" alt="">
         <div class="bloque2__container">
             <div class="bloque2__slider">
                 <h3 class="bloque2__slider--title">Conoce nuestras carreras</h3>
@@ -120,69 +126,68 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
 
                     <div class="bloque2__slider--wrapper">
                         <div class="bloque2__slider--track">
-                            <div class="bloque2__slider--card">
+                            <a href="https://google.com" class="bloque2__slider--card">
                                 <div class="bloque2__card--content"
                                     data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/tcg9egos8ao3poo3bm6v.webp"
                                     data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/tcg9egos8ao3poo3bm6v.webp">
                                     <h3>Programa Académico</h3>
                                     <h2>Marina Mercante</h2>
                                 </div>
-                            </div>
+                            </a>
 
-                            <div class="bloque2__slider--card">
+                            <a href="https://google.com" class="bloque2__slider--card">
                                 <div class="bloque2__card--content"
                                     data-bg-image-mobile="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/trpja609dypx1v7ldgfq.webp"
                                     data-bg-image-desktop="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749014487/trpja609dypx1v7ldgfq.webp">
                                     <h3>Programa Académico</h3>
-                                    <h2>Administración <br> Marítima y Portuaria</h2>
+                                    <h2>Administración <br> Marítima y Portuaria</h2> 
                                 </div>
-                            </div>
+                            </a>
 
                         </div> 
                     </div> 
                 </div> 
             </div> 
-            <div class="bloque2__imageDesktop"></div>
         </div> 
     </div> -->
 
+
     <div class="bloque2">
+        <img class="bloque2__background" src="<?php echo esc_url($background_image_url); ?>" alt="">
         <div class="bloque2__container">
             <div class="bloque2__slider">
-                <h3 class="bloque2__slider--title"><?php echo esc_html( $bloque2_main_title ); ?></h3>
+                <h3 class="bloque2__slider--title"><?php echo esc_html($main_title); ?></h3>
 
                 <div class="bloque2__slider--container">
-                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749555263/vl4xio3v6pfebgxdhzou.png" alt="Anterior" class="bloque2__slider--arrow bloque2__slider--arrow--left">
-                    <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1749555263/o4zvs6lbdd2jgz3su7en.png" alt="Siguiente" class="bloque2__slider--arrow bloque2__slider--arrow--right">
+                    <img src="<?php echo esc_url($arrow_left_url); ?>" alt="Anterior" class="bloque2__slider--arrow bloque2__slider--arrow--left">
+                    <img src="<?php echo esc_url($arrow_right_url); ?>" alt="Siguiente" class="bloque2__slider--arrow bloque2__slider--arrow--right">
 
                     <div class="bloque2__slider--wrapper">
                         <div class="bloque2__slider--track">
-                            <?php if ( ! empty( $bloque2_cards ) ) : ?>
-                                <?php foreach ( $bloque2_cards as $card ) : ?>
-                                    <div class="bloque2__slider--card">
-                                        <div class="bloque2__card--content"
-                                            data-bg-image-mobile="<?php echo esc_url( $card['data_bg_image_mobile'] ); ?>"
-                                            data-bg-image-desktop="<?php echo esc_url( $card['data_bg_image_desktop'] ); ?>">
-                                            <h3><?php echo esc_html( $card['h3_text'] ); ?></h3>
-                                            <h2><?php echo wp_kses_post( $card['h2_text'] ); ?></h2>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <div class="bloque2__slider--card">
-                                    <div class="bloque2__card--content"
-                                        data-bg-image-mobile="https://via.placeholder.com/600x400?text=Carrera+Movil"
-                                        data-bg-image-desktop="https://via.placeholder.com/1200x800?text=Carrera+Desktop">
-                                        <h3>Programa Académico</h3>
-                                        <h2>(Aún no configurado)</h2>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
+                            <?php
+                            // Itera sobre las tarjetas de carrera
+                            if (!empty($cards)) {
+                                foreach ($cards as $card) {
+                                    // Asegúrate de que al menos una imagen exista para renderizar la tarjeta
+                                    if (!empty($card['data_bg_image_mobile']) || !empty($card['data_bg_image_desktop'])) {
+                                        ?>
+                                        <a href="<?php echo esc_url($card['href']); ?>" class="bloque2__slider--card">
+                                            <div class="bloque2__card--content"
+                                                data-bg-image-mobile="<?php echo esc_url($card['data_bg_image_mobile']); ?>"
+                                                data-bg-image-desktop="<?php echo esc_url($card['data_bg_image_desktop']); ?>">
+                                                <h3><?php echo esc_html($card['h3_text']); ?></h3>
+                                                <h2><?php echo esc_html($card['h2_text']); ?></h2>
+                                            </div>
+                                        </a>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bloque2__imageDesktop"></div>
         </div>
     </div>
     
