@@ -273,10 +273,10 @@ function enamm_render_frontend_menu_recursive_items( $items, $parent_classes ) {
                     </div>
                 </nav>
                 <div class="desktop--trans">
-                    <a href="">
+                    <a href="https://www.gob.pe/enamm">
                         <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1754801721/rfe9s04bj8djj5xmggnn.png" alt="">
                     </a>
-                    <a href="">
+                    <a href="https://www.transparencia.gob.pe/reportes_directos/pte_transparencia_reg_visitas.aspx?id_entidad=88&ver=&id_tema=500#.Yk8yRedBxPY">
                         <img src="https://res.cloudinary.com/dpuerx2lr/image/upload/v1754801721/mc3cz8mkydfe3y7ebmmc.png" alt="">
                     </a>
                 </div>
