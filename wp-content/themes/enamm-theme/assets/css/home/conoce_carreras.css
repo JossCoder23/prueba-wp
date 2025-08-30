@@ -252,6 +252,7 @@
         flex-shrink: 0; /* Asegura que no se encojan */
         /* Margin derecho para el espacio entre tarjetas si no usas gap */
         /* margin-right: 20px; Ajusta según necesidad, o usa gap en el track */
+        text-decoration: none;
     }
 
     .bloque2__card--content {
