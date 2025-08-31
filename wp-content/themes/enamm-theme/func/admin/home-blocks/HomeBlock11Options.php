@@ -31,10 +31,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                 foreach ( $_POST['bloque11_images'] as $key => $image ) {
                     $image_url = isset( $image['url'] ) ? esc_url_raw( $image['url'] ) : '';
                     $alt_text = isset( $image['alt_text'] ) ? sanitize_text_field( $image['alt_text'] ) : '';
+                    $link_url = isset( $image['link_url'] ) ? esc_url_raw( $image['link_url'] ) : ''; // Nuevo campo
                     if ( ! empty( $image_url ) ) {
                         $new_bloque11_images[] = array(
                             'url' => $image_url,
-                            'alt_text' => $alt_text
+                            'alt_text' => $alt_text,
+                            'link_url' => $link_url // Guardar el nuevo campo
                         );
                     }
                 }
@@ -84,6 +86,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         <p class="description">Texto descriptivo para la imagen (importante para SEO y accesibilidad).</p>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th scope="row"><label for="bloque11_image_link_url_<?php echo $index; ?>">URL del Enlace</label></th>
+                                    <td>
+                                        <input type="url" id="bloque11_image_link_url_<?php echo $index; ?>" name="bloque11_images[<?php echo $index; ?>][link_url]" value="<?php echo esc_url( $image['link_url'] ); ?>" class="regular-text" placeholder="Ej: https://www.ejemplo.com">
+                                        <p class="description">URL a la que la imagen debe enlazar. Deja en blanco para que no tenga enlace.</p>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -112,6 +121,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <td>
                             <input type="text" id="bloque11_image_alt_ID" name="bloque11_images[ID][alt_text]" value="" class="regular-text" placeholder="Ej: Logo de Empresa Y">
                             <p class="description">Texto descriptivo para la imagen (importante para SEO y accesibilidad).</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="bloque11_image_link_url_ID">URL del Enlace</label></th>
+                        <td>
+                            <input type="url" id="bloque11_image_link_url_ID" name="bloque11_images[ID][link_url]" value="" class="regular-text" placeholder="Ej: https://www.ejemplo.com">
+                            <p class="description">URL a la que la imagen debe enlazar. Deja en blanco para que no tenga enlace.</p>
                         </td>
                     </tr>
                 </tbody>

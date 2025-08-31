@@ -808,7 +808,18 @@ $bloque11_images = get_option( 'my_theme_bloque11_images', array() );
             <div class="bloque11__container--content">
                 <?php if ( ! empty( $bloque11_images ) ) : ?>
                     <?php foreach ( $bloque11_images as $image ) : ?>
-                        <img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt_text'] ); ?>">
+                        <?php 
+                            $image_url = esc_url( $image['url'] );
+                            $alt_text = esc_attr( $image['alt_text'] );
+                            $link_url = isset( $image['link_url'] ) ? esc_url( $image['link_url'] ) : '';
+                        ?>
+                        <?php if ( ! empty( $link_url ) ) : ?>
+                            <a href="<?php echo $link_url; ?>" target="_blank" rel="noopener noreferrer">
+                        <?php endif; ?>
+                        <img src="<?php echo $image_url; ?>" alt="<?php echo $alt_text; ?>">
+                        <?php if ( ! empty( $link_url ) ) : ?>
+                            </a>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 <?php else : ?>
                     <img src="https://via.placeholder.com/120x60?text=Colab+1" alt="Default Collab Logo 1">
