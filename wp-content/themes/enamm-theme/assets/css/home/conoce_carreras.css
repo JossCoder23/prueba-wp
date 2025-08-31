@@ -201,7 +201,7 @@
         justify-content: center;
     }
     .bloque2__container {
-        width: var(--container-desktop-1020);
+        width: 980px;
         display: flex;
         align-items: center;
         max-width: none;
@@ -243,7 +243,7 @@
         transition: none; /* Sin transiciones */
         transform: none; /* Sin transformaciones */
         flex-wrap: wrap; /* Permite que las tarjetas se envuelvan si no caben en una línea */
-        column-gap: 4rem;
+        column-gap: 1.7rem;
     }
 
     .bloque2__slider--card {
